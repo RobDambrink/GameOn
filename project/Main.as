@@ -2,8 +2,10 @@
 	
 	import flash.display.MovieClip;
 	import starling.core.Starling;
+	import view.Navigator;
 	
 	public class Main extends MovieClip {
+		
 		
 		
 		public function Main() {
