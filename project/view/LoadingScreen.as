@@ -1,4 +1,4 @@
-﻿package  {
+﻿package  view{
 	import starling.events.Event;
 	import starling.display.Sprite;
 	import starling.core.Starling;
