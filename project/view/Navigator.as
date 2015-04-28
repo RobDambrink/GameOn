@@ -1,4 +1,5 @@
-﻿package  {
+﻿package view{
+	
 	import starling.display.Sprite;
 	
 	public class Navigator extends Sprite {
