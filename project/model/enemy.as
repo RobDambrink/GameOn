@@ -1,13 +1,17 @@
 ﻿package com.asgamer.eater
 {
  
-	import flash.display.MovieClip;
-	import flash.events.Event;
-	import com.senocular.utils.KeyObject;
-	import flash.display.Stage;
+	import starling.display.MovieClip;
+	import starling.events.Event;
+	
+	//import com.senocular.utils.KeyObject;
+	
+	import starling.display.Stage;
+	
 	import flash.ui.Keyboard;
     import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	import starling.events.Timer
 	
 	
 	public class Enemy extends MovieClip
