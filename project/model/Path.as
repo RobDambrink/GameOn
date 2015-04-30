@@ -1,6 +1,7 @@
-﻿package com.asgamer.eater
+﻿package model
 {
 	import starling.display.Stage;
+	
 	
 	class Path{
 		

@@ -2,6 +2,7 @@
 {
 
 	import starling.display.Stage;
+	import starling.core.Starling;
 	
 	
 	public class Sti extends Enemy

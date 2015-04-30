@@ -1,6 +1,6 @@
 ﻿package model
 {
- 
+	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.events.Event;
 	import starling.events.Timer
@@ -8,9 +8,10 @@
 	import flash.ui.Keyboard;
     import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	import starling.display.Sprite;
 	
 	
-	public class Enemy extends MovieClip
+	public class Enemy extends Sprite
 	{
  
 		private var stageRef:Stage;
@@ -101,7 +102,7 @@
 		
 		public function movement():void
 		{
-			//movement of ghost this function is override in blinky and pinky class
+			//movement of enemy this function is override in STI and sperm
 		}
 		private function enemyDie() : void 
 		{

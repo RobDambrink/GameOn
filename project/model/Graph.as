@@ -1,7 +1,7 @@
-﻿package com.asgamer.eater
+﻿package model
 {
 	
-	public class Graph1 
+	public class Graph
 	{
 		private var graphPath:Array;
 		private var vx:int;
@@ -31,7 +31,7 @@
 		private var d:Number=275;
 		public var target:Enemy;
 		
-		public function Graph1(target:Enemy):void
+		public function Graph(target:Enemy):void
 		{
 			p=new Path();
 			this.target=target;
