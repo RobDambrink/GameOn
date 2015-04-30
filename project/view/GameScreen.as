@@ -8,11 +8,12 @@
 	import starling.core.Starling;
 	import starling.events.Event;
 	import model.*;
+	import starling.display.Stage;
 	
 	public class GameScreen extends Sprite{
 
-		
-		var toScoreScreenButton:Image;		
+		var toScoreScreenButton:Image;	
+		private var player:Player;
 		
 		
 		// constructor code
@@ -32,6 +33,7 @@
 			addChild(healthBar);
 			
 			// GAME MECHANIC
+
 			
 			
 			

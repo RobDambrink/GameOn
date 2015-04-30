@@ -1,13 +1,11 @@
-﻿package model
-{
+﻿package model{
  
-	import starling.display.MovieClip;
 	import starling.core.Starling;
 	import starling.events.Event;
-	import KeyObject;
 	import starling.display.Stage;
-	import flash.ui.Keyboard;
 	import starling.display.Sprite;
+	import starling.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	
 	
 	public class Player extends Sprite
@@ -31,7 +29,7 @@
 			dir=d;
 			this.stageRef =stageRef;
 			key = new KeyObject(stageRef);
-			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
+			addEventListener(Event.ENTER_FRAME, loop);
 		}
 		
 		public function init(X:Number=35, Y:Number=610,d:Number=2):void
@@ -51,7 +49,7 @@
 			  else if(x>=605 && dir==2)
 					  x=35;
 			
-			  if (key.isDown(Keyboard.LEFT))
+			  if (key.isDown(KeyboardEvent.LEFT))
 				  adir=1;
 			  else if (key.isDown(Keyboard.RIGHT))
 				  adir=2;
