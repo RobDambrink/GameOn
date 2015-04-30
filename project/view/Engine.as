@@ -1,5 +1,4 @@
-﻿package view
-{
+﻿package view {
 	import starling.core.Starling;
 	import flash.display.MovieClip;
 	import flash.events.Event;

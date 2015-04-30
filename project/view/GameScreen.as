@@ -1,4 +1,4 @@
-﻿package  {
+﻿package view{
 	import starling.display.Sprite;
 	import starling.textures.Texture;
 	import starling.display.Image;
