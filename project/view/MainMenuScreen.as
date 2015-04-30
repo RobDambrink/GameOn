@@ -41,8 +41,7 @@
 		//--------------------start of adding buttons----------------
 		
 		private function addPlayBtn(){
-			var texture:Texture = Texture.fromBitmapData( new PlayButton() );
-			playBtn = new Image( texture );
+			playBtn = new Image(Navigator.assets.getTexture("PlayButton"));
 			addChild( playBtn );
 			
 			playBtn.y = 0;
@@ -51,8 +50,7 @@
 		}
 		
 		private function addPharmacyButton(){
-			var texture:Texture = Texture.fromBitmapData( new PharmacyButton() );
-			pharmacyButton = new Image( texture );
+			pharmacyButton = new Image(Navigator.assets.getTexture("PharmacyButton"));
 			addChild( pharmacyButton );
 			
 			pharmacyButton.y = 100;
@@ -61,8 +59,7 @@
 		}
 		
 		private function addTutorialButton(){
-			var texture:Texture = Texture.fromBitmapData( new TutorialButton() );
-			tutorialButton = new Image( texture );
+			tutorialButton = new Image(Navigator.assets.getTexture("TutorialButton"));
 			addChild( tutorialButton );
 			
 			tutorialButton.y = 200;
@@ -71,8 +68,7 @@
 		}
 		
 		private function addOptionsButton(){
-			var texture:Texture = Texture.fromBitmapData( new OptionsButton() );
-			optionsButton = new Image( texture );
+			optionsButton = new Image(Navigator.assets.getTexture("OptionsButton"));
 			addChild( optionsButton );
 			
 			optionsButton.y = 300

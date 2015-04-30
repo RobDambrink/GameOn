@@ -36,8 +36,7 @@
 		}
 
 		private function addLoadingBar() {
-			var texture: Texture = Texture.fromBitmapData(new LoadingBar());
-			loadingBar = new Image(texture);
+			loadingBar = new Image(Navigator.assets.getTexture("LoadingBar"));
 			addChild(loadingBar);
 
 			loadingBar.x = (Starling.current.stage.stageWidth - loadingBar.width) / 2;

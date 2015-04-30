@@ -32,8 +32,7 @@
 		//--------------------start of adding buttons----------------
 
 		private function addMaleButton(){
-			var texture:Texture = Texture.fromBitmapData( new MaleButton() );
-			maleButton = new Image( texture );
+			maleButton = new Image(Navigator.assets.getTexture("MaleButton")); 
 			addChild( maleButton );
 			
 			maleButton.y = 0;
@@ -42,8 +41,7 @@
 		}
 		
 		private function addFemaleButton(){
-			var texture:Texture = Texture.fromBitmapData( new FemaleButton() );
-			femaleButton = new Image( texture );
+			femaleButton = new Image(Navigator.assets.getTexture("FemaleButton"));
 			addChild( femaleButton );
 			
 			femaleButton.y = 100;

@@ -26,7 +26,7 @@
 			
 			addNewGameButton();
 			
-//if there is a saved game state on the device, then execute
+	//if there is a saved game state on the device, then execute
 			addContinueButton();
 			
 			newGame = false;
@@ -36,8 +36,7 @@
 		//--------------------start of adding buttons----------------
 
 		private function addContinueButton(){
-			var texture:Texture = Texture.fromBitmapData( new ContinueButton() );
-			continueButton = new Image( texture );
+			continueButton = new Image(Navigator.assets.getTexture("ContinueButton"));
 			addChild( continueButton );
 			
 			continueButton.y = 0;
@@ -46,8 +45,7 @@
 		}
 		
 		private function addNewGameButton(){
-			var texture:Texture = Texture.fromBitmapData( new NewGameButton() );
-			newGameButton = new Image( texture );
+			newGameButton = new Image(Navigator.assets.getTexture("NewGameButton"));
 			addChild( newGameButton );
 			
 			newGameButton.y = 100;

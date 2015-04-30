@@ -43,8 +43,7 @@
 		
 		
 		private function addToScoreScreenButton(){
-			var texture:Texture = Texture.fromBitmapData( new ToScoreScreenButton() );
-			toScoreScreenButton = new Image( texture );
+			toScoreScreenButton = new Image(Navigator.assets.getTexture("ToScoreScreenButton"));
 			addChild( toScoreScreenButton );
 			
 			toScoreScreenButton.y = 0;

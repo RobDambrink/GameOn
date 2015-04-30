@@ -30,8 +30,7 @@
 		
 		
 		private function addLevelSelectButton(){
-			var texture:Texture = Texture.fromBitmapData( new LevelSelectButton() );
-			levelSelectButton = new Image( texture );
+			levelSelectButton = new Image(Navigator.assets.getTexture("LevelSelectButton")); 
 			addChild( levelSelectButton );
 			
 			levelSelectButton.y = 0;
