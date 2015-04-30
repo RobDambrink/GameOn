@@ -16,7 +16,11 @@
 	<text xml:lang="ja">Japanese App name goes here</text>
 	</name>
 -->
+<<<<<<< HEAD
 <application xmlns="http://ns.adobe.com/air/application/3.8">
+=======
+<application xmlns="http://ns.adobe.com/air/application/13.0">
+>>>>>>> 052a7c9e71a9e66325d6045d6c4f32ee5ea45aea
   <id>Main</id>
   <versionNumber>1.0.0</versionNumber>
   <versionLabel/>
