@@ -29,30 +29,26 @@
 			}
 		}
 
-
-
-
-
 		private function addToLevelSelectButton() {
-			toLevelSelectButton = new Image (Navigator.assets.getTexture ("ToLevelSelectButton");
+			toLevelSelectButton = new Image(Navigator.assets.getTexture("ToLevelSelectButton")); 
 			addChild(toLevelSelectButton);
 
-			toLevelSelectButton.y = 0;
+				toLevelSelectButton.y = 0;
 
-			toLevelSelectButton.addEventListener(TouchEvent.TOUCH, onToLevelSelectButton);
-		}
-
-		private function onToLevelSelectButton(event: TouchEvent) {
-			var touch: Touch = event.touches[0];
-			if (touch.phase == TouchPhase.BEGAN) {
-				PlayMenuScreen.newGame = false;
-
-				Navigator.instance.loadScreen("levelSelect");
+				toLevelSelectButton.addEventListener(TouchEvent.TOUCH, onToLevelSelectButton);
 			}
+
+			private function onToLevelSelectButton(event: TouchEvent) {
+				var touch: Touch = event.touches[0];
+				if (touch.phase == TouchPhase.BEGAN) {
+					PlayMenuScreen.newGame = false;
+
+					Navigator.instance.loadScreen("levelSelect");
+				}
+			}
+
+
+
 		}
-
-
 
 	}
-
-}

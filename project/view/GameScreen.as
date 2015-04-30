@@ -7,7 +7,8 @@
 	import starling.events.TouchPhase;
 	import starling.core.Starling;
 	import starling.events.Event;
-
+	import model.*;
+	
 	public class GameScreen extends Sprite{
 
 		
