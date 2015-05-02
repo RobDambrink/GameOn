@@ -15,6 +15,11 @@
 		var toScoreScreenButton:Image;	
 		private var player:Player;
 		
+		var healthPellet:HealthPellet;
+		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
+		
+		var healthBar:HealthBar;
+		
 		
 		// constructor code
 		public function GameScreen() 
@@ -29,8 +34,9 @@
 			trace("GameScreen loaded");
 			
 			
-			var healthBar:HealthBar = new HealthBar();
-			addChild(healthBar);
+			placeHealthBar();
+			placePellets();
+			updateHealthBar();
 			
 			// GAME MECHANIC
 
@@ -61,7 +67,46 @@
 			}
 		}
 
+		
+		
+		public function placePellets()
+		{
+			for (var i:int = 0; i < 5; i++)
+			{
+				healthPellet = new HealthPellet(this);
+				healthPellet.x = Math.random() * (Starling.current.stage.stageWidth - healthPellet.width);
+				healthPellet.y = Math.random() * (Starling.current.stage.stageHeight - healthPellet.height);
 
+				addChild(healthPellet);
+
+				healthPellets.push(healthPellet);
+			}
+		}
+		
+		public function placeHealthBar(){
+			healthBar = new HealthBar(this)
+			addChild(healthBar);
+		}
+		
+		public function updateHealthBar(){
+			healthBar.updateHealthBar();
+		}
+		
+		public function removeHealthPellet(healthPellet:HealthPellet)
+		{
+			removeChild(healthPellet, true);
+
+			//remove ball from vector list
+			var index:int = healthPellets.indexOf(healthPellet);
+			healthPellets.splice(index, 1);
+
+			if (healthPellets.length == 0)
+			{
+				trace("Opperdepop! Placing new pellets.");
+				placePellets();
+			}
+		}
+		
 	
 	}
 	

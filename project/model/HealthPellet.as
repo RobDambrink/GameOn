@@ -1,4 +1,4 @@
-﻿package  {
+﻿package model {
 
 	import starling.display.Sprite;
 	import starling.textures.Texture;
@@ -6,45 +6,46 @@
 	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.events.EnterFrameEvent;
-
+	import view.*;
+	import starling.events.TouchEvent;
+	import starling.events.Touch;
+	import starling.events.TouchPhase;	
+	
 
 	public class HealthPellet extends Sprite{
 		
+		var gameScreen:GameScreen;
 		
-		public function HealthPellet(){
+		
+		
+		public function HealthPellet(screen:GameScreen){
 			// constructor code
 			
-			spawn();
+			gameScreen = screen;
 			
-			if (hit){
-				respawn();
-			}
+			var pellet:Image = new Image(Navigator.assets.getTexture("Circle"));
+			addChild( pellet );
+			
+			addEventListener( TouchEvent.TOUCH , pelletTouched );
 			
 		}
-
 		
-		function respawn(){
-			removeChild(this);
-			Starling.juggler.delayCall(spawn, 5.0);
-		}
 		
-		function spawn(){
-			addChild(this);
-		}
-
-
-/*		function pelletHit(){
-			 HealthBar.healthPoints++;
-			 HealthBar.updateHealthBar(); //update the health bar
-		}
-		
-		function checkDeath (event:EnterFrameEvent){
-			if(HealthBar.healthPoints <= 0){
-				HealthBar.healthPoints = 0; 
-				trace("You died!"); //add any extra death-code here
+		function pelletTouched(event:TouchEvent)
+		{
+			var touch:Touch = event.touches[0];
+			
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				HealthBar.hp++;
+				trace(HealthBar.hp);
+				gameScreen.removeHealthPellet(this);
+				gameScreen.updateHealthBar();
 			}
 		}
-*/		
+
+
+
 		
 	}
 	

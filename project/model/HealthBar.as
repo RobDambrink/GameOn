@@ -1,4 +1,4 @@
-﻿package  model{
+﻿package model {
 	
 	import starling.display.Sprite;
 	import starling.textures.Texture;
@@ -8,21 +8,45 @@
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;	
-	
-	
-	public class HealthBar extends Sprite{
+	import view.*;
 
-		public static var maxHealthPoints:int = 100;
-		public static var healthPoints:int = 10;
-		public static var percentageHealthPoints:Number = healthPoints / maxHealthPoints;
+
+	public class HealthBar extends Sprite{
 		
-		public function HealthBar() {
+		var gameScreen:GameScreen;
+		var healthFill:Image;
+		
+		public static var hp:int = 10;
+		public static var maxHp:int = 100;
+		var percentHp:Number = hp/maxHp;
+		
+
+		
+		
+		public function HealthBar(screen:GameScreen) {
 			// constructor code
-		}		
+			var healthStroke:Image = new Image(Navigator.assets.getTexture("StrokeHealthBar"));
+			addChild( healthStroke );
+			
+			healthFill = new Image(Navigator.assets.getTexture("FillHealthBar"));
+			addChild( healthFill );
+			healthFill.x = healthStroke.x + 9;
+			healthFill.y = healthStroke.y;
+		}
 		
 		
 		public function updateHealthBar(){
-			percentageHealthPoints = healthPoints / maxHealthPoints;
+			percentHp = hp / maxHp;
+			healthFill.scaleX = percentHp;
+			
+			if (hp > maxHp){
+				hp = maxHp;
+			}
+			
+			if (hp < 1){
+				hp = 0;
+				trace("u ded m8");
+			}
 		}
 		
 		
