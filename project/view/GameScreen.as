@@ -13,12 +13,14 @@
 	public class GameScreen extends Sprite{
 
 		var toScoreScreenButton:Image;	
-		private var player:Player;
+		//private var player:Player;
 		
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		
 		var healthBar:HealthBar;
+		
+		var enemy:Enemy;
 		
 		
 		// constructor code
@@ -37,16 +39,20 @@
 			placeHealthBar();
 			placePellets();
 			updateHealthBar();
+			placeEnemy();
 			
 			// GAME MECHANIC
 
 			
 			
 			
-			addToScoreScreenButton();
+			//addToScoreScreenButton();
 		}
 		
-		
+		function placeEnemy(){
+			trace ("Enemy Placed");
+			addChild (enemy);
+			}
 		
 		
 		

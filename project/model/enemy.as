@@ -9,6 +9,7 @@
     import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	import starling.display.Sprite;
+	import model.*;
 	
 	
 	public class Enemy extends Sprite
@@ -21,7 +22,7 @@
 		
 		private var relese:Boolean = false;
 		private var releseCount:Number;
-		public var target:Eater;
+		public var target:Player;
 
         private var initX:Number;
 		private var initY:Number;
@@ -31,14 +32,14 @@
 			this.stageRef = stageRef;
 			this.target = target;
 			
-            gotoAndStop("up");
+            //gotoAndStop("up");
 			width=33;
 			height=34;
 			releseCount=rC;
 			x =initX= X;
 			y =initY= Y;
 			
-			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
+			//addEventListener(Event.ENTER_FRAME, loop, false, 1, true);
 		}
 		
 		public function init(X:Number, Y:Number,d:Number=2,r:Boolean=false, st:Boolean=false):void
@@ -48,7 +49,7 @@
 			relese=r;
 			dir=d;
 			stopEnemy=st;
-			gotoAndStop("up");
+			//gotoAndStop("up");
 		}
  
 		private function loop(e:Event) : void
@@ -100,18 +101,17 @@
 		}
 		
 		
-		public function movement():void
-		{
-			//movement of enemy this function is override in STI and sperm
-		}
-		private function enemyDie() : void 
-		{
-			this.init(initX,initY);  
-		}
-		private function playerDie() : void 
-		{
-			  Engine.life-=1;
-		}
+		//public function movement():void
+		//{
+		//	//movement of enemy this function is override in STI and sperm
+		//}
+		//private function enemyDie() : void 
+		//{
+		//	this.init(initX,initY);  
+		//}
+		//private function playerDie() : void 
+		//{
+		//	  Engine.life-=1;
+		//}
 	}
  
-}
