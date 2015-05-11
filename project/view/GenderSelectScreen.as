@@ -12,7 +12,7 @@
 
 		var maleButton:Image;
 		var femaleButton:Image;
-
+		var menuBackground:Image;
 
 		public function GenderSelectScreen() {
 			// constructor code
@@ -24,10 +24,16 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("GenderSelectScreen loaded");
+			
+			addMenuBackground();
 			addMaleButton();
 			addFemaleButton();
 		}
 		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
+		}
 		
 		//--------------------start of adding buttons----------------
 

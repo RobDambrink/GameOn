@@ -11,7 +11,7 @@
 	public class TutorialScreen extends Sprite {
 
 		var toLevelSelectButton: Image;
-
+		var menuBackground:Image;
 
 		public function TutorialScreen() {
 			// constructor code
@@ -22,13 +22,22 @@
 
 		private function onAddedToStage(event: Event) {
 			trace("TutorialScreen loaded");
-
+			
+			addMenuBackground();
+			
 			// if new game option was clicked, then add button to progress to the story screen
 			if (PlayMenuScreen.newGame) {
 				addToLevelSelectButton();
 			}
 		}
-
+		
+		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
+		}
+		
+		
 		private function addToLevelSelectButton() {
 			toLevelSelectButton = new Image(Navigator.assets.getTexture("ToLevelSelectButton")); 
 			addChild(toLevelSelectButton);

@@ -30,8 +30,10 @@
 			
 			healthFill = new Image(Navigator.assets.getTexture("FillHealthBar"));
 			addChild( healthFill );
-			healthFill.x = healthStroke.x + 9;
-			healthFill.y = healthStroke.y;
+			healthFill.x = healthStroke.x + 8;
+			healthFill.y = healthStroke.y + 8;
+			
+			healthFill.height = 186;
 		}
 		
 		
@@ -39,8 +41,9 @@
 			percentHp = hp / maxHp;
 			healthFill.scaleX = percentHp;
 			
-			if (hp > maxHp){
+			if (hp > (maxHp - 1)){
 				hp = maxHp;
+				trace("u win m8");
 			}
 			
 			if (hp < 1){

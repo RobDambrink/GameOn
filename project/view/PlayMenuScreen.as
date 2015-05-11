@@ -14,7 +14,7 @@
 		
 		var continueButton:Image;
 		var newGameButton:Image;
-		
+		var menuBackground:Image;
 		
 		public function PlayMenuScreen() {
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -24,6 +24,8 @@
 		{
 			trace("PlayMenuScreen loaded");
 			
+			addMenuBackground();
+			
 			addNewGameButton();
 			
 	//if there is a saved game state on the device, then execute
@@ -32,6 +34,11 @@
 			newGame = false;
 		}
 		
+		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
+		}
 		
 		//--------------------start of adding buttons----------------
 

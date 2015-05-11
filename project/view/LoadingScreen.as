@@ -8,8 +8,9 @@
 
 	public class LoadingScreen extends Sprite {
 
-		var loadingBar: Image;
-
+		var loadingBar:Image;
+		var menuBackground:Image;
+		
 		public function LoadingScreen() {
 			// constructor code
 
@@ -26,14 +27,22 @@
 
 		private function onAddedToStage(event: Event) {
 			trace("LoadingScreen loaded");
-			Starling.juggler.delayCall(conditionMet, 2.0);
+//			Starling.juggler.delayCall(conditionMet, 2.0);
 			addLoadingBar();
+			addMenuBackground();
 		}
-
-		private function conditionMet() {
-			trace("Loading complete, loading Main Menu");
-			Navigator.instance.loadScreen("mainMenu");
+		
+		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
 		}
+		
+		
+//		private function conditionMet() {
+//			trace("Loading complete, loading Main Menu");
+//			Navigator.instance.loadScreen("mainMenu");
+//		}
 
 		private function addLoadingBar() {
 			loadingBar = new Image(Navigator.assets.getTexture("LoadingBar"));
