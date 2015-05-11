@@ -14,13 +14,10 @@
 
 		var toScoreScreenButton:Image;	
 		//private var player:Player;
-		
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
-		
 		var healthBar:HealthBar;
-		
-		var enemy:Enemy;
+		//var enemy:Enemy;
 		
 		
 		// constructor code
@@ -39,7 +36,7 @@
 			placeHealthBar();
 			placePellets();
 			updateHealthBar();
-			placeEnemy();
+			//placeEnemy();
 			
 			// GAME MECHANIC
 
@@ -49,10 +46,10 @@
 			//addToScoreScreenButton();
 		}
 		
-		function placeEnemy(){
-			trace ("Enemy Placed");
-			addChild (enemy);
-			}
+		//function placeEnemy(){
+//			trace ("Enemy Placed");
+//			addChild (enemy);
+//			}
 		
 		
 		

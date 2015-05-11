@@ -6,9 +6,11 @@
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
+	import starling.core.Starling;
 	
 	public class MainMenuScreen extends Sprite{
 		
+		var menuBackground:Image;
 		var playBtn:Image;
 		var pharmacyButton:Image;
 		var tutorialButton:Image;
@@ -30,12 +32,18 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("MainMenuScreen loaded");
+			addMenuBackground();
 			addPlayBtn();
 			addPharmacyButton();
 			addTutorialButton();
 			addOptionsButton();
 		}
 		
+		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
+		}
 		
 		
 		//--------------------start of adding buttons----------------
@@ -44,7 +52,8 @@
 			playBtn = new Image(Navigator.assets.getTexture("PlayButton"));
 			addChild( playBtn );
 			
-			playBtn.y = 0;
+			playBtn.y = 30;
+			playBtn.x = (Starling.current.stage.stageWidth - playBtn.width) / 2;
 			
 			playBtn.addEventListener( TouchEvent.TOUCH , onPlayButton );
 		}
@@ -53,7 +62,8 @@
 			pharmacyButton = new Image(Navigator.assets.getTexture("PharmacyButton"));
 			addChild( pharmacyButton );
 			
-			pharmacyButton.y = 100;
+			pharmacyButton.y = playBtn.y + playBtn.height + 20;
+			pharmacyButton.x = (Starling.current.stage.stageWidth - pharmacyButton.width) / 2;
 			
 			pharmacyButton.addEventListener( TouchEvent.TOUCH , onPharmacyButton );
 		}
@@ -62,7 +72,8 @@
 			tutorialButton = new Image(Navigator.assets.getTexture("TutorialButton"));
 			addChild( tutorialButton );
 			
-			tutorialButton.y = 200;
+			tutorialButton.y = pharmacyButton.y + pharmacyButton.height + 20;
+			tutorialButton.x = (Starling.current.stage.stageWidth - tutorialButton.width) / 2;
 			
 			tutorialButton.addEventListener( TouchEvent.TOUCH , onTutorialButton );
 		}
@@ -71,7 +82,8 @@
 			optionsButton = new Image(Navigator.assets.getTexture("OptionsButton"));
 			addChild( optionsButton );
 			
-			optionsButton.y = 300
+			optionsButton.y = tutorialButton.y + tutorialButton.height + 20;
+			optionsButton.x = (Starling.current.stage.stageWidth - optionsButton.width) / 2;
 			
 			optionsButton.addEventListener( TouchEvent.TOUCH , onOptionsButton );
 		}

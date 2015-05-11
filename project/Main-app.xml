@@ -13,8 +13,7 @@
 	<text xml:lang="fr">French App name goes here</text>
 	<text xml:lang="ja">Japanese App name goes here</text>
 	</name>
--->
-<application xmlns="http://ns.adobe.com/air/application/3.8">
+--><application xmlns="http://ns.adobe.com/air/application/17.0">
   <id>Main</id>
   <versionNumber>1.0.0</versionNumber>
   <versionLabel/>
@@ -28,7 +27,7 @@
     <transparent>false</transparent>
     <visible>true</visible>
     <fullScreen>false</fullScreen>
-    <aspectRatio>portrait</aspectRatio>
+    <aspectRatio>landscape</aspectRatio>
     <renderMode>direct</renderMode>
     <autoOrients>false</autoOrients></initialWindow>
   <icon/>

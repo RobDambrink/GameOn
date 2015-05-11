@@ -3,7 +3,10 @@
 	import flash.display.MovieClip;
 	import starling.display.MovieClip;
 	import starling.core.Starling;
-
+	
+	
+	
+	
 	public class Main extends MovieClip {
 		
 	//public static var assets:AssetManager = new AssetManager();	
