@@ -7,29 +7,28 @@
 	import flash.filesystem.File;
 	import flash.system.Capabilities;
 	import view.*;
-
-
+	
 	public class Navigator extends Sprite {
 
 		//Makes the variable usable by other classes.
 		public static var instance: Navigator;
-		public static var assets: AssetManager = new AssetManager();
+		//public static var assets: AssetManager = new AssetManager();
 
 		//Variable needed to load instances of other classes.
 		var nextScreen: Sprite;
-		
+
 		//Creates new loadingscreen
-		var load: LoadingScreen = new LoadingScreen();
+		//var load: LoadingScreen = new LoadingScreen();
 
 		//constructor code
 		public function Navigator() {
-			Navigator.instance = this;
-			assets.verbose = true;
-			var appDir: File = File.applicationDirectory;
-			assets.enqueue(appDir.resolvePath("assets"));
-			assets.loadQueue(load.onLoadingProcess);
+
 		}
 
+		public function start(assets:AssetManager){
+			trace ("werkt");
+			loadScreen("mainMenu");
+		}
 
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
 		public function loadScreen(screenName: String) // screenName:String = "mainMenu"
@@ -38,9 +37,7 @@
 				removeChild(nextScreen, true);
 			}
 
-			if (screenName == "loadingScreen") {
-				nextScreen = new LoadingScreen();
-			} else if (screenName == "mainMenu") {
+			if (screenName == "mainMenu") {
 				nextScreen = new MainMenuScreen();
 			}
 

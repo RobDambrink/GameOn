@@ -14,7 +14,7 @@
 		
 		var continueButton:Image;
 		var newGameButton:Image;
-		
+		//var main:Main;		
 		
 		public function PlayMenuScreen() {
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -36,7 +36,7 @@
 		//--------------------start of adding buttons----------------
 
 		private function addContinueButton(){
-			continueButton = new Image(Navigator.assets.getTexture("ContinueButton"));
+			continueButton = new Image(Main.assets.getTexture("ContinueButton"));
 			addChild( continueButton );
 			
 			continueButton.y = 0;
@@ -45,7 +45,7 @@
 		}
 		
 		private function addNewGameButton(){
-			newGameButton = new Image(Navigator.assets.getTexture("NewGameButton"));
+			newGameButton = new Image(Main.assets.getTexture("NewGameButton"));
 			addChild( newGameButton );
 			
 			newGameButton.y = 100;

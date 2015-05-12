@@ -13,6 +13,7 @@
 
 	public class HealthBar extends Sprite{
 		
+		//var main:Main;
 		var gameScreen:GameScreen;
 		var healthFill:Image;
 		
@@ -25,10 +26,10 @@
 		
 		public function HealthBar(screen:GameScreen) {
 			// constructor code
-			var healthStroke:Image = new Image(Navigator.assets.getTexture("StrokeHealthBar"));
+			var healthStroke:Image = new Image(Main.assets.getTexture("StrokeHealthBar"));
 			addChild( healthStroke );
 			
-			healthFill = new Image(Navigator.assets.getTexture("FillHealthBar"));
+			healthFill = new Image(Main.assets.getTexture("FillHealthBar"));
 			addChild( healthFill );
 			healthFill.x = healthStroke.x + 9;
 			healthFill.y = healthStroke.y;

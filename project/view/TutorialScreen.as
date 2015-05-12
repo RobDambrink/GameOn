@@ -11,7 +11,7 @@
 	public class TutorialScreen extends Sprite {
 
 		var toLevelSelectButton: Image;
-
+		//var main:Main;
 
 		public function TutorialScreen() {
 			// constructor code
@@ -30,7 +30,7 @@
 		}
 
 		private function addToLevelSelectButton() {
-			toLevelSelectButton = new Image(Navigator.assets.getTexture("ToLevelSelectButton")); 
+			toLevelSelectButton = new Image(Main.assets.getTexture("ToLevelSelectButton")); 
 			addChild(toLevelSelectButton);
 
 				toLevelSelectButton.y = 0;

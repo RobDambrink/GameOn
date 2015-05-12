@@ -17,6 +17,7 @@
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
+		//var main:Main;
 		//var enemy:Enemy;
 		
 		
@@ -54,7 +55,7 @@
 		
 		
 		private function addToScoreScreenButton(){
-			toScoreScreenButton = new Image(Navigator.assets.getTexture("ToScoreScreenButton"));
+			toScoreScreenButton = new Image(Main.assets.getTexture("ToScoreScreenButton"));
 			addChild( toScoreScreenButton );
 			
 			toScoreScreenButton.y = 0;

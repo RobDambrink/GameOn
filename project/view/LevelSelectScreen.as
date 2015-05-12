@@ -11,7 +11,7 @@
 		
 		
 		var levelSelectButton:Image;
-		
+		//var main:Main;
 		
 		public function LevelSelectScreen() {
 			// constructor code
@@ -30,7 +30,7 @@
 		
 		
 		private function addLevelSelectButton(){
-			levelSelectButton = new Image(Navigator.assets.getTexture("LevelSelectButton")); 
+			levelSelectButton = new Image(Main.assets.getTexture("LevelSelectButton")); 
 			addChild( levelSelectButton );
 			
 			levelSelectButton.y = 0;

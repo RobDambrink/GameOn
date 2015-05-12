@@ -7,14 +7,46 @@
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	import starling.core.Starling;
+	import starling.utils.formatString;
+	import flash.filesystem.File;
+	import flash.filesystem.FileStream;
+	import flash.utils.ByteArray;
+	
+	import flash.desktop.NativeApplication;
+    import flash.display.Bitmap;
+    import flash.display.Loader;
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.filesystem.File;
+    import flash.filesystem.FileMode;
+    import flash.filesystem.FileStream;
+    import flash.geom.Rectangle;
+    import flash.system.Capabilities;
+    import flash.utils.ByteArray;
+    import flash.utils.setTimeout;
+
+    import starling.core.Starling;
+    import starling.events.Event;
+    import starling.textures.RenderTexture;
+    import starling.utils.AssetManager;
+    import starling.utils.RectangleUtil;
+    import starling.utils.ScaleMode;
+    import starling.utils.SystemUtil;
+    import starling.utils.formatString;
 	
 	public class MainMenuScreen extends Sprite{
 		
+
 		var menuBackground:Image;
 		var playBtn:Image;
 		var pharmacyButton:Image;
 		var tutorialButton:Image;
 		var optionsButton:Image;
+		
+		//var main:Main;
+		
+		private var mStarling:Starling;
+
 		
 		
 		public function MainMenuScreen() {
@@ -41,15 +73,17 @@
 		
 		
 		function addMenuBackground(){
-			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
-			addChild( menuBackground );
+			trace("background loaded");
+			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
+			addChild(menuBackground);
+
 		}
 		
 		
 		//--------------------start of adding buttons----------------
 		
 		private function addPlayBtn(){
-			playBtn = new Image(Navigator.assets.getTexture("PlayButton"));
+			playBtn = new Image(Main.assets.getTexture("PlayButton"));
 			addChild( playBtn );
 			
 			playBtn.y = 30;
@@ -59,7 +93,7 @@
 		}
 		
 		private function addPharmacyButton(){
-			pharmacyButton = new Image(Navigator.assets.getTexture("PharmacyButton"));
+			pharmacyButton = new Image(Main.assets.getTexture("PharmacyButton"));
 			addChild( pharmacyButton );
 			
 			pharmacyButton.y = playBtn.y + playBtn.height + 20;
@@ -69,7 +103,7 @@
 		}
 		
 		private function addTutorialButton(){
-			tutorialButton = new Image(Navigator.assets.getTexture("TutorialButton"));
+			tutorialButton = new Image(Main.assets.getTexture("TutorialButton"));
 			addChild( tutorialButton );
 			
 			tutorialButton.y = pharmacyButton.y + pharmacyButton.height + 20;
@@ -79,7 +113,7 @@
 		}
 		
 		private function addOptionsButton(){
-			optionsButton = new Image(Navigator.assets.getTexture("OptionsButton"));
+			optionsButton = new Image(Main.assets.getTexture("OptionsButton"));
 			addChild( optionsButton );
 			
 			optionsButton.y = tutorialButton.y + tutorialButton.height + 20;

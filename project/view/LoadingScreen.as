@@ -9,6 +9,7 @@
 	public class LoadingScreen extends Sprite {
 
 		var loadingBar: Image;
+		var main:Main;
 
 		public function LoadingScreen() {
 			// constructor code
@@ -36,7 +37,7 @@
 		}
 
 		private function addLoadingBar() {
-			loadingBar = new Image(Navigator.assets.getTexture("LoadingBar"));
+			loadingBar = new Image(main.assets.getTexture("LoadingBar"));
 			addChild(loadingBar);
 
 			loadingBar.x = (Starling.current.stage.stageWidth - loadingBar.width) / 2;

@@ -15,7 +15,7 @@
 	public class HealthPellet extends Sprite{
 		
 		var gameScreen:GameScreen;
-		
+		//var main:Main;		
 		
 		
 		public function HealthPellet(screen:GameScreen){
@@ -23,7 +23,7 @@
 			
 			gameScreen = screen;
 			
-			var pellet:Image = new Image(Navigator.assets.getTexture("Circle"));
+			var pellet:Image = new Image(Main.assets.getTexture("Circle"));
 			addChild( pellet );
 			
 			addEventListener( TouchEvent.TOUCH , pelletTouched );

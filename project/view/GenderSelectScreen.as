@@ -12,6 +12,7 @@
 
 		var maleButton:Image;
 		var femaleButton:Image;
+		//var main:Main;
 
 
 		public function GenderSelectScreen() {
@@ -32,7 +33,7 @@
 		//--------------------start of adding buttons----------------
 
 		private function addMaleButton(){
-			maleButton = new Image(Navigator.assets.getTexture("MaleButton")); 
+			maleButton = new Image(Main.assets.getTexture("MaleButton")); 
 			addChild( maleButton );
 			
 			maleButton.y = 0;
@@ -41,7 +42,7 @@
 		}
 		
 		private function addFemaleButton(){
-			femaleButton = new Image(Navigator.assets.getTexture("FemaleButton"));
+			femaleButton = new Image(Main.assets.getTexture("FemaleButton"));
 			addChild( femaleButton );
 			
 			femaleButton.y = 100;
