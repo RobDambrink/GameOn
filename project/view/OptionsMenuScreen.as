@@ -1,9 +1,12 @@
 ﻿package view{
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.display.Image;
 	
 	public class OptionsMenuScreen extends Sprite{
-
+		
+		var menuBackground:Image;
+		
 		public function OptionsMenuScreen() {
 			// constructor code
 			
@@ -14,6 +17,13 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("OptionsMenuScreen loaded");
+			addMenuBackground();
+		}
+		
+		
+		function addMenuBackground(){
+			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			addChild( menuBackground );
 		}
 		
 		

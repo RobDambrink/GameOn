@@ -23,7 +23,11 @@
 			
 			gameScreen = screen;
 			
+<<<<<<< HEAD
 			var pellet:Image = new Image(Main.assets.getTexture("Circle"));
+=======
+			var pellet:Image = new Image(Navigator.assets.getTexture("HealthDot"));
+>>>>>>> ba00e991d302bfaa0cfdaa1fc8705fc36d7c58e5
 			addChild( pellet );
 			
 			addEventListener( TouchEvent.TOUCH , pelletTouched );
