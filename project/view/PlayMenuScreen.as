@@ -14,11 +14,11 @@
 		
 		var continueButton:Image;
 		var newGameButton:Image;
-<<<<<<< HEAD
+
 		//var main:Main;		
-=======
+
 		var menuBackground:Image;
->>>>>>> ba00e991d302bfaa0cfdaa1fc8705fc36d7c58e5
+
 		
 		public function PlayMenuScreen() {
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -40,7 +40,7 @@
 		
 		
 		function addMenuBackground(){
-			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
 			addChild( menuBackground );
 		}
 		

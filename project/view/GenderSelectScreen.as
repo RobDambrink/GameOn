@@ -12,12 +12,9 @@
 
 		var maleButton:Image;
 		var femaleButton:Image;
-<<<<<<< HEAD
 		//var main:Main;
 
-=======
 		var menuBackground:Image;
->>>>>>> ba00e991d302bfaa0cfdaa1fc8705fc36d7c58e5
 
 		public function GenderSelectScreen() {
 			// constructor code
@@ -36,7 +33,7 @@
 		}
 		
 		function addMenuBackground(){
-			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
 			addChild( menuBackground );
 		}
 		

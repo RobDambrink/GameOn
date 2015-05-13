@@ -22,7 +22,7 @@
 		
 		
 		function addMenuBackground(){
-			menuBackground = new Image(Navigator.assets.getTexture("MainMenuBackground"));
+			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
 			addChild( menuBackground );
 		}
 		
