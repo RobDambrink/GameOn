@@ -25,7 +25,7 @@
 
 		public function start(assets:AssetManager){
 			trace ("werkt");
-			loadScreen("game");
+			loadScreen("mainMenu");
 		}
 
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.

@@ -12,14 +12,7 @@
 
 		var maleButton:Image;
 		var femaleButton:Image;
-<<<<<<< HEAD
 		var menuBackground:Image;
-
-=======
-		//var main:Main;
-
-		var menuBackground:Image;
->>>>>>> f8ecb1ffedbbfaa351d4a28b144b0ab6953445b1
 
 		public function GenderSelectScreen() {
 			// constructor code
