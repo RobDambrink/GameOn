@@ -14,7 +14,7 @@
 	<text xml:lang="ja">Japanese App name goes here</text>
 	</name>
 -->
-<application xmlns="http://ns.adobe.com/air/application/3.6">
+<application xmlns="http://ns.adobe.com/air/application/17.0">
   <id>Main</id>
   <versionNumber>1.0.0</versionNumber>
   <versionLabel/>
@@ -35,7 +35,8 @@
   <customUpdateUI>false</customUpdateUI>
   <allowBrowserInvocation>false</allowBrowserInvocation>
   <android>
-    <manifestAdditions><![CDATA[<manifest>
+    <manifestAdditions>
+      <![CDATA[<manifest>
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -47,7 +48,8 @@
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-</manifest>]]></manifestAdditions>
+</manifest>]]>
+    </manifestAdditions>
   </android>
   <supportedLanguages>en</supportedLanguages>
 </application>
