@@ -8,17 +8,15 @@
 	import flash.system.Capabilities;
 	import view.*;
 	
+	
 	public class Navigator extends Sprite {
 
 		//Makes the variable usable by other classes.
 		public static var instance: Navigator;
-		//public static var assets: AssetManager = new AssetManager();
 
 		//Variable needed to load instances of other classes.
 		var nextScreen: Sprite;
 
-		//Creates new loadingscreen
-		//var load: LoadingScreen = new LoadingScreen();
 
 		//constructor code
 		public function Navigator() {

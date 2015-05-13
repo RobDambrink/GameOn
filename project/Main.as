@@ -29,11 +29,10 @@
     // The "media" folder of this project has to be added to its "source paths" as well,
     // to make sure the icon and startup images are added to the compiled mobile app.
 
-    [SWF(width="1280", height="720", frameRate="30", backgroundColor="#000000")]
     public class Main extends Sprite
     {
-        private const StageWidth:int  = 1280;
-        private const StageHeight:int = 720;
+        private const StageWidth:int  = 426;
+        private const StageHeight:int = 240;
 
         private var mStarling:Starling;
         private var mBackground:Loader;
@@ -47,12 +46,19 @@
             // then run on a device with a different resolution; for that case, we zoom the
             // viewPort to the optimal size for any display and load the optimal textures.
 
-            var iOS:Boolean = SystemUtil.platform == "IOS";
+            //var iOS:Boolean = SystemUtil.platform == "IOS";
             var stageSize:Rectangle  = new Rectangle(0, 0, StageWidth, StageHeight);
             var screenSize:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
-            var viewPort:Rectangle = RectangleUtil.fit(stageSize, screenSize, ScaleMode.SHOW_ALL, iOS);
-            var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
+            var viewPort:Rectangle = RectangleUtil.fit(stageSize, screenSize, ScaleMode.SHOW_ALL);
+            //var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
+			
+			var scaleFactor:int = 3;
+			trace (viewPort);
+			//if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
+			//else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
+			//else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
 
+			
 			trace (scaleFactor);
             Starling.multitouchEnabled = true; // useful on mobile devices
             Starling.handleLostContext = true; // recommended everywhere when using AssetManager
@@ -94,7 +100,7 @@
 			assets.verbose = Capabilities.isDebugger;
 			assets.enqueue(
 					//appDir.resolvePath("audio"),
-					appDir.resolvePath(formatString("assets/1x" /*scaleFactor*/))
+					appDir.resolvePath(formatString("assets/{0}x", scaleFactor))
 			);
 
             // Now, while the AssetManager now contains pointers to all the assets, it actually

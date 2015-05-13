@@ -17,7 +17,7 @@
 <application xmlns="http://ns.adobe.com/air/application/3.6">
   <id>Main</id>
   <versionNumber>1.0.0</versionNumber>
-  <versionLabel></versionLabel>
+  <versionLabel/>
   <filename>Main</filename>
   <description/>
   <name>Main</name>
