@@ -6,6 +6,8 @@
 	import flash.desktop.NativeApplication;
 	import flash.filesystem.File;
 	import flash.system.Capabilities;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	import view.*;
 	
 	
@@ -16,7 +18,10 @@
 
 		//Variable needed to load instances of other classes.
 		var nextScreen: Sprite;
-
+		
+		// This is the path the user follows through all the menu screens.
+		public static var breadcrumbs:Vector.<String> = new Vector.<String>();
+		
 
 		//constructor code
 		public function Navigator() {
@@ -78,8 +83,44 @@
 			else if ( screenName == "game" ){
 				nextScreen = new GameScreen();
 			}
+			
+			// Makes sure there are no duplicate values in the breadcrumbs Vector
+			if (breadcrumbs.indexOf(screenName) == -1){
+				breadcrumbs.push(screenName);
+			}
+			
+			trace(breadcrumbs);
+			
+			
 			addChild(nextScreen);
 		}
+		
+		protected function onKeyDown(e:KeyboardEvent):void
+		{
+			if(e.keyCode == Keyboard.BACK)
+			{
+				//handle the button press here.
+				trace("Devices BACK button pressed");
+				
+				breadcrumbs.pop();
+				
+				breadcrumbs[0]="mainMenu";
+				
+				loadScreen(breadcrumbs[breadcrumbs.length -1]);
+			}
+			else if(e.keyCode == Keyboard.HOME)
+			{
+				//handle the button press here.
+				trace("Devices HOME button pressed");
+				trace("This doesn't work on PC");
+			}
+			else if(e.keyCode == Keyboard.MENU)
+			{
+				//handle the button press here.
+				trace("Devices MENU button pressed");
+			}
+		}
+		
 	}
 
 }

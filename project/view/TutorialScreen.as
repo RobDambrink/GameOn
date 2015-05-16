@@ -26,7 +26,7 @@
 			addMenuBackground();
 			
 			// if new game option was clicked, then add button to progress to the story screen
-			if (PlayMenuScreen.newGame) {
+			if (Navigator.breadcrumbs.indexOf("genderSelect") >= 0){
 				addToLevelSelectButton();
 			}
 		}
@@ -50,8 +50,6 @@
 			private function onToLevelSelectButton(event: TouchEvent) {
 				var touch: Touch = event.touches[0];
 				if (touch.phase == TouchPhase.BEGAN) {
-					PlayMenuScreen.newGame = false;
-
 					Navigator.instance.loadScreen("levelSelect");
 				}
 			}

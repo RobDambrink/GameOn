@@ -59,7 +59,7 @@
 			//else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
 
 			
-			trace (scaleFactor);
+			trace ("scaleFactor", scaleFactor);
             Starling.multitouchEnabled = true; // useful on mobile devices
             Starling.handleLostContext = true; // recommended everywhere when using AssetManager
             //RenderTexture.optimizePersistentBuffers = iOS; // safe on iOS, dangerous on Android
@@ -124,7 +124,8 @@
         private function initElements(scaleFactor:int):void
         {
             // Add background image. By using "loadBytes", we can avoid any flickering.
-
+			
+// Insert splash screen here
             var bgPath:String = formatString("assets/{0}x/Circle.png", scaleFactor); //formatString("assets/{0}x/background.jpg", scaleFactor);
             var bgFile:File = File.applicationDirectory.resolvePath(bgPath);
             var bytes:ByteArray = new ByteArray();

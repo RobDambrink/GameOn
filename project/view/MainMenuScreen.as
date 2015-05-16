@@ -118,7 +118,7 @@
 		private function onPlayButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				trace ("de klikt werkt")
+				trace ("de klik werkt")
 				//Navigator.instance.loadScreen("playMenu");
 			}
 		}

@@ -10,8 +10,6 @@
 	
 	public class PlayMenuScreen extends Sprite{
 		
-		public static var newGame:Boolean;
-		
 		var continueButton:Image;
 		var newGameButton:Image;
 		var menuBackground:Image;
@@ -31,8 +29,6 @@
 			
 	//if there is a saved game state on the device, then execute
 			addContinueButton();
-			
-			newGame = false;
 		}
 		
 		
@@ -79,7 +75,6 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 // WARNING that New Game deletes all progress! 
-				newGame = true;
 				Navigator.instance.loadScreen( "genderSelect" );
 			}
 		}
