@@ -6,12 +6,9 @@
 	import flash.desktop.NativeApplication;
 	import flash.filesystem.File;
 	import flash.system.Capabilities;
-	import flash.events.KeyboardEvent;
+	import starling.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import view.*;
-	import flash.events.TransformGestureEvent;
-	import flash.ui.Multitouch;
-	import flash.ui.MultitouchInputMode;
 
 
 	public class Navigator extends Sprite {
@@ -31,6 +28,7 @@
 		}
 
 		public function start(assets: AssetManager) {
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
 			loadScreen("game");
 		}
@@ -81,7 +79,8 @@
 			if (e.keyCode == Keyboard.BACK) {
 				//handle the button press here.
 				trace("Devices BACK button pressed");
-
+				e.preventDefault();
+				
 				breadcrumbs.pop();
 
 				breadcrumbs[0] = "mainMenu";
@@ -94,6 +93,7 @@
 			} else if (e.keyCode == Keyboard.MENU) {
 				//handle the button press here.
 				trace("Devices MENU button pressed");
+				e.preventDefault();
 			}
 		}
 

@@ -1,17 +1,18 @@
 ﻿package view{
-	import starling.display.Sprite;
+	import starling.display.Sprite;	
+	import starling.display.Stage;
 	import starling.textures.Texture;
 	import starling.display.Image;
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
+	import starling.events.Event;
 	import starling.events.TouchPhase;
 	import starling.core.Starling;
-	import starling.events.Event;
+	import org.gestouch.gestures.SwipeGesture;
+	import org.gestouch.events.GestureEvent;
 	import model.*;
-	import starling.display.Stage;
-	import flash.events.TransformGestureEvent;
-	import flash.ui.Multitouch;
-	import flash.ui.MultitouchInputMode;
+
+
 	
 	public class GameScreen extends Sprite{
 
@@ -33,9 +34,8 @@
 		//This function tells the console that the gamescreen is loaded. Also adds the background to the stage. The function addConditionMet is delayed for 2 seconds, then executes.
 		private function onAddedToStage(event:Event)
 		{
-			
-			Multitouch.inputMode = MultitouchInputMode.GESTURE;
-			addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+			var swipe:SwipeGesture = new SwipeGesture(stage);
+			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			
 			trace("GameScreen loaded");
 			
@@ -48,6 +48,29 @@
 			//addToScoreScreenButton();
 		}
 		
+		function onSwipeRec(e:GestureEvent):void {
+			trace ("onSwipeRec")
+			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
+			if (swipeGesture.offsetX>6) {
+				trace ("swipe");
+				player.x += 20;
+
+			}
+			if (swipeGesture.offsetX<-6) {
+				trace ("swipe more")
+				player.x += -20;
+			}
+			
+			if (swipeGesture.offsetY>6) {
+				trace ("swipe");
+				player.y += 20;
+
+			}
+			if (swipeGesture.offsetY<-6) {
+				trace ("swipe more")
+				player.y += -20;
+			}
+		}
 	
 		
 		private function addToScoreScreenButton(){
@@ -94,29 +117,6 @@
 			player.x = Math.random() * (Starling.current.stage.stageWidth - player.width);
 			player.y = Math.random() * (Starling.current.stage.stageHeight - player.height);
 			addChild(player);
-		}
-		
-		function onSwipe(e: TransformGestureEvent): void {
-			if (e.offsetX == 1) {
-				//User swiped towards right
-				trace ("right");
-				player.x += 100
-			}
-			if (e.offsetX == -1) {
-				//User swiped towards left
-				trace ("left");
-				player.x += -100
-			}
-			if (e.offsetY == 1) {
-				//User swiped towards bottom
-				trace ("bottom");
-				player.y += 100
-			}
-			if (e.offsetY == -1) {
-				//User swiped towards top
-				trace ("top");
-				player.x += -100
-			}
 		}
 		
 		

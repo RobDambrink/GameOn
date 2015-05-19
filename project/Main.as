@@ -21,6 +21,12 @@
     import starling.utils.ScaleMode;
     import starling.utils.SystemUtil;
     import starling.utils.formatString;
+	
+	import org.gestouch.core.Gestouch
+	import org.gestouch.input.NativeInputAdapter;
+	import org.gestouch.extensions.starling.StarlingDisplayListAdapter;
+	import org.gestouch.extensions.starling.StarlingTouchHitTester;
+	import starling.display.DisplayObject;
 
     //import utils.ProgressBar;
 
@@ -45,7 +51,9 @@
             // We develop the game in a *fixed* coordinate system of 320x480. The game might
             // then run on a device with a different resolution; for that case, we zoom the
             // viewPort to the optimal size for any display and load the optimal textures.
-
+			
+			
+			
             //var iOS:Boolean = SystemUtil.platform == "IOS";
             var stageSize:Rectangle  = new Rectangle(0, 0, StageWidth, StageHeight);
             var screenSize:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
@@ -73,10 +81,15 @@
             {
                 loadAssets(scaleFactor, startGame);
             });
-
+			
+			// Set Swipe Shizzle
+			Gestouch.inputAdapter ||= new NativeInputAdapter(stage);
+			Gestouch.addDisplayListAdapter(starling.display.DisplayObject, new StarlingDisplayListAdapter());
+			Gestouch.addTouchHitTester(new StarlingTouchHitTester(mStarling), -1);
+			
             mStarling.start();
             initElements(scaleFactor);
-
+			
             // When the game becomes inactive, we pause Starling; otherwise, the enter frame event
             // would report a very long 'passedTime' when the app is reactivated.
 
