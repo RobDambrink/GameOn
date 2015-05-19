@@ -119,7 +119,7 @@
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
 				trace ("de klik werkt")
-				//Navigator.instance.loadScreen("playMenu");
+				Navigator.instance.loadScreen("playMenu");
 			}
 		}
 

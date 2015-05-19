@@ -9,8 +9,11 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import view.*;
-	
-	
+	import flash.events.TransformGestureEvent;
+	import flash.ui.Multitouch;
+	import flash.ui.MultitouchInputMode;
+
+
 	public class Navigator extends Sprite {
 
 		//Makes the variable usable by other classes.
@@ -18,19 +21,18 @@
 
 		//Variable needed to load instances of other classes.
 		var nextScreen: Sprite;
-		
+
 		// This is the path the user follows through all the menu screens.
-		public static var breadcrumbs:Vector.<String> = new Vector.<String>();
-		
+		public static var breadcrumbs: Vector.<String> = new Vector.<String>();
 
 		//constructor code
 		public function Navigator() {
 
 		}
 
-		public function start(assets:AssetManager){
-			trace ("werkt");
-			loadScreen("mainMenu");
+		public function start(assets: AssetManager) {
+			Navigator.instance = this;
+			loadScreen("game");
 		}
 
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
@@ -42,85 +44,59 @@
 
 			if (screenName == "mainMenu") {
 				nextScreen = new MainMenuScreen();
-			}
-
-			else if ( screenName == "playMenu" ){
+			} else if (screenName == "playMenu") {
 				nextScreen = new PlayMenuScreen();
-			}
-			
-			else if ( screenName == "genderSelect" ){
+			} else if (screenName == "genderSelect") {
 				nextScreen = new GenderSelectScreen();
-			}
-			
-			else if ( screenName == "tutorial" ){
+			} else if (screenName == "tutorial") {
 				nextScreen = new TutorialScreen();
-			}
-			
-			else if ( screenName == "pharmacy" ){
+			} else if (screenName == "pharmacy") {
 				nextScreen = new PharmacyScreen();
-			}
-			
-			else if ( screenName == "optionsMenu" ){
+			} else if (screenName == "optionsMenu") {
 				nextScreen = new OptionsMenuScreen();
-			}
-			
-			else if ( screenName == "levelSelect" ){
+			} else if (screenName == "levelSelect") {
 				nextScreen = new LevelSelectScreen();
-			}
-			
-			else if ( screenName == "story" ){
+			} else if (screenName == "story") {
 				nextScreen = new StoryScreen();
-			}
-			
-			else if ( screenName == "lostGame" ){
+			} else if (screenName == "lostGame") {
 				nextScreen = new LostGameScreen();
-			}
-			
-			else if ( screenName == "scoreScreen" ){
+			} else if (screenName == "scoreScreen") {
 				nextScreen = new ScoreScreen();
-			}
-			
-			else if ( screenName == "game" ){
+			} else if (screenName == "game") {
 				nextScreen = new GameScreen();
 			}
-			
+
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
-			if (breadcrumbs.indexOf(screenName) == -1){
+			if (breadcrumbs.indexOf(screenName) == -1) {
 				breadcrumbs.push(screenName);
 			}
-			
+
 			trace(breadcrumbs);
-			
-			
+
+
 			addChild(nextScreen);
 		}
-		
-		protected function onKeyDown(e:KeyboardEvent):void
-		{
-			if(e.keyCode == Keyboard.BACK)
-			{
+
+		protected function onKeyDown(e: KeyboardEvent): void {
+			if (e.keyCode == Keyboard.BACK) {
 				//handle the button press here.
 				trace("Devices BACK button pressed");
-				
+
 				breadcrumbs.pop();
-				
-				breadcrumbs[0]="mainMenu";
-				
-				loadScreen(breadcrumbs[breadcrumbs.length -1]);
-			}
-			else if(e.keyCode == Keyboard.HOME)
-			{
+
+				breadcrumbs[0] = "mainMenu";
+
+				loadScreen(breadcrumbs[breadcrumbs.length - 1]);
+			} else if (e.keyCode == Keyboard.HOME) {
 				//handle the button press here.
 				trace("Devices HOME button pressed");
 				trace("This doesn't work on PC");
-			}
-			else if(e.keyCode == Keyboard.MENU)
-			{
+			} else if (e.keyCode == Keyboard.MENU) {
 				//handle the button press here.
 				trace("Devices MENU button pressed");
 			}
 		}
-		
+
 	}
 
 }
