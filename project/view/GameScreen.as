@@ -21,6 +21,8 @@
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
+		var wall:Wall;
+		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
 		
 		
@@ -36,6 +38,7 @@
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
+			this.addEventListener(Event.ENTER_FRAME, collision);
 			
 			trace("GameScreen loaded");
 			
@@ -43,32 +46,40 @@
 			//placePellets();
 			updateHealthBar();
 			placePlayer();
+			placeWall();
 			//placeEnemy();
 			// GAME MECHANIC
 			//addToScoreScreenButton();
 		}
 		
+		function collision(){
+			//if(player.hitTestObject(wall)){player.hitWall()}
+		}
+		
+		/**
+			This method performs various actions based on the direction the user swiped in.
+		*/
 		function onSwipeRec(e:GestureEvent):void {
 			trace ("onSwipeRec")
 			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
 			if (swipeGesture.offsetX>6) {
 				trace ("swipe");
-				player.x += 20;
+				player.x += player.speed;
 
 			}
 			if (swipeGesture.offsetX<-6) {
 				trace ("swipe more")
-				player.x += -20;
+				player.x -= player.speed;
 			}
 			
 			if (swipeGesture.offsetY>6) {
 				trace ("swipe");
-				player.y += 20;
+				player.y += player.speed;
 
 			}
 			if (swipeGesture.offsetY<-6) {
 				trace ("swipe more")
-				player.y += -20;
+				player.y -= player.speed;
 			}
 		}
 	
@@ -91,6 +102,13 @@
 		}
 
 		
+		public function placeWall(){
+			wall= new Wall();
+			//place the wall in the center of the screen
+			wall.x=Starling.current.stage.stageWidth/2;
+			wall.y=Starling.current.stage.stageHeight/2;
+			addChild(wall);
+		}
 		
 		public function placePellets()
 		{
