@@ -11,7 +11,7 @@
 	import org.gestouch.gestures.SwipeGesture;
 	import org.gestouch.events.GestureEvent;
 	import model.*;
-
+	//import flash.geom.Point;
 
 	
 	public class GameScreen extends Sprite{
@@ -53,7 +53,14 @@
 		}
 		
 		function collision(){
-			//if(player.hitTestObject(wall)){player.hitWall()}
+//			if(player.hitTest(wall)){
+//				player.hitWall();
+//			}
+
+			if(player.getBounds(player.parent).intersects(wall.getBounds(wall.parent))){
+				player.hitWall();
+			}
+			
 		}
 		
 		/**
@@ -107,6 +114,11 @@
 			//place the wall in the center of the screen
 			wall.x=Starling.current.stage.stageWidth/2;
 			wall.y=Starling.current.stage.stageHeight/2;
+			
+			// REMOVE THIS COMMENTS TO TEST THE HITTESTWALL
+			//wall.x = player.x;
+			//wall.y = player.y;			
+
 			addChild(wall);
 		}
 		

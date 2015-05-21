@@ -57,7 +57,7 @@
 		}
 
 		public function hitWall(){
-			
+			trace("function hitWall activated");
 		}
 		
 		/**
