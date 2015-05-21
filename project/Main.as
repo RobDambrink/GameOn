@@ -60,11 +60,11 @@
             var viewPort:Rectangle = RectangleUtil.fit(stageSize, screenSize, ScaleMode.SHOW_ALL);
             //var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
 			
-			var scaleFactor:int = 3;
+			var scaleFactor:int;
 			trace (viewPort);
-			//if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
-			//else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
-			//else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
+			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
+			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
+			else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
 
 			
 			trace ("scaleFactor", scaleFactor);
