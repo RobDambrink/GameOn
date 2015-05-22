@@ -25,11 +25,13 @@
 		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
 		var map:Array = [
-			[1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1],
-			[1,0,0,1,0,0,0,1,0,0,1],
-			[1,1,1,1,1,1,1,1,1,1,1]
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1,1,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1,1,1,1],
+			[1,0,0,1,0,0,0,1,0,0,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,0,0,0,0,0,0,0,0,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
 		// constructor code
@@ -60,7 +62,7 @@
 		}
 		
 		
-		function loadMap(map:Array, cellSize:int = 20):void
+		function loadMap(map:Array, cellSize:int = 30):void
 		{
 			for(var row:int = 0; row < map.length; row++)
 			{
@@ -91,7 +93,7 @@
 					{
 						object.x = column * cellSize;
 						object.y = row * cellSize;
-						Starling.current.stage.addChild(object);
+						addChild(object);
 					}
 				}
 			}

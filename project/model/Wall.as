@@ -13,7 +13,7 @@
 		public function Wall() {
 			// constructor code
 			trace("Wall Constructor");
-			var wall:Image = new Image(Main.assets.getTexture("Wall-20x20"));
+			var wall:Image = new Image(Main.assets.getTexture("TileHouse"));
 			addChild( wall );
 		}
 
