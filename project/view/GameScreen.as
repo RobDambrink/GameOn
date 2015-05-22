@@ -24,7 +24,13 @@
 		var wall:Wall;
 		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
-		
+		var map:Array = [
+			[1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1],
+			[1,0,0,1,0,0,0,1,0,0,1],
+			[1,1,1,1,1,1,1,1,1,1,1]
+		];
 		
 		// constructor code
 		public function GameScreen() 
@@ -38,21 +44,62 @@
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
-			this.addEventListener(Event.ENTER_FRAME, collision);
+			//this.addEventListener(Event.ENTER_FRAME, collision);
 			
 			trace("GameScreen loaded");
 			
-			placeHealthBar();
+			loadMap(map);
+			
+			//placeHealthBar();
 			//placePellets();
-			updateHealthBar();
-			placePlayer();
-			placeWall();
+			//updateHealthBar();
+			//placePlayer();
+			//placeWall();
 			//placeEnemy();
-			// GAME MECHANIC
 			//addToScoreScreenButton();
 		}
 		
-		function collision(){
+		
+		function loadMap(map:Array, cellSize:int = 20):void
+		{
+			for(var row:int = 0; row < map.length; row++)
+			{
+				for(var column:int = 0; column < map[row].length; column++)
+				{
+					var data:int = map[row][column];
+		
+					// Empty tile, move onto the next item.
+					if(data === 0) continue;
+		
+		
+					var object:Sprite;
+		
+					if(data === 1){
+						object = new Wall();
+					}
+/*					if(data === 2){
+						object = new Wall();
+					}
+					if(data === 3){
+						object = new Wall();
+					}
+					if(data === 4){
+						object = new Wall();
+					}
+*/		
+					if(object !== null)
+					{
+						object.x = column * cellSize;
+						object.y = row * cellSize;
+						Starling.current.stage.addChild(object);
+					}
+				}
+			}
+		}
+		
+		
+		
+/*		function collision(){
 //			if(player.hitTest(wall)){
 //				player.hitWall();
 //			}
@@ -62,7 +109,7 @@
 			}
 			
 		}
-		
+*/		
 		/**
 			This method performs various actions based on the direction the user swiped in.
 		*/
