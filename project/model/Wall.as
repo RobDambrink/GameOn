@@ -10,10 +10,22 @@
 */
 	public class Wall extends Sprite{
 
-		public function Wall() {
+		public function Wall(type:String) {
 			// constructor code
-			trace("Wall Constructor");
-			var wall:Image = new Image(Main.assets.getTexture("TileHouse"));
+			if (type === "House"){
+				var wall:Image = new Image(Main.assets.getTexture("TileHouse"));
+			}
+			if (type === "Tree"){
+				var wall:Image = new Image(Main.assets.getTexture("Circle24"));
+			}
+//			if (type === "Table"){
+//				var wall:Image = new Image(Main.assets.getTexture("TileTable"));
+//			}
+			if (type === "Transparent"){
+				var wall:Image = new Image(Main.assets.getTexture("TileTransparent"));
+			}
+			
+			
 			addChild( wall );
 		}
 

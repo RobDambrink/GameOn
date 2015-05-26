@@ -25,7 +25,7 @@
 			var player: Image
 			//Select the male sprite
 			if (gender == "male") {
-				player = new Image(Main.assets.getTexture("Circle"));
+				player = new Image(Main.assets.getTexture("Circle24"));
 			}
 			//select the female sprite
 			if (gender == "female") {

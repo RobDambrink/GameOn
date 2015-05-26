@@ -60,7 +60,7 @@
             var viewPort:Rectangle = RectangleUtil.fit(stageSize, screenSize, ScaleMode.SHOW_ALL);
             //var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
 			
-			var scaleFactor:int;
+			var scaleFactor:int; 
 			trace (viewPort);
 			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
 			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480

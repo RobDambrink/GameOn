@@ -25,13 +25,16 @@
 		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
 		var map:Array = [
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1,1,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1,1,1,1],
-			[1,0,0,1,0,0,0,1,0,0,1,1,1,1],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,1,1,1,1],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1],
+			[1,0,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1],
+			[1,0,0,1,0,0,5,1,0,0,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
 		// constructor code
@@ -62,33 +65,47 @@
 		}
 		
 		
-		function loadMap(map:Array, cellSize:int = 30):void
+		function loadMap(map:Array):void
 		{
 			for(var row:int = 0; row < map.length; row++)
 			{
 				for(var column:int = 0; column < map[row].length; column++)
 				{
 					var data:int = map[row][column];
-		
+					
+					// Data = 0: Path the player can walk on.
 					// Empty tile, move onto the next item.
 					if(data === 0) continue;
 		
-		
 					var object:Sprite;
-		
+					
 					if(data === 1){
-						object = new Wall();
+						object = new Wall("House");
 					}
-/*					if(data === 2){
-						object = new Wall();
+					if(data === 2){
+						object = new Wall("Tree");
 					}
-					if(data === 3){
-						object = new Wall();
-					}
+//					if(data === 3){
+//						object = new Wall(table);
+//					}
 					if(data === 4){
-						object = new Wall();
+						object = new Wall("Transparent");
 					}
-*/		
+					if(data === 5){
+						object = new Player();
+					}
+//					if(data === 6){
+//						object = new Enemy();
+//					}
+//					if(data === 7){
+//						object = new Exit();
+//					}
+//					if(data === 8){
+//						object = new HealthPellet();
+//					}
+//					
+					var cellSize:int = object.width;
+					
 					if(object !== null)
 					{
 						object.x = column * cellSize;
@@ -158,7 +175,7 @@
 		}
 
 		
-		public function placeWall(){
+/*		public function placeWall(){
 			wall= new Wall();
 			//place the wall in the center of the screen
 			wall.x=Starling.current.stage.stageWidth/2;
@@ -170,7 +187,7 @@
 
 			addChild(wall);
 		}
-		
+*/		
 		public function placePellets()
 		{
 			for (var i:int = 0; i < 5; i++)
