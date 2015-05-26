@@ -11,13 +11,11 @@
 /*	import flash.events.TransformGestureEvent;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;*/
-	import org.gestouch.gestures.SwipeGesture;
-	import org.gestouch.events.GestureEvent;
 
 
 	public class Player extends Sprite {
 
-		public var speed: int = 5;
+		public var speed: int = 2.5;
 		public var infected: Boolean;
 		public var gender: String = "male";
 			
@@ -44,31 +42,9 @@
 		}
 		
 		public function getSpeed(){
-			return speed;
+			return speed*Main.scaleFactor;
 		}
 		
-		public function onSwipeRec(e:GestureEvent){
-			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
-			if (swipeGesture.offsetX>6) {
-				trace ("swipe");
-				this.x += this.getSpeed();
-
-			}
-			if (swipeGesture.offsetX<-6) {
-				trace ("swipe more")
-				this.x -= this.getSpeed();
-			}
-			
-			if (swipeGesture.offsetY>6) {
-				trace ("swipe");
-				this.y += this.getSpeed();
-
-			}
-			if (swipeGesture.offsetY<-6) {
-				trace ("swipe more")
-				this.y -= this.getSpeed();
-			}
-		}
 		
 		private function update(dir:String){
 			

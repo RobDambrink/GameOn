@@ -17,23 +17,27 @@
 	public class GameScreen extends Sprite{
 
 		var toScoreScreenButton:Image;	
-		var player:Player;
+		var player:Player=new Player();
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var wall:Wall;
+		var playerX:int;
+		var playerY:int;
+		var lastSwipe:String;
+		var direction:String;
 		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
 		var map:Array = [
-			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1],
-			[1,0,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1],
-			[1,0,0,1,0,0,5,1,0,0,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[0,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,0],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
@@ -49,12 +53,12 @@
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
-			//this.addEventListener(Event.ENTER_FRAME, collision);
+			this.addEventListener(Event.ENTER_FRAME, movement);
 			
 			trace("GameScreen loaded");
 			
 			loadMap(map);
-			
+			findPlayer();
 			//placeHealthBar();
 			//placePellets();
 			//updateHealthBar();
@@ -64,6 +68,29 @@
 			//addToScoreScreenButton();
 		}
 		
+		
+		function findPlayer(){
+			trace("findPlayer");	
+			for (var i:int=0; i<map.length; i++){
+				for (var j:int; j<map[i].length; j++){				
+					if (map[i][j]==5){
+						returnI(i);
+						returnJ(j);
+					}
+				}
+				j=0;
+			}
+		}
+		
+		function returnI(i:int){
+			trace(i);
+			playerX = i;
+		}
+		
+		function returnJ(j:int){
+			trace(j);	
+			playerY = j;
+		}
 		
 		function loadMap(map:Array):void
 		{
@@ -77,11 +104,11 @@
 					// Empty tile, move onto the next item.
 					if(data === 0) continue;
 		
-							var object:Sprite;
+					var object:Sprite;
 					
 					if(data === 1){
 						object = new Wall("House");
-				}
+					}
 					if(data === 2){
 						object = new Wall("Tree");
 					}
@@ -92,7 +119,6 @@
 						object = new Wall("Transparent");
 					}
 					if(data === 5){
-						player = new Player();
 						object=player;
 					}
 //					if(data === 6){
@@ -104,7 +130,10 @@
 //					if(data === 8){
 //						object = new HealthPellet();
 //					}
-//					
+					if(data === 9){
+						continue;						
+					}
+					
 					var cellSize:int = object.width;
 					
 					if(object !== null)
@@ -118,6 +147,53 @@
 		}
 		
 		
+		function checkPath(xcoord:int, ycoord:int){
+			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
+				trace("muurtje");
+				direction="";
+			}	
+			else if(map[xcoord][ycoord]===0){
+				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
+					movePlayer(5,15);
+				}
+				else if(lastSwipe==="right" && playerX===5 && playerY===15){
+					movePlayer(5,1);
+				}
+				else{
+				movePlayer(xcoord, ycoord);
+				}
+			}
+		}
+		
+		function movePlayer(xcoord:int, ycoord:int){
+		trace("movePlayah");
+			map[playerX][playerY]=0;
+			playerX=xcoord;
+			playerY=ycoord;			
+			map[xcoord][ycoord]=5;
+			trace("x: ", xcoord, " y: ", ycoord);
+			loadMap(map);				
+			
+		}
+		
+		function movement(e:Event){	
+			if(direction==="down"){
+				checkPath(playerX+1,playerY);
+				//player.x = player.x+player.getSpeed();
+			}
+			if(direction==="up"){
+				checkPath(playerX-1,playerY);
+				//player.x = player.x-player.getSpeed();
+			}
+			if(direction==="left"){
+				checkPath(playerX,playerY-1);
+				//player.y = player.y-player.getSpeed();
+			}
+			if(direction==="right"){
+				checkPath(playerX,playerY+1);
+				//player.y = player.y+player.getSpeed();
+			}
+		}
 		
 /*		function collision(){
 //			if(player.hitTest(wall)){
@@ -134,12 +210,49 @@
 			This method performs various actions based on the direction the user swiped in.
 		*/
 		function onSwipeRec(e:GestureEvent):void {
-			trace ("onSwipeRec")
-			player.onSwipeRec(e);
+			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
+			//right
+			if (swipeGesture.offsetX>6) {
+				trace ("swipe right");
+				lastSwipe="right";
+				direction="right";
+				//checkPath(playerX, playerY+1);
+				//player.x += player.getSpeed();
+
+
+			}
+			//left
+			if (swipeGesture.offsetX<-6) {
+				trace ("swipe left")
+				lastSwipe="left";
+				direction="left";
+				//checkPath(playerX, playerY-1);
+				//player.x -= player.getSpeed();				
+			}
+			//downwards
+			if (swipeGesture.offsetY>6) {
+				trace ("swipe down");
+				lastSwipe="down";
+				direction="down";
+				//checkPath(playerX+1, playerY);
+				//player.y += player.getSpeed();
+				
+
+			}
+			//upwards
+			if (swipeGesture.offsetY<-6) {
+				trace ("swipe up");
+				lastSwipe="up";
+				direction="up";
+				//movement
+				//checkPath(playerX-1, playerY);
+				
+				//player.y -= player.getSpeed();
+			}
 		}
-	
 		
-		private function addToScoreScreenButton(){
+		
+		public function addToScoreScreenButton(){
 			toScoreScreenButton = new Image(Main.assets.getTexture("ToScoreScreenButton"));
 			addChild( toScoreScreenButton );
 			
@@ -148,7 +261,7 @@
 			toScoreScreenButton.addEventListener( TouchEvent.TOUCH , onToScoreScreenButton );
 		}
 		
-		private function onToScoreScreenButton(event:TouchEvent){
+		public function onToScoreScreenButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
