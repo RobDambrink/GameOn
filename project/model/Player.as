@@ -8,9 +8,11 @@
 	import flash.ui.Keyboard;
 	import starling.display.Image;
 	import view.*;
-	import flash.events.TransformGestureEvent;
+/*	import flash.events.TransformGestureEvent;
 	import flash.ui.Multitouch;
-	import flash.ui.MultitouchInputMode;
+	import flash.ui.MultitouchInputMode;*/
+	import org.gestouch.gestures.SwipeGesture;
+	import org.gestouch.events.GestureEvent;
 
 
 	public class Player extends Sprite {
@@ -39,6 +41,33 @@
 		*/
 		public function getGender() {
 			return gender;
+		}
+		
+		public function getSpeed(){
+			return speed;
+		}
+		
+		public function onSwipeRec(e:GestureEvent){
+			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
+			if (swipeGesture.offsetX>6) {
+				trace ("swipe");
+				this.x += this.getSpeed();
+
+			}
+			if (swipeGesture.offsetX<-6) {
+				trace ("swipe more")
+				this.x -= this.getSpeed();
+			}
+			
+			if (swipeGesture.offsetY>6) {
+				trace ("swipe");
+				this.y += this.getSpeed();
+
+			}
+			if (swipeGesture.offsetY<-6) {
+				trace ("swipe more")
+				this.y -= this.getSpeed();
+			}
 		}
 		
 		private function update(dir:String){

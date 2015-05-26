@@ -77,11 +77,11 @@
 					// Empty tile, move onto the next item.
 					if(data === 0) continue;
 		
-					var object:Sprite;
+							var object:Sprite;
 					
 					if(data === 1){
 						object = new Wall("House");
-					}
+				}
 					if(data === 2){
 						object = new Wall("Tree");
 					}
@@ -92,7 +92,8 @@
 						object = new Wall("Transparent");
 					}
 					if(data === 5){
-						object = new Player();
+						player = new Player();
+						object=player;
 					}
 //					if(data === 6){
 //						object = new Enemy();
@@ -134,26 +135,7 @@
 		*/
 		function onSwipeRec(e:GestureEvent):void {
 			trace ("onSwipeRec")
-			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
-			if (swipeGesture.offsetX>6) {
-				trace ("swipe");
-				player.x += player.speed;
-
-			}
-			if (swipeGesture.offsetX<-6) {
-				trace ("swipe more")
-				player.x -= player.speed;
-			}
-			
-			if (swipeGesture.offsetY>6) {
-				trace ("swipe");
-				player.y += player.speed;
-
-			}
-			if (swipeGesture.offsetY<-6) {
-				trace ("swipe more")
-				player.y -= player.speed;
-			}
+			player.onSwipeRec(e);
 		}
 	
 		
