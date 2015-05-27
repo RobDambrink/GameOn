@@ -15,7 +15,7 @@
 
 	public class Player extends Sprite {
 
-		public var speed: int = 2.5;
+		public var speed: int = 1;
 		public var infected: Boolean;
 		public var gender: String = "male";
 			

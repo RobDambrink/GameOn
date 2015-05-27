@@ -26,20 +26,35 @@
 		var playerY:int;
 		var lastSwipe:String;
 		var direction:String;
+		var memorySwipe:String;
 		//var walls:Vector.<Wall> = new Vector.<Wall>();
 		//var enemy:Enemy;
 		var map:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-			[0,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,0],
 			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
+			[1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1],
+			[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
 			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
+		
+		var playerGrid:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
+			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
+			[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+		];
+		
 		
 		// constructor code
 		public function GameScreen() 
@@ -58,6 +73,7 @@
 			trace("GameScreen loaded");
 			
 			loadMap(map);
+			loadPlayer(playerGrid);
 			findPlayer();
 			//placeHealthBar();
 			//placePellets();
@@ -73,7 +89,7 @@
 			trace("findPlayer");	
 			for (var i:int=0; i<map.length; i++){
 				for (var j:int; j<map[i].length; j++){				
-					if (map[i][j]==5){
+					if (playerGrid[i][j]==5){
 						returnI(i);
 						returnJ(j);
 					}
@@ -146,11 +162,80 @@
 			}
 		}
 		
+		function loadPlayer(map:Array):void
+		{
+			for(var row:int = 0; row < map.length; row++)
+			{
+				for(var column:int = 0; column < map[row].length; column++)
+				{
+					var data:int = map[row][column];
+					
+					if(data === 0) continue;
+					if(data === 1) continue;
+					
+					var object:Sprite;
+
+					if(data === 5){
+						object=player;
+					}
+					
+					else {
+						
+					}
+					
+					var cellSize:int = player.width;
+					
+					if(object !== null)
+					{
+						object.x = column * cellSize;
+						object.y = row * cellSize;
+						addChild(object);
+					}
+				}
+			}
+		}
+		
+/*		function memoryCheck(){
+			var checkX:int;
+			var checkY:int;
+			
+			if(lastSwipe==="left"){
+				checkY=playerY-1;
+				checkX=playerX;
+			}
+			else if(lastSwipe==="right"){
+				checkY=playerY+1;
+				checkX=playerX;
+			}
+			else if(lastSwipe==="up"){
+				checkY=playerY;
+				checkX=playerX+1;
+			}
+			else if(lastSwipe==="down"){
+				checkY=playerY;
+				checkX=playerX-1;
+			}
+			if(map[checkY][checkX]===1 || map[checkY][checkX]===2 || map[checkY][checkX]===3 || map[checkY][checkX]===4){
+				if(memorySwipe!==null){					
+					direction=memorySwipe;
+				}
+			}
+			else{
+				direction=lastSwipe;
+			}
+		}*/
+		
 		
 		function checkPath(xcoord:int, ycoord:int){
 			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
-				trace("muurtje");
-				direction="";
+				//trace("muurtje1");
+				if(direction===memorySwipe){
+					direction=lastSwipe;
+				}
+				else{
+					direction=memorySwipe;
+				}
+				//memoryCheck();
 			}	
 			else if(map[xcoord][ycoord]===0){
 				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
@@ -167,12 +252,12 @@
 		
 		function movePlayer(xcoord:int, ycoord:int){
 		trace("movePlayah");
-			map[playerX][playerY]=0;
+			playerGrid[playerX][playerY]=0;
 			playerX=xcoord;
 			playerY=ycoord;			
-			map[xcoord][ycoord]=5;
+			playerGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
-			loadMap(map);				
+			loadPlayer(playerGrid);				
 			
 		}
 		
@@ -211,12 +296,16 @@
 		*/
 		function onSwipeRec(e:GestureEvent):void {
 			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
+			if(lastSwipe!==null){
+				trace("Memory set");
+				memorySwipe=lastSwipe;
+			}
 			//right
 			if (swipeGesture.offsetX>6) {
 				trace ("swipe right");
 				lastSwipe="right";
 				direction="right";
-				//checkPath(playerX, playerY+1);
+				checkPath(playerX, playerY+1);
 				//player.x += player.getSpeed();
 
 
@@ -226,7 +315,7 @@
 				trace ("swipe left")
 				lastSwipe="left";
 				direction="left";
-				//checkPath(playerX, playerY-1);
+				checkPath(playerX, playerY-1);
 				//player.x -= player.getSpeed();				
 			}
 			//downwards
@@ -234,7 +323,7 @@
 				trace ("swipe down");
 				lastSwipe="down";
 				direction="down";
-				//checkPath(playerX+1, playerY);
+				checkPath(playerX+1, playerY);
 				//player.y += player.getSpeed();
 				
 
@@ -245,10 +334,11 @@
 				lastSwipe="up";
 				direction="up";
 				//movement
-				//checkPath(playerX-1, playerY);
+				checkPath(playerX-1, playerY);
 				
 				//player.y -= player.getSpeed();
 			}
+			trace(memorySwipe, " ", lastSwipe);
 		}
 		
 		
