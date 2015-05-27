@@ -18,6 +18,8 @@
 
 		var toScoreScreenButton:Image;	
 		var player:Player=new Player();
+		var enemy1:Enemy=new Enemy();
+		var enemy2:Enemy=new Enemy();
 		var healthPellet:HealthPellet;
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
@@ -26,9 +28,8 @@
 		var playerY:int;
 		var lastSwipe:String;
 		var direction:String;
+		var enemyDirection:String;
 		var memorySwipe:String;
-		//var walls:Vector.<Wall> = new Vector.<Wall>();
-		//var enemy:Enemy;
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -42,7 +43,7 @@
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
-		var playerGrid:Array = [
+		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -51,7 +52,7 @@
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
 			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
 			[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,7,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
@@ -73,7 +74,7 @@
 			trace("GameScreen loaded");
 			
 			loadMap(map);
-			loadPlayer(playerGrid);
+			loadPlayer(movementGrid);
 			findPlayer();
 			//placeHealthBar();
 			//placePellets();
@@ -89,7 +90,7 @@
 			trace("findPlayer");	
 			for (var i:int=0; i<map.length; i++){
 				for (var j:int; j<map[i].length; j++){				
-					if (playerGrid[i][j]==5){
+					if (movementGrid[i][j]==5){
 						returnI(i);
 						returnJ(j);
 					}
@@ -178,9 +179,11 @@
 					if(data === 5){
 						object=player;
 					}
-					
-					else {
-						
+					if(data===6){
+						object=enemy1;
+					}
+					if(data===7){
+						object=enemy2;
 					}
 					
 					var cellSize:int = player.width;
@@ -226,14 +229,32 @@
 		}*/
 		
 		
+		function checkWallCollision(){
+			if(memorySwipe==="down" && map[playerX-1][playerY]===0){
+				return true;				
+			}
+			if(memorySwipe==="up" && map[player+1][playerY]===0){
+				return true;
+			}
+			if(memorySwipe==="left" && map[playerX][playerY+1]===0){
+				return true;
+			}
+			if(memorySwipe==="right" && map[playerX][playerY-1]===0){
+				return true;
+			}
+			return false;
+		}
+		
 		function checkPath(xcoord:int, ycoord:int){
 			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
 				//trace("muurtje1");
-				if(direction===memorySwipe){
-					direction=lastSwipe;
-				}
-				else{
-					direction=memorySwipe;
+				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe===					"left")){
+					if(direction===memorySwipe){
+							direction=lastSwipe;
+						}
+						else{
+							direction=memorySwipe;
+						}
 				}
 				//memoryCheck();
 			}	
@@ -252,14 +273,16 @@
 		
 		function movePlayer(xcoord:int, ycoord:int){
 		trace("movePlayah");
-			playerGrid[playerX][playerY]=0;
+			movementGrid[playerX][playerY]=0;
 			playerX=xcoord;
 			playerY=ycoord;			
-			playerGrid[xcoord][ycoord]=5;
+			movementGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
-			loadPlayer(playerGrid);				
+			loadPlayer(movementGrid);				
 			
 		}
+		
+		function moveEnemy
 		
 		function movement(e:Event){	
 			if(direction==="down"){
