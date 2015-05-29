@@ -16,11 +16,10 @@
 		
 		var gameScreen:GameScreen;	
 		var healthPellet:Image;
-		public static var instance:HealthPellet;
 		
 		public function HealthPellet(screen:GameScreen){
 			// constructor code
-			instance = this;
+			
 			gameScreen = screen;
 			
 			healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));

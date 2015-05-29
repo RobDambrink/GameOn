@@ -20,8 +20,7 @@
 		public static var player:Player = new Player();
 		var enemy1:Enemy = new Enemy();
 		var enemy2:Enemy = new Enemy();
-//		var healthPellet:HealthPellet = new HealthPellet(this);
-//		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
+		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var wall:Wall;
 		var playerX:int;
@@ -33,7 +32,7 @@
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
@@ -46,8 +45,8 @@
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,8,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
 			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
@@ -146,13 +145,11 @@
 //					if(data === 7){
 //						object = new Exit();
 //					}
-//					if(data === 8){
-//						object = new HealthPellet(this);
-//					}
-					if(data === 9){
-						continue;						
+					if(data === 8){
+						object = new HealthPellet(this);
+						healthPellets.push(object);
 					}
-					
+										
 					var cellSize:int = object.width;
 					
 					if(object !== null)
@@ -188,7 +185,7 @@
 						object=enemy2;
 					}
 					if (data===8){
-						object = new HealthPellet(this);
+						//object = new HealthPellet(this);
 					}
 					
 					var cellSize:int = player.width;
@@ -253,7 +250,7 @@
 		function checkPath(xcoord:int, ycoord:int){
 			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
 				//trace("muurtje1");
-				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe===					"left")){
+				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
 					if(direction===memorySwipe){
 							direction=lastSwipe;
 						}
@@ -263,7 +260,20 @@
 				}
 				//memoryCheck();
 			}	
-			else if(map[xcoord][ycoord]===0){
+			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){
+				if (map[xcoord][ycoord]===8){ 
+					var usedPellet:HealthPellet;
+					for each(var healthPellet in healthPellets){
+						trace(healthPellet);
+						if (player.x == healthPellet.x && player.y == healthPellet.y){
+							usedPellet = healthPellet;
+							break;
+						}
+					}
+					if (usedPellet){
+						usedPellet.pelletTouched();
+					}
+				}
 				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
 					movePlayer(5,15);
 				}
@@ -284,17 +294,6 @@
 			movementGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
 			loadPlayer(movementGrid);
-			
-			
-			
-			
-			
-			
-			
-			if(movementGrid[xcoord][ycoord]=8){
-				trace("testpellet");
-				HealthPellet.instance.pelletTouched();
-			}
 		}
 		
 		
@@ -304,7 +303,7 @@
 		
 		
 		
-		function moveEnemy(){	}
+//		function moveEnemy(){	}
 		
 		function movement(e:Event){	
 			if(direction==="down"){
