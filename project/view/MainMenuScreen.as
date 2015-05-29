@@ -40,7 +40,7 @@
 		var tutorialButton: Image;
 		var optionsButton: Image;
 
-		private var mStarling: Starling;
+		
 		
 			public function MainMenuScreen() {
 				// constructor code
@@ -61,7 +61,6 @@
 
 
 		function addMenuBackground() {
-			trace("background loaded");
 			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
 			addChild(menuBackground);
 
@@ -109,6 +108,7 @@
 
 			optionsButton.addEventListener(TouchEvent.TOUCH, onOptionsButton);
 		}
+		
 		//---------------end of adding buttons------------------
 
 
@@ -118,7 +118,6 @@
 		private function onPlayButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				trace ("de klik werkt")
 				Navigator.instance.loadScreen("playMenu");
 			}
 		}
@@ -143,6 +142,8 @@
 				Navigator.instance.loadScreen("optionsMenu");
 			}
 		}
+		
+		
 		//---------------end of button's event handlers---------
 
 

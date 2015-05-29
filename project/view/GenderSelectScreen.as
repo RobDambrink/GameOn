@@ -12,6 +12,8 @@
 
 		var maleButton:Image;
 		var femaleButton:Image;
+		var maleImage:Image;
+		var femaleImage:Image;
 		var menuBackground:Image;
 
 		public function GenderSelectScreen() {
@@ -26,6 +28,8 @@
 			trace("GenderSelectScreen loaded");
 			
 			addMenuBackground();
+			addMale();
+			addFemale();
 			addMaleButton();
 			addFemaleButton();
 		}
@@ -37,6 +41,24 @@
 		
 		//--------------------start of adding buttons----------------
 
+		private function addMale(){
+			maleImage = new Image(Main.assets.getTexture("BoyFront")); 
+			addChild( maleImage );
+			
+			maleImage.y = 0;
+			
+			maleImage.addEventListener( TouchEvent.TOUCH , onMaleButton );
+		}
+		
+		private function addFemale(){
+			femaleImage = new Image(Main.assets.getTexture("GirlFront")); 
+			addChild( femaleImage );
+			
+			femaleImage.y = 0;
+			
+			femaleImage.addEventListener( TouchEvent.TOUCH , onFemaleButton );
+		}
+		
 		private function addMaleButton(){
 			maleButton = new Image(Main.assets.getTexture("MaleButton")); 
 			addChild( maleButton );
