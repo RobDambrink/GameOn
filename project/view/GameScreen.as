@@ -24,6 +24,7 @@
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var wall:Wall;
+		var walls:Vector.<Wall> = new Vector.<Wall>();
 		var playerX:int;
 		var playerY:int;
 		var lastSwipe:String;
@@ -80,10 +81,6 @@
 			
 			placeHealthBar();
 			updateHealthBar();
-			//placePellets(); NIET MEER NODIG
-			
-			//placePlayer(); NIET MEER NODIG
-			//placeEnemy(); NIET MEER NODIG
 			
 			//addToScoreScreenButton();
 		}
@@ -94,24 +91,14 @@
 			for (var i:int = 0; i < map.length; i++){
 				for (var j:int; j < map[i].length; j++){				
 					if (movementGrid[i][j] == 5){
-						returnI(i);
-						returnJ(j);
+						playerX=i;
+						playerY=j;
 					}
 				}
 				j=0;
 			}
 		}
-		
-		function returnI(i:int){
-			trace(i);
-			playerX = i;
-		}
-		
-		function returnJ(j:int){
-			trace(j);	
-			playerY = j;
-		}
-		
+				
 		function loadMap(map:Array):void
 		{
 			for(var row:int = 0; row < map.length; row++)
@@ -128,15 +115,19 @@
 					
 					if(data === 1){
 						object = new Wall("House");
+						walls.push(object);
 					}
 					if(data === 2){
 						object = new Wall("Tree");
+						walls.push(object);
 					}
 //					if(data === 3){
 //						object = new Wall(table);
+						//walls.push(object);
 //					}
 					if(data === 4){
 						object = new Wall("Transparent");
+						walls.push(object);
 					}
 					if(data === 5){
 						object=player;
@@ -202,51 +193,16 @@
 			}
 		}
 		
-/*		function memoryCheck(){
-			var checkX:int;
-			var checkY:int;
-			
-			if(lastSwipe==="left"){
-				checkY=playerY-1;
-				checkX=playerX;
-			}
-			else if(lastSwipe==="right"){
-				checkY=playerY+1;
-				checkX=playerX;
-			}
-			else if(lastSwipe==="up"){
-				checkY=playerY;
-				checkX=playerX+1;
-			}
-			else if(lastSwipe==="down"){
-				checkY=playerY;
-				checkX=playerX-1;
-			}
-			if(map[checkY][checkX]===1 || map[checkY][checkX]===2 || map[checkY][checkX]===3 || map[checkY][checkX]===4){
-				if(memorySwipe!==null){					
-					direction=memorySwipe;
+	
+		/*
+			This function checks if any of the walls are currently colliding with the player. If so, the player is stopped from moving.
+		*/
+		function checkWallCollision(){
+			for(var i:int; i<walls.length; i++){
+				if(collision(walls[i])){
+					direction="";
 				}
 			}
-			else{
-				direction=lastSwipe;
-			}
-		}*/
-		
-		
-		function checkWallCollision(){
-			if(memorySwipe==="down" && map[playerX-1][playerY]===0){
-				return true;				
-			}
-			if(memorySwipe==="up" && map[player+1][playerY]===0){
-				return true;
-			}
-			if(memorySwipe==="left" && map[playerX][playerY+1]===0){
-				return true;
-			}
-			if(memorySwipe==="right" && map[playerX][playerY-1]===0){
-				return true;
-			}
-			return false;
 		}
 		
 		function checkPath(xcoord:int, ycoord:int){
@@ -260,7 +216,6 @@
 							direction=memorySwipe;
 						}
 				}
-				//memoryCheck();
 			}	
 			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){
 				if (map[xcoord][ycoord]===8){ 
@@ -289,7 +244,6 @@
 		}
 		
 		public function movePlayer(xcoord:int, ycoord:int){
-		trace("movePlayah");
 			movementGrid[playerX][playerY]=0;
 			playerX=xcoord;
 			playerY=ycoord;			
@@ -298,45 +252,54 @@
 			loadPlayer(movementGrid);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-//		function moveEnemy(){	}
-		
-		function movement(e:Event){	
+		function movement(e:Event){		
+			checkWallCollision();
 			if(direction==="down"){
-				checkPath(playerX+1,playerY);
-				//player.x = player.x+player.getSpeed();
-			}
+				//checkPath(playerX+1,playerY);
+				player.y = player.y+player.getSpeed();			}
 			if(direction==="up"){
-				checkPath(playerX-1,playerY);
-				//player.x = player.x-player.getSpeed();
+				//checkPath(playerX-1,playerY);				
+				player.y = player.y-player.getSpeed();
 			}
 			if(direction==="left"){
-				checkPath(playerX,playerY-1);
-				//player.y = player.y-player.getSpeed();
+				//checkPath(playerX,playerY-1);
+				player.x = player.x-player.getSpeed();
 			}
 			if(direction==="right"){
-				checkPath(playerX,playerY+1);
-				//player.y = player.y+player.getSpeed();
+				//checkPath(playerX,playerY+1);				
+				player.x = player.x+player.getSpeed();
 			}
 		}
 		
-/*		function collision(){
-//			if(player.hitTest(wall)){
-//				player.hitWall();
-//			}
-
+		/*
+			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
+		*/
+		function collision(wall:Wall){
 			if(player.getBounds(player.parent).intersects(wall.getBounds(wall.parent))){
-				player.hitWall();
+				fixPlayer();
+				direction="";
 			}
-			
+
 		}
-*/		
+		
+		/*
+			This function relocates the player after collision with a wall to ensure that there is no longer collision.
+			This function is also broken right now.
+		*/
+		function fixPlayer(){
+			if(direction==="down"){
+				player.y -= 6;			}
+			if(direction==="up"){
+				player.y += 6;
+			}
+			if(direction==="left"){
+				player.x += 6;
+			}
+			if(direction==="right"){
+				player.x -= 6;
+			}
+		}
+		
 		/**
 			This method performs various actions based on the direction the user swiped in.
 		*/
@@ -351,28 +314,21 @@
 				trace ("swipe right");
 				lastSwipe="right";
 				direction="right";
-				checkPath(playerX, playerY+1);
-				//player.x += player.getSpeed();
-
-
+				//checkPath(playerX, playerY+1);
 			}
 			//left
 			if (swipeGesture.offsetX<-6) {
 				trace ("swipe left")
 				lastSwipe="left";
 				direction="left";
-				checkPath(playerX, playerY-1);
-				//player.x -= player.getSpeed();				
+				//checkPath(playerX, playerY-1);	
 			}
 			//downwards
 			if (swipeGesture.offsetY>6) {
 				trace ("swipe down");
 				lastSwipe="down";
 				direction="down";
-				checkPath(playerX+1, playerY);
-				//player.y += player.getSpeed();
-				
-
+				//checkPath(playerX+1, playerY);
 			}
 			//upwards
 			if (swipeGesture.offsetY<-6) {
@@ -380,9 +336,7 @@
 				lastSwipe="up";
 				direction="up";
 				//movement
-				checkPath(playerX-1, playerY);
-				
-				//player.y -= player.getSpeed();
+				//checkPath(playerX-1, playerY);
 			}
 			trace(memorySwipe, " ", lastSwipe);
 		}
@@ -404,22 +358,6 @@
 				Navigator.instance.loadScreen( "scoreScreen" );
 			}
 		}
-
-		
-/*		public function placeWall(){
-			wall= new Wall();
-			//place the wall in the center of the screen
-			wall.x=Starling.current.stage.stageWidth/2;
-			wall.y=Starling.current.stage.stageHeight/2;
-			
-			// REMOVE THIS COMMENTS TO TEST THE HITTESTWALL
-			//wall.x = player.x;
-			//wall.y = player.y;			
-
-			addChild(wall);
-		}
-*/		
-		
 		
 		public function placeHealthBar(){
 			healthBar = new HealthBar(this)
