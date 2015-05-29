@@ -6,7 +6,8 @@
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
-	
+	import starling.core.Starling;
+	import model.*;
 	
 	public class GenderSelectScreen extends Sprite{
 
@@ -26,7 +27,6 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("GenderSelectScreen loaded");
-			
 			addMenuBackground();
 			addMale();
 			addFemale();
@@ -45,7 +45,8 @@
 			maleImage = new Image(Main.assets.getTexture("BoyFront")); 
 			addChild( maleImage );
 			
-			maleImage.y = 0;
+			maleImage.x = (Starling.current.stage.stageWidth - maleImage.width) * (1/4);
+			maleImage.y = (Starling.current.stage.stageHeight - maleImage.height) * (1/4);
 			
 			maleImage.addEventListener( TouchEvent.TOUCH , onMaleButton );
 		}
@@ -54,7 +55,8 @@
 			femaleImage = new Image(Main.assets.getTexture("GirlFront")); 
 			addChild( femaleImage );
 			
-			femaleImage.y = 0;
+			femaleImage.x = (Starling.current.stage.stageWidth - femaleImage.width) * (3/4);
+			femaleImage.y = (Starling.current.stage.stageHeight - femaleImage.height) * (1/4);
 			
 			femaleImage.addEventListener( TouchEvent.TOUCH , onFemaleButton );
 		}
@@ -63,7 +65,8 @@
 			maleButton = new Image(Main.assets.getTexture("MaleButton")); 
 			addChild( maleButton );
 			
-			maleButton.y = 0;
+			maleButton.x = (Starling.current.stage.stageWidth - maleButton.width) * (1/6);
+			maleButton.y = (Starling.current.stage.stageHeight - maleButton.height) * (3/4);
 			
 			maleButton.addEventListener( TouchEvent.TOUCH , onMaleButton );
 		}
@@ -72,7 +75,8 @@
 			femaleButton = new Image(Main.assets.getTexture("FemaleButton"));
 			addChild( femaleButton );
 			
-			femaleButton.y = 100;
+			femaleButton.x = (Starling.current.stage.stageWidth - femaleButton.width) * (5/6);
+			femaleButton.y = (Starling.current.stage.stageHeight - femaleButton.height) * (3/4);
 			
 			femaleButton.addEventListener( TouchEvent.TOUCH , onFemaleButton );
 		}
@@ -86,6 +90,7 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 //the variable GENDER gets set to Male
+				model.Player.gender = "male";
 				Navigator.instance.loadScreen( "tutorial" );
 			}
 		}
@@ -95,6 +100,7 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 //the variable GENDER gets set to Female
+				model.Player.gender = "female";
 				Navigator.instance.loadScreen( "tutorial" );
 			}
 		}

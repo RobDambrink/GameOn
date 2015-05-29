@@ -38,7 +38,7 @@
 		
 		public function updateHealthBar(){
 			percentHp = hp / maxHp;
-			healthFill.scaleX = percentHp;
+			healthFill.scaleX = (percentHp - 0.01);
 			
 			if (hp > (maxHp - 1)){
 				hp = maxHp;
