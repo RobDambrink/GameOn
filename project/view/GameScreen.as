@@ -17,11 +17,11 @@
 	public class GameScreen extends Sprite{
 
 		var toScoreScreenButton:Image;	
-		var player:Player=new Player();
-		var enemy1:Enemy=new Enemy();
-		var enemy2:Enemy=new Enemy();
-		var healthPellet:HealthPellet;
-		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
+		public static var player:Player = new Player();
+		var enemy1:Enemy = new Enemy();
+		var enemy2:Enemy = new Enemy();
+//		var healthPellet:HealthPellet = new HealthPellet(this);
+//		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var wall:Wall;
 		var playerX:int;
@@ -38,7 +38,7 @@
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
 			[1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1],
-			[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
@@ -46,12 +46,12 @@
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+			[1,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,8,1],
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
 			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
-			[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,7,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
@@ -64,7 +64,7 @@
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
-		//This function tells the console that the gamescreen is loaded. Also adds the background to the stage. The function addConditionMet is delayed for 2 seconds, then executes.
+		//This function tells the console that the gamescreen is loaded. 
 		private function onAddedToStage(event:Event)
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
@@ -76,12 +76,14 @@
 			loadMap(map);
 			loadPlayer(movementGrid);
 			findPlayer();
-			//placeHealthBar();
+			
+			placeHealthBar();
+			updateHealthBar();
 			//placePellets();
-			//updateHealthBar();
+			
 			//placePlayer();
-			//placeWall();
 			//placeEnemy();
+			
 			//addToScoreScreenButton();
 		}
 		
@@ -145,7 +147,7 @@
 //						object = new Exit();
 //					}
 //					if(data === 8){
-//						object = new HealthPellet();
+//						object = new HealthPellet(this);
 //					}
 					if(data === 9){
 						continue;						
@@ -184,6 +186,9 @@
 					}
 					if(data===7){
 						object=enemy2;
+					}
+					if (data===8){
+						object = new HealthPellet(this);
 					}
 					
 					var cellSize:int = player.width;
@@ -271,18 +276,35 @@
 			}
 		}
 		
-		function movePlayer(xcoord:int, ycoord:int){
+		public function movePlayer(xcoord:int, ycoord:int){
 		trace("movePlayah");
 			movementGrid[playerX][playerY]=0;
 			playerX=xcoord;
 			playerY=ycoord;			
 			movementGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
-			loadPlayer(movementGrid);				
+			loadPlayer(movementGrid);
 			
+			
+			
+			
+			
+			
+			
+			if(movementGrid[xcoord][ycoord]=8){
+				trace("testpellet");
+				HealthPellet.instance.pelletTouched();
+			}
 		}
 		
-		function moveEnemy
+		
+		
+		
+		
+		
+		
+		
+		function moveEnemy(){	}
 		
 		function movement(e:Event){	
 			if(direction==="down"){
@@ -396,22 +418,12 @@
 			addChild(wall);
 		}
 */		
-		public function placePellets()
-		{
-			for (var i:int = 0; i < 5; i++)
-			{
-				healthPellet = new HealthPellet(this);
-				healthPellet.x = Math.random() * (Starling.current.stage.stageWidth - healthPellet.width);
-				healthPellet.y = Math.random() * (Starling.current.stage.stageHeight - healthPellet.height);
-
-				addChild(healthPellet);
-
-				healthPellets.push(healthPellet);
-			}
-		}
+		
 		
 		public function placeHealthBar(){
 			healthBar = new HealthBar(this)
+			healthBar.y = Main.scaleFactor * 2;
+			healthBar.x = (Starling.current.stage.stageWidth - healthBar.width) / 2;
 			addChild(healthBar);
 		}
 		
@@ -423,24 +435,41 @@
 			addChild(player);
 		}
 		
-		
 		public function updateHealthBar(){
 			healthBar.updateHealthBar();
 		}
 		
+		
+		
+		
+		
+//		public function placePellets(){
+//			for (var i:int = 0; i < 5; i++)
+//			{
+//				healthPellet = new HealthPellet(this);
+//				healthPellet.x = Math.random() * (Starling.current.stage.stageWidth - healthPellet.width);
+//				healthPellet.y = Math.random() * (Starling.current.stage.stageHeight - healthPellet.height);
+//
+//				addChild(healthPellet);
+//
+//				healthPellets.push(healthPellet);
+//			}
+//		}
+		
 		public function removeHealthPellet(healthPellet:HealthPellet)
 		{
+			trace("remove healht pellet");
 			removeChild(healthPellet, true);
-
-			//remove ball from vector list
-			var index:int = healthPellets.indexOf(healthPellet);
-			healthPellets.splice(index, 1);
-
-			if (healthPellets.length == 0)
-			{
-				trace("Opperdepop! Placing new pellets.");
-				placePellets();
-			}
+			
+//			//remove ball from vector list
+//			var index:int = healthPellets.indexOf(healthPellet);
+//			healthPellets.splice(index, 1);
+//
+//			if (healthPellets.length == 0)
+//			{
+//				trace("Opperdepop! Placing new pellets.");
+//				placePellets();
+//			}
 		}
 		
 	

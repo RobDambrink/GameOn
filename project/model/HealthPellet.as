@@ -15,36 +15,42 @@
 	public class HealthPellet extends Sprite{
 		
 		var gameScreen:GameScreen;	
+		var healthPellet:Image;
+		public static var instance:HealthPellet;
 		
 		public function HealthPellet(screen:GameScreen){
 			// constructor code
-			
+			instance = this;
 			gameScreen = screen;
 			
-			var pellet:Image = new Image(Main.assets.getTexture("HealthDot"));
+			healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
 
-			addChild( pellet );
+			addChild( healthPellet );
 			
-			addEventListener( TouchEvent.TOUCH , pelletTouched );
+//			addEventListener( Event.ENTER_FRAME , pelletCheck );
 			
 		}
 		
 		
-		function pelletTouched(event:TouchEvent)
-		{
-			var touch:Touch = event.touches[0];
-			
-			if(touch.phase == TouchPhase.BEGAN)
-			{ 
-				HealthBar.hp++;
-				trace(HealthBar.hp);
-				gameScreen.removeHealthPellet(this);
-				gameScreen.updateHealthBar();
-			}
-		}
+//		function pelletTouched(event:TouchEvent)
+//		{
+//			var touch:Touch = event.touches[0];
+//			
+//			if(touch.phase == TouchPhase.BEGAN)
+//			{ 
+//				HealthBar.hp++;
+//				trace(HealthBar.hp);
+//				gameScreen.removeHealthPellet(this);
+//				gameScreen.updateHealthBar();
+//			}
+//		}
 
-
-
+		public function pelletTouched(){
+			HealthBar.hp++;
+			trace(HealthBar.hp);
+			gameScreen.removeHealthPellet(this);
+			gameScreen.updateHealthBar();
+		} 
 		
 	}
 	

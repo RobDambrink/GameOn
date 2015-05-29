@@ -26,15 +26,13 @@
 		
 		public function HealthBar(screen:GameScreen) {
 			// constructor code
-			var healthStroke:Image = new Image(Main.assets.getTexture("StrokeHealthBar"));
+			var healthStroke:Image = new Image(Main.assets.getTexture("HealthBarEmpty"));
 			addChild( healthStroke );
 			
-			healthFill = new Image(Main.assets.getTexture("FillHealthBar"));
+			healthFill = new Image(Main.assets.getTexture("HealthBarFull"));
 			addChild( healthFill );
-			healthFill.x = healthStroke.x + 8;
-			healthFill.y = healthStroke.y + 8;
-			
-			healthFill.height = 186;
+			healthFill.x = healthStroke.x;
+			healthFill.y = healthStroke.y;
 		}
 		
 		
