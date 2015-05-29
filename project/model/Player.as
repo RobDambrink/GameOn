@@ -17,7 +17,7 @@
 
 		public var speed: int = 1;
 		public var infected: Boolean;
-		public var gender: String = "male";
+		public static var gender: String = "male"; // Remove this string before final version!
 			
 
 		public function Player(){
@@ -25,11 +25,11 @@
 			var player: Image
 			//Select the male sprite
 			if (gender == "male") {
-				player = new Image(Main.assets.getTexture("Circle24"));
+				player = new Image(Main.assets.getTexture("TileBoy"));
 			}
 			//select the female sprite
 			if (gender == "female") {
-				player = new Image(Main.assets.getTexture("Circle"));
+				player = new Image(Main.assets.getTexture("TileGirl"));
 			}
 			addChild(player);
 		}
