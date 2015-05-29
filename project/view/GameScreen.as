@@ -16,6 +16,7 @@
 	
 	public class GameScreen extends Sprite{
 
+		var mazeBackground:Image;
 		var toScoreScreenButton:Image;	
 		public static var player:Player = new Player();
 		var enemy1:Enemy = new Enemy();
@@ -71,6 +72,7 @@
 			this.addEventListener(Event.ENTER_FRAME, movement);
 			
 			trace("GameScreen loaded");
+			//addMazeBackground();
 			
 			loadMap(map);
 			loadPlayer(movementGrid);
@@ -78,10 +80,10 @@
 			
 			placeHealthBar();
 			updateHealthBar();
-			//placePellets();
+			//placePellets(); NIET MEER NODIG
 			
-			//placePlayer();
-			//placeEnemy();
+			//placePlayer(); NIET MEER NODIG
+			//placeEnemy(); NIET MEER NODIG
 			
 			//addToScoreScreenButton();
 		}
@@ -89,9 +91,9 @@
 		
 		function findPlayer(){
 			trace("findPlayer");	
-			for (var i:int=0; i<map.length; i++){
-				for (var j:int; j<map[i].length; j++){				
-					if (movementGrid[i][j]==5){
+			for (var i:int = 0; i < map.length; i++){
+				for (var j:int; j < map[i].length; j++){				
+					if (movementGrid[i][j] == 5){
 						returnI(i);
 						returnJ(j);
 					}
@@ -154,7 +156,7 @@
 					
 					if(object !== null)
 					{
-						object.x = column * cellSize;
+						object.x = (column * cellSize) + (Main.scaleFactor * 9);
 						object.y = row * cellSize;
 						addChild(object);
 					}
@@ -192,7 +194,7 @@
 					
 					if(object !== null)
 					{
-						object.x = column * cellSize;
+						object.x = (column * cellSize) + (Main.scaleFactor * 9);
 						object.y = row * cellSize;
 						addChild(object);
 					}
@@ -471,6 +473,10 @@
 //			}
 		}
 		
+		private function addMazeBackground(){
+			mazeBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
+			addChild(mazeBackground);
+		}
 	
 	}
 	
