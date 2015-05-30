@@ -72,6 +72,7 @@
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			this.addEventListener(Event.ENTER_FRAME, movement);
 			
+			
 			trace("GameScreen loaded");
 			//addMazeBackground();
 			
@@ -82,6 +83,9 @@
 			placeHealthBar();
 			updateHealthBar();
 			
+//			this.addEventListener( Event.ENTER_FRAME , pelletCheck );
+			this.addEventListener( Event.ENTER_FRAME , checkPelletCollision );
+
 			//addToScoreScreenButton();
 		}
 		
@@ -272,6 +276,32 @@
 			}
 		}
 		
+		
+		
+		
+		
+		
+		function checkPelletCollision(e:Event){
+			for(var i:int; i < healthPellets.length; i++){
+				var usedPellet:HealthPellet;
+				for each(var healthPellet in healthPellets){
+					if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
+						usedPellet = healthPellet;
+						break;
+					}
+				}
+				if (usedPellet){
+					usedPellet.pelletTouched();
+				}
+			}
+		}
+		
+
+
+
+
+
+		
 		/*
 			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
 		*/
@@ -280,8 +310,9 @@
 				fixPlayer();
 				direction="";
 			}
-
 		}
+		
+
 		
 		/*
 			This function relocates the player after collision with a wall to ensure that there is no longer collision.
