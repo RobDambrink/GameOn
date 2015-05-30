@@ -19,30 +19,11 @@
 		
 		public function HealthPellet(screen:GameScreen){
 			// constructor code
-			
 			gameScreen = screen;
-			
 			healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
-
-			addChild( healthPellet );
-			
-//			addEventListener( Event.ENTER_FRAME , pelletCheck );
-			
+			addChild( healthPellet );			
 		}
-		
-		
-//		function pelletTouched(event:TouchEvent)
-//		{
-//			var touch:Touch = event.touches[0];
-//			
-//			if(touch.phase == TouchPhase.BEGAN)
-//			{ 
-//				HealthBar.hp++;
-//				trace(HealthBar.hp);
-//				gameScreen.removeHealthPellet(this);
-//				gameScreen.updateHealthBar();
-//			}
-//		}
+
 
 		public function pelletTouched(){
 			HealthBar.hp++;
@@ -51,6 +32,17 @@
 			gameScreen.updateHealthBar();
 		} 
 		
+		
+		public function changeDisplay(display:String){
+			if (display == "transparent"){
+				healthPellet = new Image(Main.assets.getTexture("TileTransparent"));
+				GameScreen.pelletVisible = false;			
+			}
+			if (display == "normal"){
+				healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
+				GameScreen.pelletVisible = true;
+			}
+		}
+		
 	}
-	
 }

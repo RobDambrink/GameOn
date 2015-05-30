@@ -11,7 +11,6 @@
 	import org.gestouch.gestures.SwipeGesture;
 	import org.gestouch.events.GestureEvent;
 	import model.*;
-	//import flash.geom.Point;
 
 	
 	public class GameScreen extends Sprite{
@@ -22,6 +21,7 @@
 		var enemy1:Enemy = new Enemy();
 		var enemy2:Enemy = new Enemy();
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
+		public static var pelletVisible:Boolean = true;
 		var healthBar:HealthBar;
 		var wall:Wall;
 		var walls:Vector.<Wall> = new Vector.<Wall>();
@@ -43,7 +43,6 @@
 			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
-		
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -61,11 +60,10 @@
 		// constructor code
 		public function GameScreen() 
 		{
-			//Only when added to the stage, the function onAddedToStage will be executed.
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
-		//This function tells the console that the gamescreen is loaded. 
+		
 		private function onAddedToStage(event:Event)
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
@@ -102,7 +100,8 @@
 				j=0;
 			}
 		}
-				
+		
+		
 		function loadMap(map:Array):void
 		{
 			for(var row:int = 0; row < map.length; row++)
@@ -159,6 +158,7 @@
 			}
 		}
 		
+		
 		function loadPlayer(map:Array):void
 		{
 			for(var row:int = 0; row < map.length; row++)
@@ -206,6 +206,7 @@
 			}
 		}
 		
+		
 		function checkPath(xcoord:int, ycoord:int){
 			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
 				//trace("muurtje1");
@@ -247,6 +248,7 @@
 			}
 		}
 		
+		
 		public function movePlayer(xcoord:int, ycoord:int){
 			movementGrid[playerX][playerY]=0;
 			playerX=xcoord;
@@ -255,6 +257,7 @@
 			trace("x: ", xcoord, " y: ", ycoord);
 			loadPlayer(movementGrid);
 		}
+		
 		
 		function movement(e:Event){		
 			checkWallCollision();
@@ -275,32 +278,25 @@
 				player.x = player.x+player.getSpeed();
 			}
 		}
-		
-		
-		
-		
-		
-		
+
+
 		function checkPelletCollision(e:Event){
-			for(var i:int; i < healthPellets.length; i++){
-				var usedPellet:HealthPellet;
-				for each(var healthPellet in healthPellets){
-					if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
-						usedPellet = healthPellet;
-						break;
+			if (pelletVisible){
+				for(var i:int; i < healthPellets.length; i++){
+					var usedPellet:HealthPellet;
+					for each(var healthPellet in healthPellets){
+						if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
+							usedPellet = healthPellet;
+							break;
+						}
 					}
-				}
-				if (usedPellet){
-					usedPellet.pelletTouched();
+					if (usedPellet){
+						usedPellet.pelletTouched();
+					}
 				}
 			}
 		}
 		
-
-
-
-
-
 		
 		/*
 			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
@@ -312,7 +308,6 @@
 			}
 		}
 		
-
 		
 		/*
 			This function relocates the player after collision with a wall to ensure that there is no longer collision.
@@ -331,6 +326,7 @@
 				player.x -= Player.speed;
 			}
 		}
+		
 		
 		/**
 			This method performs various actions based on the direction the user swiped in.
@@ -383,6 +379,7 @@
 			toScoreScreenButton.addEventListener( TouchEvent.TOUCH , onToScoreScreenButton );
 		}
 		
+		
 		public function onToScoreScreenButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
@@ -391,12 +388,14 @@
 			}
 		}
 		
+		
 		public function placeHealthBar(){
 			healthBar = new HealthBar(this)
 			healthBar.y = Main.scaleFactor * 2;
 			healthBar.x = (Starling.current.stage.stageWidth - healthBar.width) / 2;
 			addChild(healthBar);
 		}
+		
 		
 		public function placePlayer(){
 			trace ("placePlayer")
@@ -406,42 +405,22 @@
 			addChild(player);
 		}
 		
+		
 		public function updateHealthBar(){
 			healthBar.updateHealthBar();
 		}
 		
-		
-		
-		
-		
-//		public function placePellets(){
-//			for (var i:int = 0; i < 5; i++)
-//			{
-//				healthPellet = new HealthPellet(this);
-//				healthPellet.x = Math.random() * (Starling.current.stage.stageWidth - healthPellet.width);
-//				healthPellet.y = Math.random() * (Starling.current.stage.stageHeight - healthPellet.height);
-//
-//				addChild(healthPellet);
-//
-//				healthPellets.push(healthPellet);
-//			}
-//		}
-		
+				
 		public function removeHealthPellet(healthPellet:HealthPellet)
 		{
 			trace("remove healht pellet");
-			removeChild(healthPellet, true);
+			healthPellet.changeDisplay("transparent");
+			Starling.juggler.delayCall(healthPellet.changeDisplay("normal"), 5);
 			
-//			//remove ball from vector list
-//			var index:int = healthPellets.indexOf(healthPellet);
-//			healthPellets.splice(index, 1);
-//
-//			if (healthPellets.length == 0)
-//			{
-//				trace("Opperdepop! Placing new pellets.");
-//				placePellets();
-//			}
+			// To Do: Make the changeDisplay function work!
+			
 		}
+		
 		
 		private function addMazeBackground(){
 			mazeBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
