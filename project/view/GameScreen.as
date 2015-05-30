@@ -177,9 +177,6 @@
 					if(data===7){
 						object=enemy2;
 					}
-					if (data===8){
-						//object = new HealthPellet(this);
-					}
 					
 					var cellSize:int = player.width;
 					
@@ -218,6 +215,8 @@
 				}
 			}	
 			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){
+				
+// Code to do something with the touched healthPellet.
 				if (map[xcoord][ycoord]===8){ 
 					var usedPellet:HealthPellet;
 					for each(var healthPellet in healthPellets){
@@ -231,6 +230,7 @@
 						usedPellet.pelletTouched();
 					}
 				}
+				
 				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
 					movePlayer(5,15);
 				}
@@ -256,7 +256,8 @@
 			checkWallCollision();
 			if(direction==="down"){
 				//checkPath(playerX+1,playerY);
-				player.y = player.y+player.getSpeed();			}
+				player.y = player.y+player.getSpeed();
+			}
 			if(direction==="up"){
 				//checkPath(playerX-1,playerY);				
 				player.y = player.y-player.getSpeed();
@@ -284,19 +285,19 @@
 		
 		/*
 			This function relocates the player after collision with a wall to ensure that there is no longer collision.
-			This function is also broken right now.
 		*/
 		function fixPlayer(){
 			if(direction==="down"){
-				player.y -= 6;			}
+				player.y -= Player.speed;
+			}
 			if(direction==="up"){
-				player.y += 6;
+				player.y += Player.speed;
 			}
 			if(direction==="left"){
-				player.x += 6;
+				player.x += Player.speed;
 			}
 			if(direction==="right"){
-				player.x -= 6;
+				player.x -= Player.speed;
 			}
 		}
 		

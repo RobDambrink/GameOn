@@ -15,8 +15,8 @@
 
 	public class Player extends Sprite {
 
-		public var speed: int = 1;
-		public var infected: Boolean;
+		public static var speed: int = 1 * Main.scaleFactor;
+		public static var infected: Boolean;
 		public static var gender: String = "male"; // Remove this string before final version!
 			
 
@@ -57,9 +57,9 @@
 		/**
 			Enter a negative value to decrease the speed and a positive value to increase the speed.
 		*/
-		public function changeSpeed(change: int) {
-			this.speed += change;
-		}
+//		public function changeSpeed(change: int) {
+//			this.speed += change;
+//		}
 
 		public function hitWall(){
 			trace("function hitWall activated");
