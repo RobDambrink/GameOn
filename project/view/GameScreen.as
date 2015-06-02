@@ -32,25 +32,25 @@
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
-			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
-			[1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1],
+			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
+			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
+			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
+			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
+			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
+			[1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];		
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
 			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,7,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1],
+			[1,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
@@ -85,18 +85,24 @@
 			//addToScoreScreenButton();
 		}
 		
+		var playerXCoord:int;
+		var playerYCoord:int;
 		
 		function findPlayer(){
-			trace("findPlayer");	
-			for (var i:int = 0; i < map.length; i++){
-				for (var j:int; j < map[i].length; j++){				
-					if (movementGrid[i][j] == 5){
-						playerX=i;
-						playerY=j;
-					}
-				}
-				j=0;
-			}
+			//trace("findPlayer");	
+			//for (var i:int = 0; i < map.length; i++){
+			//	for (var j:int; j < map[i].length; j++){				
+			//		if (movementGrid[i][j] == 5){
+			//			//playerX=i;
+			//			//playerY=j;
+			//			trace("origineel xcoord: ", i, "ycoord: ", j);
+			//		}
+			//	}
+			//	j=0;
+			//}
+			playerXCoord=(player.x-(9*Main.scaleFactor))/(24*Main.scaleFactor);
+			playerYCoord=player.y/(24*Main.scaleFactor);
+			trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);			
 		}
 				
 		function loadMap(map:Array):void
@@ -202,30 +208,96 @@
 			}
 		}
 		
-		function checkPath(xcoord:int, ycoord:int){
-			if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
+		var wallX:int;
+		var wallY:int;
+		function checkPath(ycoord:int, xcoord:int){
+			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4){
 				//trace("muurtje1");
-				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
+				wallY=((ycoord)*(24*Main.scaleFactor));
+				wallX=((xcoord)*(24*Main.scaleFactor))+(9*Main.scaleFactor);
+				playerXCoord=(player.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
+				playerYCoord=player.y/(24*Main.scaleFactor);
+				
+				if(direction==="up"){	
+					//trace("player.y: ", player.y, " wallY: ", wallY);
+					if(player.y<=(wallY+24)){
+						//trace("up");
+						
+						player.y=(wallY+24);
+						//return true;
+						
+						//player.y=wallX-(1*Main.scaleFactor);
+					}
+					else{
+						//trace("whoopsie");
+						return true;
+					}
+				}
+				
+				if(lastSwipe==="down"){	
+					if((player.y+24)<=wallY){
+						//trace("down");
+						
+						player.y=(wallY-24);
+						//return true;
+						
+						//player.y=wallX-(1*Main.scaleFactor);
+					}
+					else{
+						//trace("whoopsie");
+						return true;
+					}
+				}
+				
+				if(direction==="left"){	
+					//trace("player.x: ", player.x, "wallX: ", wallX);
+					if(player.x<=(wallX+24)){
+					//	trace("left");						
+						player.x=(wallX+24);
+					}
+					else{
+						//trace("whoopsie");
+						return true;
+					}
+				}
+				
+				if(lastSwipe==="right"){	
+				//	trace("player.x: ", player.x, "wallX: ", wallX);
+					if(player.x+24<=(wallX)){
+					//	trace("right");						
+						player.x=wallX-24;
+					}
+					else{
+					//	trace("whoopsie");
+						return true;
+					}
+				}
+				
+				
+/*				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
 					if(direction===memorySwipe){
 							direction=lastSwipe;
 						}
 						else{
 							direction=memorySwipe;
 						}
-				}
+				}*/
+				return false;
 			}	
-			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){			
+/*			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){			
 				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
 					movePlayer(5,15);
 				}
 				else if(lastSwipe==="right" && playerX===5 && playerY===15){
 					movePlayer(5,1);
-				}
-				else{
-				movePlayer(xcoord, ycoord);
-				}
+				}*/
+			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===8){
+				return true;
 			}
+			//trace(map[ycoord][xcoord]);	
+			return false;
 		}
+
 		
 		public function movePlayer(xcoord:int, ycoord:int){
 			movementGrid[playerX][playerY]=0;
@@ -233,26 +305,36 @@
 			playerY=ycoord;			
 			movementGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
-			loadPlayer(movementGrid);
+			//loadPlayer(movementGrid);
 		}
 		
 		function movement(e:Event){		
-			checkWallCollision();
+			playerXCoord=(player.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
+			playerYCoord=player.y/(24*Main.scaleFactor);
+			//trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);
+			//trace("x: ", player.x, " y: ", player.y);
+			//checkWallCollision();
 			if(direction==="down"){
-				//checkPath(playerX+1,playerY);
-				player.y = player.y+player.getSpeed();
+				if(checkPath(playerYCoord+1,playerXCoord)){
+					player.y = player.y+player.getSpeed();
+				}
+
 			}
 			if(direction==="up"){
-				//checkPath(playerX-1,playerY);				
-				player.y = player.y-player.getSpeed();
+				if(checkPath(playerYCoord-1,playerXCoord)){
+					player.y = player.y-player.getSpeed();
+				}				
+		
 			}
 			if(direction==="left"){
-				//checkPath(playerX,playerY-1);
-				player.x = player.x-player.getSpeed();
+				if(checkPath(playerYCoord,playerXCoord-1)){
+					player.x = player.x-player.getSpeed();
+				}
 			}
 			if(direction==="right"){
-				//checkPath(playerX,playerY+1);				
-				player.x = player.x+player.getSpeed();
+				if(checkPath(playerYCoord,playerXCoord+1)){
+					player.x = player.x+player.getSpeed();
+				}				
 			}
 		}	
 		
@@ -261,7 +343,8 @@
 				var usedPellet:HealthPellet;
 				for each(var healthPellet in healthPellets){
 					if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
-						usedPellet = healthPellet;
+						//usedPellet = healthPellet;
+						healthPellet.pelletTouched();
 						break;
 					}
 				}
@@ -386,8 +469,7 @@
 		public function removeHealthPellet(healthPellet:HealthPellet)
 		{
 			trace("remove healht pellet");
-			healthPellet.hide();			
-			
+			healthPellet.hide();
 			//removeChild(healthPellet, true);
 		}
 		

@@ -17,27 +17,49 @@
 		
 		var gameScreen:GameScreen;	
 		var healthPellet:Image;
-		var hidden:Boolean=false;
+		public static var hidden:Boolean=false;
 		
 		public function HealthPellet(screen:GameScreen){
 			// constructor code			
 			gameScreen = screen;
-			healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
+			
+			applyTexture();
+
+			//healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
 			addChild( healthPellet );			
 		}
 		
 		public function hide(){
 			if(hidden===false){
 				trace("hiding");
+				
 				hidden=true;
+				//gameScreen.removeChild(this);
+				//applyTexture();
 				//enter the respawn timer in milliseconds, currently 2 seconds for testing purposes.
+				
+				//Starling.juggler.delayCall(respawn, 2);
 				setTimeout(respawn, 2000);
+			}
+		}
+		
+		public function applyTexture(){
+			if (!hidden){
+				healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
+				trace("applytexture not hidden");
+			}
+			else if (hidden){
+				
+				healthPellet = new Image(Main.assets.getTexture("TileTransparent"));
+				trace("applytexture hidden");
 			}
 		}
 		
 		public function respawn(){
 			trace("respawnerino");
-			hidden=false;			
+			hidden=false;	
+			//gameScreen.addChild(this);
+			//applyTexture();
 		}
 
 		public function pelletTouched(){
