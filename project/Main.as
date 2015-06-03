@@ -39,7 +39,7 @@
     {
         private const StageWidth:int  = 426;
         private const StageHeight:int = 240;
-        public static var scaleFactor:int; 
+        public static var scaleFactor:int = 1; 
         private var mStarling:Starling;
         private var mBackground:Loader;
         //private var mProgressBar:ProgressBar;
@@ -62,9 +62,9 @@
 			
 			
 			trace (viewPort);
-			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
-			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
-			else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
+			//if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
+			//else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
+			//else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
 
 			
 			trace ("scaleFactor", scaleFactor);

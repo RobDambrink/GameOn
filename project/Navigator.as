@@ -30,7 +30,7 @@
 		public function start(assets: AssetManager) {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
-			loadScreen("game");
+			loadScreen("mainMenu");
 		}
 
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.

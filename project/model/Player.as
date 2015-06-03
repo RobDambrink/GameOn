@@ -18,6 +18,7 @@
 		public static var speed: int = 3 * Main.scaleFactor; // Make sure 24 is dividable by the number entered! (example 24/3=8)
 		public static var infected: Boolean;
 		public static var gender: String = "male"; // Remove this string before final version!
+		public var hit:Boolean=false;
 			
 
 		public function Player(){
@@ -39,6 +40,12 @@
 		*/
 		public function getGender() {
 			return gender;
+		}
+		
+		public function unHit(){
+			if(hit){
+				hit=false;
+			}
 		}
 		
 		public function getSpeed(){

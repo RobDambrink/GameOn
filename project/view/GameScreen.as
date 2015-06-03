@@ -11,49 +11,56 @@
 	import org.gestouch.gestures.SwipeGesture;
 	import org.gestouch.events.GestureEvent;
 	import model.*;
+	import flash.utils.setTimeout;
 	
 	public class GameScreen extends Sprite{
 
 		var mazeBackground:Image;
 		var toScoreScreenButton:Image;	
 		public static var player:Player = new Player();
-		var enemy1:Enemy = new Enemy();
-		var enemy2:Enemy = new Enemy();
+		var exit:Exit = new Exit();
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var wall:Wall;
 		var walls:Vector.<Wall> = new Vector.<Wall>();
 		var playerX:int;
 		var playerY:int;
+		var enemy1:Enemy = new Enemy();
+		var enemy2:Enemy = new Enemy();
 		var lastSwipe:String;
 		var direction:String;
-		var enemyDirection:String;
 		var memorySwipe:String;
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1],
-			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
-			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
-			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
-			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
-			[1,8,1,1,1,1,1,0,8,0,1,1,1,1,1,8,1],
-			[1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1],
-			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+		
+			[1,8,8,8,1,1,1,8,8,8,1,1,1,8,8,8,1],
+			
+			[1,8,1,8,1,8,8,8,1,8,8,8,1,8,1,8,1],
+			
+			[1,8,8,8,1,8,1,8,1,8,1,8,1,8,8,8,1],
+			
+			[1,8,8,8,8,8,1,8,8,8,1,8,8,8,8,8,1],
+			
+			[1,8,1,1,1,1,1,8,8,8,1,1,1,1,1,8,1],
+			
+			[1,8,1,1,1,1,1,8,1,8,1,1,1,1,1,8,1],
+			
+			[1,8,8,8,8,8,8,8,7,8,8,8,8,8,8,8,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
 		];		
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1],
+			[1,0,0,0,0,0,0,0,5,0,0,0,0,0,0,7,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
 			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
-			[1,0,1,0,0,0,0,1,5,1,0,0,0,0,1,0,1],
+			[1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1],
 			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
 			[1,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
-		
 		
 		// constructor code
 		public function GameScreen() 
@@ -67,20 +74,21 @@
 		{
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
-			this.addEventListener(Event.ENTER_FRAME, movement);			
+			//this.addEventListener( Event.ENTER_FRAME , checkPelletCollision );
+			this.addEventListener(Event.ENTER_FRAME, movement);	
 			
 			trace("GameScreen loaded");
-			//addMazeBackground();
+			addMazeBackground();
 			
 			loadMap(map);
 			loadPlayer(movementGrid);
 			findPlayer();
 			
 			placeHealthBar();
+			HealthBar.hp=20;
 			updateHealthBar();
 			
 //			this.addEventListener( Event.ENTER_FRAME , pelletCheck );
-			this.addEventListener( Event.ENTER_FRAME , checkPelletCollision );
 
 			//addToScoreScreenButton();
 		}
@@ -138,15 +146,19 @@
 					if(data === 5){
 						object=player;
 					}
-//					if(data === 6){
-//						object = new Enemy();
-//					}
-//					if(data === 7){
-//						object = new Exit();
-//					}
+					if(data === 6){
+						object = new Wall("Bounce");
+					}
+					if(data === 7){
+						object = exit;
+					}
 					if(data === 8){
 						object = new HealthPellet(this);
 						healthPellets.push(object);
+					}
+					if(data === 9){
+						object = new Wall("Exit");
+						walls.push(object);
 					}
 										
 					var cellSize:int = object.width;
@@ -200,77 +212,55 @@
 		/*
 			This function checks if any of the walls are currently colliding with the player. If so, the player is stopped from moving.
 		*/
-		function checkWallCollision(){
+/*		function checkWallCollision(){
 			for(var i:int; i<walls.length; i++){
 				if(collision(walls[i])){
 					direction="";
 				}
 			}
-		}
+		}*/
 		
-		var wallX:int;
-		var wallY:int;
-		function checkPath(ycoord:int, xcoord:int){
+
+		function checkPath(ycoord:int, xcoord:int, user:Object, dir:String){
+			var wallX:int;
+			var wallY:int;
 			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4){
-				//trace("muurtje1");
 				wallY=((ycoord)*(24*Main.scaleFactor));
 				wallX=((xcoord)*(24*Main.scaleFactor))+(9*Main.scaleFactor);
-				playerXCoord=(player.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
-				playerYCoord=player.y/(24*Main.scaleFactor);
-				
-				if(direction==="up"){	
-					//trace("player.y: ", player.y, " wallY: ", wallY);
-					if(player.y<=(wallY+24)){
-						//trace("up");
-						
-						player.y=(wallY+24);
-						//return true;
-						
-						//player.y=wallX-(1*Main.scaleFactor);
+				if(dir==="up"){	
+					if(user.y<=(wallY+24)){
+						user.y=(wallY+24);
 					}
 					else{
-						//trace("whoopsie");
+						return true;
+					}
+				}				
+				if(dir==="down"){	
+					if((user.y+24)<=wallY){
+						user.y=(wallY-24);
+					}
+					else{
 						return true;
 					}
 				}
 				
-				if(lastSwipe==="down"){	
-					if((player.y+24)<=wallY){
-						//trace("down");
-						
-						player.y=(wallY-24);
-						//return true;
-						
-						//player.y=wallX-(1*Main.scaleFactor);
+				if(dir==="left"){	
+					if(user.x<=(wallX+24)){		
+						user.x=(wallX+24);
 					}
 					else{
-						//trace("whoopsie");
 						return true;
 					}
 				}
 				
-				if(direction==="left"){	
-					//trace("player.x: ", player.x, "wallX: ", wallX);
-					if(player.x<=(wallX+24)){
-					//	trace("left");						
-						player.x=(wallX+24);
+				if(dir==="right"){	
+					if(user.x+24<=(wallX)){					
+						user.x=wallX-24;
 					}
 					else{
-						//trace("whoopsie");
 						return true;
 					}
-				}
-				
-				if(lastSwipe==="right"){	
-				//	trace("player.x: ", player.x, "wallX: ", wallX);
-					if(player.x+24<=(wallX)){
-					//	trace("right");						
-						player.x=wallX-24;
-					}
-					else{
-					//	trace("whoopsie");
-						return true;
-					}
+
 				}
 				
 				
@@ -282,6 +272,12 @@
 							direction=memorySwipe;
 						}
 				}*/
+				if(user is Enemy){
+					user.enemyDirection();
+				}
+				else{
+					direction="";
+				}
 				return false;
 			}	
 /*			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){			
@@ -291,7 +287,7 @@
 				else if(lastSwipe==="right" && playerX===5 && playerY===15){
 					movePlayer(5,1);
 				}*/
-			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===8){
+			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===7 || map[ycoord][xcoord]===8){
 				return true;
 			}
 			//trace(map[ycoord][xcoord]);	
@@ -300,74 +296,129 @@
 
 		
 		public function movePlayer(xcoord:int, ycoord:int){
+			trace("Fakka you from move player");
+
 			movementGrid[playerX][playerY]=0;
 			playerX=xcoord;
 			playerY=ycoord;			
 			movementGrid[xcoord][ycoord]=5;
 			trace("x: ", xcoord, " y: ", ycoord);
-			//loadPlayer(movementGrid);
+			loadPlayer(movementGrid);
 		}
 		
-		function movement(e:Event){		
+		function movement(e:Event){	
+			enemyMovement(enemy1);
+			enemyMovement(enemy2);
+			//checkPelletCollision();
+			collision();
 			playerXCoord=(player.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
 			playerYCoord=player.y/(24*Main.scaleFactor);
 			//trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);
 			//trace("x: ", player.x, " y: ", player.y);
 			//checkWallCollision();
 			if(direction==="down"){
-				if(checkPath(playerYCoord+1,playerXCoord)){
+				if(checkPath(playerYCoord+1,playerXCoord, player, direction)){
 					player.y = player.y+player.getSpeed();
 				}
 
 			}
 			if(direction==="up"){
-				if(checkPath(playerYCoord-1,playerXCoord)){
+				if(checkPath(playerYCoord-1,playerXCoord, player, direction)){
 					player.y = player.y-player.getSpeed();
 				}				
 		
 			}
 			if(direction==="left"){
-				if(checkPath(playerYCoord,playerXCoord-1)){
+				if(checkPath(playerYCoord,playerXCoord-1, player, direction)){
 					player.x = player.x-player.getSpeed();
 				}
 			}
 			if(direction==="right"){
-				if(checkPath(playerYCoord,playerXCoord+1)){
+				if(checkPath(playerYCoord,playerXCoord+1, player, direction)){
 					player.x = player.x+player.getSpeed();
+				}				
+			}
+		}
+		
+		function enemyMovement(user:Enemy){	
+			var enemyX:int=(user.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
+			var enemyY:int=user.y/(24*Main.scaleFactor);
+			if(user.enDir==="down"){
+				if(checkPath(enemyY+1,enemyX, user, user.enDir)){
+					user.y = user.y+user.speed;
+				}
+
+			}
+			if(user.enDir==="up"){
+				if(checkPath(enemyY-1,enemyX, user, user.enDir)){
+					user.y = user.y-user.speed;
+				}				
+		
+			}
+			if(user.enDir==="left"){
+				if(checkPath(enemyY,enemyX-1, user, user.enDir)){
+					user.x = user.x-user.speed;
+				}
+			}
+			if(user.enDir==="right"){
+				if(checkPath(enemyY,enemyX+1, user, user.enDir)){
+					user.x = user.x+user.speed;
 				}				
 			}
 		}	
 		
-		function checkPelletCollision(e:Event){
-			for(var i:int; i < healthPellets.length; i++){
-				var usedPellet:HealthPellet;
-				for each(var healthPellet in healthPellets){
+		function checkPelletCollision(){
+			//for(var i:int; i < healthPellets.length; i++){
+				//var usedPellet:HealthPellet;
+/*				for each(var healthPellet in healthPellets){
 					if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
-						//usedPellet = healthPellet;
-						healthPellet.pelletTouched();
+						healthPellet.pelletTouched(healthPellet);
 						break;
-					}
-				}
-				if (usedPellet){
-					usedPellet.pelletTouched();
-				}
-			}
+		}*/
+				
+			//	if (usedPellet){
+				//	usedPellet.pelletTouched(usedPellet);
+				//}
+			//}
 		}
 		
 		/*
 			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
 		*/
-		function collision(wall:Wall){
-			if(player.getBounds(player.parent).intersects(wall.getBounds(wall.parent))){
-				fixPlayer();
-				//direction="";
-				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
-					if(direction===memorySwipe){
-						direction=lastSwipe;
-					}
-					else{
-						direction=memorySwipe;
-					}
+		function collision(){
+			//if(player.getBounds(player.parent).intersects(wall.getBounds(wall.parent))){
+			//	fixPlayer();
+			//	trace("awrawhraorh");
+			//	//direction="";
+			//	if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
+			//		if(direction===memorySwipe){
+			//			direction=lastSwipe;
+			//		}
+			//		else{
+			//			direction=memorySwipe;
+			//		}
+			//	}
+			//}
+			for each(var healthPellet in healthPellets){
+				if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
+					healthPellet.pelletTouched(healthPellet);
+					break;
+				}
+			}
+					
+			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
+				if(HealthBar.hp>99){
+					trace("=================GAME OVER YOU WIN=====================");
+					Navigator.instance.loadScreen( "scoreScreen" );
+				}
+			}
+			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
+				if(!player.hit){				
+					HealthBar.hp-=10;
+					player.hit=true;
+					setTimeout(player.unHit, 2000);
+					trace(HealthBar.hp);
+					updateHealthBar();
 				}
 			}
 		}		
@@ -469,12 +520,13 @@
 		public function removeHealthPellet(healthPellet:HealthPellet)
 		{
 			trace("remove healht pellet");
-			healthPellet.hide();
-			//removeChild(healthPellet, true);
+			healthPellet.hide(healthPellet);
+			removeChild(healthPellet, true);
 		}
 		
+
 		private function addMazeBackground(){
-			mazeBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
+			mazeBackground = new Image(Main.assets.getTexture("school"));
 			addChild(mazeBackground);
 		}	
 	}	

@@ -16,7 +16,7 @@
 			var wall:Image;
 			
 			if (type === "House"){
-				wall = new Image(Main.assets.getTexture("TileHouse"));
+				wall = new Image(Main.assets.getTexture("TileTable"));
 			}
 			if (type === "Tree"){
 				wall = new Image(Main.assets.getTexture("Circle24"));
@@ -27,6 +27,13 @@
 			if (type === "Transparent"){
 				wall = new Image(Main.assets.getTexture("TileTransparent"));
 			}
+			if (type === "Exit"){
+				wall = new Image(Main.assets.getTexture("TileExit"));
+			}
+			if (type === "Bounce"){
+				wall = new Image(Main.assets.getTexture("TileTransparent"));
+			}
+			
 			
 			
 			addChild( wall );

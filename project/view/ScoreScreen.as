@@ -1,6 +1,7 @@
 ﻿package view{
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.display.Image;
 	
 	public class ScoreScreen extends Sprite{
 
@@ -15,7 +16,8 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("ScoreScreen loaded");
-			//addToPharmacyButton();
+			var winning:Image = new Image(Main.assets.getTexture("winning"));
+			addChild(winning);
 		}
 
 	}

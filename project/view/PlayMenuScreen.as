@@ -6,6 +6,7 @@
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
+	import starling.core.Starling;
 
 	
 	public class PlayMenuScreen extends Sprite{
@@ -25,10 +26,12 @@
 			
 			addMenuBackground();
 			
-			addNewGameButton();
+			
 			
 	//if there is a saved game state on the device, then execute
 			addContinueButton();
+			
+			addNewGameButton();
 		}
 		
 		
@@ -43,7 +46,8 @@
 			continueButton = new Image(Main.assets.getTexture("ContinueButton"));
 			addChild( continueButton );
 			
-			continueButton.y = 0;
+			continueButton.y = Main.scaleFactor * 15;
+			continueButton.x = (Starling.current.stage.stageWidth - continueButton.width) / 2;
 			
 			continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
 		}
@@ -52,7 +56,8 @@
 			newGameButton = new Image(Main.assets.getTexture("NewGameButton"));
 			addChild( newGameButton );
 			
-			newGameButton.y = 100;
+			newGameButton.y = continueButton.y + continueButton.height + (Main.scaleFactor * 10);
+			newGameButton.x = (Starling.current.stage.stageWidth - newGameButton.width) / 2;
 			
 			newGameButton.addEventListener( TouchEvent.TOUCH , onNewGameButton );
 		}

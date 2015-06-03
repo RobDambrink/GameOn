@@ -17,7 +17,7 @@
 		var gameScreen:GameScreen;
 		var healthFill:Image;
 		
-		public static var hp:int = 80;
+		public static var hp:int = 15;
 		public static var maxHp:int = 100;
 		var percentHp:Number = hp/maxHp;
 		
@@ -36,19 +36,16 @@
 		}
 		
 		
-		public function updateHealthBar(){
-			percentHp = hp / maxHp;
-			healthFill.scaleX = (percentHp - 0.01);
-			
+		public function updateHealthBar(){			
 			if (hp > (maxHp - 1)){
 				hp = maxHp;
-				trace("u win m8");
-			}
-			
+			}			
 			if (hp < 1){
 				hp = 0;
-				trace("u ded m8");
+				Navigator.instance.loadScreen( "levelSelect" );
 			}
+			percentHp = hp / maxHp;
+			healthFill.scaleX = (percentHp - 0.01);
 		}
 		
 		
