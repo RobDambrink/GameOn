@@ -73,7 +73,7 @@
 			playBtn = new Image(Main.assets.getTexture("PlayButton"));
 			addChild(playBtn);
 
-			playBtn.y = Main.scaleFactor * 15;
+			playBtn.y = 15;
 			playBtn.x = (Starling.current.stage.stageWidth - playBtn.width) / 2;
 
 			playBtn.addEventListener(TouchEvent.TOUCH, onPlayButton);
@@ -83,7 +83,7 @@
 			pharmacyButton = new Image(Main.assets.getTexture("PharmacyButton"));
 			addChild(pharmacyButton);
 
-			pharmacyButton.y = playBtn.y + playBtn.height + (Main.scaleFactor * 10);
+			pharmacyButton.y = playBtn.y + playBtn.height + 10;
 			pharmacyButton.x = (Starling.current.stage.stageWidth - pharmacyButton.width) / 2;
 
 			pharmacyButton.addEventListener(TouchEvent.TOUCH, onPharmacyButton);
@@ -93,7 +93,7 @@
 			tutorialButton = new Image(Main.assets.getTexture("TutorialButton"));
 			addChild(tutorialButton);
 
-			tutorialButton.y = pharmacyButton.y + pharmacyButton.height + (Main.scaleFactor * 10);
+			tutorialButton.y = pharmacyButton.y + pharmacyButton.height + 10;
 			tutorialButton.x = (Starling.current.stage.stageWidth - tutorialButton.width) / 2;
 
 			tutorialButton.addEventListener(TouchEvent.TOUCH, onTutorialButton);
@@ -103,7 +103,7 @@
 			optionsButton = new Image(Main.assets.getTexture("OptionsButton"));
 			addChild(optionsButton);
 
-			optionsButton.y = tutorialButton.y + tutorialButton.height + (Main.scaleFactor * 10);
+			optionsButton.y = tutorialButton.y + tutorialButton.height + 10;
 			optionsButton.x = (Starling.current.stage.stageWidth - optionsButton.width) / 2;
 
 			optionsButton.addEventListener(TouchEvent.TOUCH, onOptionsButton);

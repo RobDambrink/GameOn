@@ -8,15 +8,12 @@
 
 	public class LoadingScreen extends Sprite {
 
-<<<<<<< HEAD
 		var loadingBar: Image;
 		var main:Main;
 
-=======
 		var loadingBar:Image;
 		var menuBackground:Image;
 		
->>>>>>> ba00e991d302bfaa0cfdaa1fc8705fc36d7c58e5
 		public function LoadingScreen() {
 			// constructor code
 

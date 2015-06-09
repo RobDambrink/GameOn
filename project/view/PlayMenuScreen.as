@@ -46,7 +46,7 @@
 			continueButton = new Image(Main.assets.getTexture("ContinueButton"));
 			addChild( continueButton );
 			
-			continueButton.y = Main.scaleFactor * 15;
+			continueButton.y = 15;
 			continueButton.x = (Starling.current.stage.stageWidth - continueButton.width) / 2;
 			
 			continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
@@ -56,7 +56,7 @@
 			newGameButton = new Image(Main.assets.getTexture("NewGameButton"));
 			addChild( newGameButton );
 			
-			newGameButton.y = continueButton.y + continueButton.height + (Main.scaleFactor * 10);
+			newGameButton.y = continueButton.y + continueButton.height + 10;
 			newGameButton.x = (Starling.current.stage.stageWidth - newGameButton.width) / 2;
 			
 			newGameButton.addEventListener( TouchEvent.TOUCH , onNewGameButton );

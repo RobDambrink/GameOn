@@ -35,8 +35,8 @@
 			backButton = new Image(Main.assets.getTexture("BackButton"));
 			addChild(backButton);
 
-			backButton.y = Main.scaleFactor * 15;
-			backButton.x = Main.scaleFactor * 15;
+			backButton.y = 15;
+			backButton.x = 15;
 
 			backButton.addEventListener(TouchEvent.TOUCH, onBackButton);
 		}

@@ -568,7 +568,7 @@
 		
 		public function placeHealthBar(){
 			healthBar = new HealthBar(this)
-			healthBar.y = Main.scaleFactor * 2;
+			healthBar.y = 2;
 			healthBar.x = (Starling.current.stage.stageWidth - healthBar.width) / 2;
 			addChild(healthBar);
 		}

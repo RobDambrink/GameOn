@@ -54,6 +54,10 @@
 				nextScreen = new OptionsMenuScreen();
 			} else if (screenName == "levelSelect") {
 				nextScreen = new LevelSelectScreen();
+			} else if (screenName == "levelSelect2") {
+				nextScreen = new LevelSelectScreen2();
+			} else if (screenName == "levelSelect3") {
+				nextScreen = new LevelSelectScreen3();
 			} else if (screenName == "story") {
 				nextScreen = new StoryScreen();
 			} else if (screenName == "lostGame") {
