@@ -34,7 +34,7 @@
 				wall = new Image(Main.assets.getTexture("TileTransparent"));
 			}
 			
-			
+			wall.alignPivot();
 			
 			addChild( wall );
 		}

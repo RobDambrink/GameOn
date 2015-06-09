@@ -22,6 +22,8 @@
 			trace("enemy constructor aangeroepen");
 			enemy = new Image(Main.assets.getTexture("sti"));
 			enemyDirection();
+			
+			enemy.alignPivot();
 			addChild(enemy);
 		}
 		

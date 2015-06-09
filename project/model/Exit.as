@@ -9,6 +9,9 @@
 		public function Exit(){
 			// constructor code
 			exit = new Image(Main.assets.getTexture("TileTransparent"));
+			
+			exit.alignPivot();
+			
 			addChild(exit);
 		}
 

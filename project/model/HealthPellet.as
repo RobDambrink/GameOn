@@ -26,6 +26,9 @@
 			applyTexture();
 
 			//healthPellet = new Image(Main.assets.getTexture("TileHealthDot"));
+			
+			healthPellet.alignPivot();
+			
 			addChild( healthPellet );			
 		}
 		

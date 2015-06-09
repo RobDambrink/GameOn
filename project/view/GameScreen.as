@@ -23,6 +23,7 @@
 		var healthBar:HealthBar;
 		var wall:Wall;
 		var walls:Vector.<Wall> = new Vector.<Wall>();
+		var bounces:Vector.<Wall> = new Vector.<Wall>();
 		var playerX:int;
 		var playerY:int;
 		var enemy1:Enemy = new Enemy();
@@ -33,32 +34,25 @@
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		
-			[1,8,8,8,1,1,1,8,8,8,1,1,1,8,8,8,1],
-			
-			[1,8,1,8,1,8,8,8,1,8,8,8,1,8,1,8,1],
-			
-			[1,8,8,8,1,8,1,8,1,8,1,8,1,8,8,8,1],
-			
-			[1,8,8,8,8,8,1,8,8,8,1,8,8,8,8,8,1],
-			
-			[1,8,1,1,1,1,1,8,8,8,1,1,1,1,1,8,1],
-			
-			[1,8,1,1,1,1,1,8,1,8,1,1,1,1,1,8,1],
-			
-			[1,8,8,8,8,8,8,8,7,8,8,8,8,8,8,8,1],
+			[1,6,0,0,0,0,0,6,0,6,0,0,0,0,0,6,1],
+			[1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1],
+			[1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1],
+			[1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1],
+			[1,0,1,1,1,1,1,0,0,0,1,1,1,1,1,0,1],
+			[1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1],
+			[1,6,0,0,0,0,0,6,7,6,0,0,0,0,0,6,1],
 			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
 		];		
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,0,0,5,0,0,0,0,0,0,7,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
-			[0,0,0,0,1,1,0,1,0,1,0,1,1,0,0,0,0],
-			[1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1],
-			[1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
-			[1,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+			[1,8,8,8,8,8,8,8,5,8,8,8,8,8,8,7,1],
+			[1,8,1,8,1,8,8,8,1,8,8,8,1,8,1,8,1],
+			[1,8,8,8,1,8,1,8,1,8,1,8,1,8,8,8,1],
+			[1,8,8,8,8,8,1,8,8,8,1,8,8,8,8,8,1],
+			[1,8,1,1,1,1,1,8,8,8,1,1,1,1,1,8,1],
+			[1,8,1,1,1,1,1,8,1,8,1,1,1,1,1,8,1],
+			[1,6,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
@@ -107,9 +101,9 @@
 			//		}
 			//	}
 			//	j=0;
-			//}
-			playerXCoord=(player.x-(9*Main.scaleFactor))/(24*Main.scaleFactor);
-			playerYCoord=player.y/(24*Main.scaleFactor);
+			//} 
+			playerXCoord=(player.x - 9) / 24;
+			playerYCoord= player.y / 24;
 			trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);			
 		}
 				
@@ -148,6 +142,7 @@
 					}
 					if(data === 6){
 						object = new Wall("Bounce");
+						bounces.push(object);
 					}
 					if(data === 7){
 						object = exit;
@@ -165,8 +160,8 @@
 					
 					if(object !== null)
 					{
-						object.x = (column * cellSize) + (Main.scaleFactor * 9);
-						object.y = row * cellSize;
+						object.x = (column * cellSize)+ 12; //
+						object.y = (row * cellSize) + 12;
 						addChild(object);
 					}
 				}
@@ -189,19 +184,23 @@
 					if(data === 5){
 						object=player;
 					}
-					if(data===6){
+					if(data === 6){
 						object=enemy1;
 					}
-					if(data===7){
+					if(data === 7){
 						object=enemy2;
+					}
+					if(data === 8){
+						object = new HealthPellet(this);
+						healthPellets.push(object);
 					}
 					
 					var cellSize:int = player.width;
 					
 					if(object !== null)
 					{
-						object.x = (column * cellSize) + (Main.scaleFactor * 9);
-						object.y = row * cellSize;
+						object.x = (column * cellSize) + 12; //
+						object.y = (row * cellSize) + 12;
 						addChild(object);
 					}
 				}
@@ -224,11 +223,12 @@
 		function checkPath(ycoord:int, xcoord:int, user:Object, dir:String){
 			var wallX:int;
 			var wallY:int;
-			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4){
-				wallY=((ycoord)*(24*Main.scaleFactor));
-				wallX=((xcoord)*(24*Main.scaleFactor))+(9*Main.scaleFactor);
+			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4 || map[ycoord][xcoord]===9){
+				wallY=((ycoord * 24)+12);
+				wallX=((xcoord * 24)+12); 
+				
 				if(dir==="up"){	
-					if(user.y<=(wallY+24)){
+					if(user.y<=wallY+24){
 						user.y=(wallY+24);
 					}
 					else{
@@ -236,7 +236,7 @@
 					}
 				}				
 				if(dir==="down"){	
-					if((user.y+24)<=wallY){
+					if(user.y>=wallY-24){
 						user.y=(wallY-24);
 					}
 					else{
@@ -245,7 +245,7 @@
 				}
 				
 				if(dir==="left"){	
-					if(user.x<=(wallX+24)){		
+					if(user.x<=wallX+24){		
 						user.x=(wallX+24);
 					}
 					else{
@@ -254,7 +254,7 @@
 				}
 				
 				if(dir==="right"){	
-					if(user.x+24<=(wallX)){					
+					if(user.x>=wallX-24){					
 						user.x=wallX-24;
 					}
 					else{
@@ -275,8 +275,8 @@
 				if(user is Enemy){
 					user.enemyDirection();
 				}
-				else{
-					direction="";
+				else if (user is Player){
+					direction=memorySwipe;
 				}
 				return false;
 			}	
@@ -287,10 +287,21 @@
 				else if(lastSwipe==="right" && playerX===5 && playerY===15){
 					movePlayer(5,1);
 				}*/
-			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===7 || map[ycoord][xcoord]===8){
+//			else if(player.x==wallX && player.y==wallY){
+//				direction = memorySwipe;
+//				return true;
+//			}
+			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===9 || map[ycoord][xcoord]===7){
 				return true;
 			}
-			//trace(map[ycoord][xcoord]);	
+			
+			else if(map[ycoord][xcoord]===6){
+				direction=memorySwipe;
+				memorySwipe=lastSwipe;
+				return true;
+			}
+			
+
 			return false;
 		}
 
@@ -307,12 +318,12 @@
 		}
 		
 		function movement(e:Event){	
-			enemyMovement(enemy1);
-			enemyMovement(enemy2);
-			//checkPelletCollision();
+//			enemyMovement(enemy1);
+//			enemyMovement(enemy2);
+			//checkWalls(player);
 			collision();
-			playerXCoord=(player.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
-			playerYCoord=player.y/(24*Main.scaleFactor);
+			playerXCoord= (player.x - 9) / 24 ;
+			playerYCoord=player.y /24;
 			//trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);
 			//trace("x: ", player.x, " y: ", player.y);
 			//checkWallCollision();
@@ -320,29 +331,31 @@
 				if(checkPath(playerYCoord+1,playerXCoord, player, direction)){
 					player.y = player.y+player.getSpeed();
 				}
-
+				checkBounce();
 			}
 			if(direction==="up"){
 				if(checkPath(playerYCoord-1,playerXCoord, player, direction)){
 					player.y = player.y-player.getSpeed();
-				}				
-		
+				}
+				checkBounce();		
 			}
 			if(direction==="left"){
 				if(checkPath(playerYCoord,playerXCoord-1, player, direction)){
 					player.x = player.x-player.getSpeed();
 				}
+				checkBounce();
 			}
 			if(direction==="right"){
 				if(checkPath(playerYCoord,playerXCoord+1, player, direction)){
 					player.x = player.x+player.getSpeed();
-				}				
+				}		
+				checkBounce();
 			}
 		}
 		
 		function enemyMovement(user:Enemy){	
-			var enemyX:int=(user.x -(9*Main.scaleFactor))/(24*Main.scaleFactor);
-			var enemyY:int=user.y/(24*Main.scaleFactor);
+			var enemyX:int=(user.x - 9) / 24;
+			var enemyY:int=user.y / 24;
 			if(user.enDir==="down"){
 				if(checkPath(enemyY+1,enemyX, user, user.enDir)){
 					user.y = user.y+user.speed;
@@ -367,14 +380,34 @@
 			}
 		}	
 		
-		function checkPelletCollision(){
+		function checkWalls(user:Object){
+			var xcoord= (player.x - 9) / 24;
+			var ycoord= player.y / 24;
 			//for(var i:int; i < healthPellets.length; i++){
 				//var usedPellet:HealthPellet;
-/*				for each(var healthPellet in healthPellets){
-					if (player.getBounds(player.parent).intersects(healthPellet.getBounds(healthPellet.parent))){
-						healthPellet.pelletTouched(healthPellet);
+			for each(var wall in walls){
+				var wallY=((ycoord * 24) + 12);
+				var wallX=((xcoord * 24) + 12);
+				
+					if((user.y<wallY+24) || (user.y>wallY-24) || (user.x<wallX+24) || (user.x>wallX-24)){
+						if(direction==="up"){	
+							user.y=(wallY+24);
+						}
+						if(direction==="down"){	
+							user.y=(wallY-24);
+						}
+					
+						if(direction==="left"){	
+							user.x=(wallX+24);
+						}
+						
+						if(direction==="right"){				
+							user.x=wallX-24;
+						}
+					
 						break;
-		}*/
+					}
+			}
 				
 			//	if (usedPellet){
 				//	usedPellet.pelletTouched(usedPellet);
@@ -421,6 +454,22 @@
 					updateHealthBar();
 				}
 			}
+
+//			for each(var bounce in bounces){
+//				//trace("bounce.y: ",bounce.y,"bounce.x: ", bounce.x);
+//				if(checkPath(player.y/24, player.x/24, player, lastSwipe)){
+//					trace("bounce 1");
+//					if (player.x===bounce.x && player.y===bounce.y){
+//						trace("bounce hit");
+//						if(direction!==null){
+//							direction=memorySwipe;
+//						}
+//						break;
+//					}
+//				}
+//			}
+			
+
 		}		
 		
 		/*
@@ -448,7 +497,7 @@
 			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
 			if(lastSwipe!==null){
 				trace("Memory set");
-				memorySwipe=lastSwipe;
+				//memorySwipe=lastSwipe;
 			}
 			//right
 			if (swipeGesture.offsetX>6) {
@@ -481,6 +530,25 @@
 			}
 			trace(memorySwipe, " ", lastSwipe);
 		}
+		
+		
+		public function checkBounce(){
+			for each(var bounce in bounces){
+				if(player.x===bounce.x && player.y===bounce.y){
+					trace("bouncerino");
+					if((memorySwipe!=="up" && direction==="down") || (memorySwipe!=="down" && direction==="up") || (memorySwipe!=="left" && direction==="right") || (memorySwipe!=="right" && direction==="left")){
+						if(direction===memorySwipe){
+							direction=lastSwipe;
+						}
+						else{
+							direction=memorySwipe;
+						}
+					}
+					break;
+				}
+			}
+		}
+
 		
 		public function addToScoreScreenButton(){
 			toScoreScreenButton = new Image(Main.assets.getTexture("ToScoreScreenButton"));

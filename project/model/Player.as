@@ -32,7 +32,11 @@
 			if (gender == "female") {
 				player = new Image(Main.assets.getTexture("TileGirl"));
 			}
+			
+			player.alignPivot();
+			
 			addChild(player);
+			
 		}
 
 		/**
