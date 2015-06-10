@@ -12,6 +12,8 @@
 	import org.gestouch.events.GestureEvent;
 	import model.*;
 	import flash.utils.setTimeout;
+	import starling.animation.Tween;
+	import starling.animation.Transitions;
 	
 	public class GameScreen extends Sprite{
 
@@ -31,8 +33,10 @@
 		var lastSwipe:String;
 		var direction:String;
 		var memorySwipe:String;
+		var level:int;
+		var tween:Tween = new Tween(player, 0.4,"linear");
 		var map:Array = [
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 1
 			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
 			[1,6,0,0,0,0,0,6,0,6,0,0,0,0,0,6,1],
 			[1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1],
@@ -42,7 +46,103 @@
 			[1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1],
 			[1,6,0,0,0,0,0,6,7,6,0,0,0,0,0,6,1],
 			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
-		];		
+		];
+		var map2:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 2
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
+		var map3:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 3
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+		];	
+		var map4:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 4
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+		];	
+		var map5:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 5
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
+		var map6:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 6
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
+		var map7:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 7
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
+		var map8:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 8
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
+		var map9:Array = [
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 9
+			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
+		];	
 		var movementGrid:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // UI
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -57,10 +157,11 @@
 		];
 		
 		// constructor code
-		public function GameScreen() 
+		public function GameScreen(level:int) 
 		{
 			//Only when added to the stage, the function onAddedToStage will be executed.
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.level=level;
 		}
 		
 		//This function tells the console that the gamescreen is loaded. 
@@ -69,12 +170,13 @@
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			//this.addEventListener( Event.ENTER_FRAME , checkPelletCollision );
-			this.addEventListener(Event.ENTER_FRAME, movement);	
+			//this.addEventListener(Event.ENTER_FRAME, movement);	
+			this.addEventListener(Event.ENTER_FRAME, update);
 			
 			trace("GameScreen loaded");
 			addMazeBackground();
 			
-			loadMap(map);
+			loadMap();
 			loadPlayer(movementGrid);
 			findPlayer();
 			
@@ -90,25 +192,79 @@
 		var playerXCoord:int;
 		var playerYCoord:int;
 		
+		private function update(e:Event){
+			Starling.juggler.add(tween);
+			if(tween.isComplete){
+				tween.reset(player,0.4,"linear");
+				movementTest();
+				trace("playerY: ", playerY, "playerX: ", playerX);
+				tween.moveTo((playerY * 24) , (playerX * 24));
+			}
+		}
+		
+    	
+   	 function movementTest(){    
+   		 if(direction==="down"){
+   			 if(checkPath(playerX+1,playerY, player, direction)){
+   				 playerX+=1;
+   			 }
+   		 }
+   		 if(direction==="up"){
+   			 if(checkPath(playerX-1,playerY, player, direction)){
+   				 playerX-=1;
+   			 }
+   		 }
+   		 if(direction==="left"){
+   			 if(checkPath(playerX,playerY-1, player, direction)){
+   				 playerY-=1;
+   			 }
+   		 }
+   		 if(direction==="right"){
+   			 if(checkPath(playerX,playerY+1,player, direction)){
+   				 playerY+=1;
+   			 }
+   		 }
+   	 }
+   	 
+
+		
 		function findPlayer(){
-			//trace("findPlayer");	
-			//for (var i:int = 0; i < map.length; i++){
-			//	for (var j:int; j < map[i].length; j++){				
-			//		if (movementGrid[i][j] == 5){
-			//			//playerX=i;
-			//			//playerY=j;
-			//			trace("origineel xcoord: ", i, "ycoord: ", j);
-			//		}
-			//	}
-			//	j=0;
-			//} 
-			playerXCoord=(player.x - 9) / 24;
-			playerYCoord= player.y / 24;
+			playerX=(player.x) / 24;
+			playerY= player.y / 24;
 			trace("xcoord: ", playerXCoord, "ycoord: ", playerYCoord);			
 		}
 				
-		function loadMap(map:Array):void
+		function loadMap():void
 		{
+			var map:Array;
+			if(level===1){
+				map=this.map;
+			}
+			if(level===2){
+				map=this.map2;
+			}
+			if(level===3){
+				map=this.map3;
+			}
+			if(level===4){
+				map=this.map4;
+			}
+			if(level===5){
+				map=this.map5;
+			}
+			if(level===6){
+				map=this.map6;
+			}
+			if(level===7){
+				map=this.map7;
+			}
+			if(level===8){
+				map=this.map8;
+			}
+			if(level===9){
+				map=this.map9;
+			}
+			
 			for(var row:int = 0; row < map.length; row++)
 			{
 				for(var column:int = 0; column < map[row].length; column++)
@@ -219,13 +375,18 @@
 			}
 		}*/
 		
-
-		function checkPath(ycoord:int, xcoord:int, user:Object, dir:String){
-			var wallX:int;
-			var wallY:int;
-			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4 || map[ycoord][xcoord]===9){
-				wallY=((ycoord * 24)+12);
-				wallX=((xcoord * 24)+12); 
+	function checkPath(xcoord:int, ycoord:int, user:Object, dir:String){
+   		 if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
+   			 if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
+   				 if(direction===memorySwipe){
+   					 direction=lastSwipe;
+   				 }
+   				 else{
+   					 direction=memorySwipe;
+   				 }
+   			 }
+				var wallY:int=((ycoord * 24)+12);
+				var wallX:int=((xcoord * 24)+12); 
 				
 				if(dir==="up"){	
 					if(user.y<=wallY+24){
@@ -260,50 +421,18 @@
 					else{
 						return true;
 					}
-
 				}
-				
-				
-/*				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
-					if(direction===memorySwipe){
-							direction=lastSwipe;
-						}
-						else{
-							direction=memorySwipe;
-						}
-				}*/
 				if(user is Enemy){
 					user.enemyDirection();
 				}
-				else if (user is Player){
-					direction=memorySwipe;
-				}
-				return false;
-			}	
-/*			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){			
-				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
-					movePlayer(5,15);
-				}
-				else if(lastSwipe==="right" && playerX===5 && playerY===15){
-					movePlayer(5,1);
-				}*/
-//			else if(player.x==wallX && player.y==wallY){
-//				direction = memorySwipe;
-//				return true;
-//			}
-			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===9 || map[ycoord][xcoord]===7){
+   		 }    
+   		 else if(map[xcoord][ycoord]===0 || map[ycoord][xcoord]===9 || map[ycoord][xcoord]===6){
 				return true;
-			}
-			
-			else if(map[ycoord][xcoord]===6){
-				direction=memorySwipe;
-				memorySwipe=lastSwipe;
-				return true;
-			}
-			
+   		 }
+   		 return false;
+   	 }
 
-			return false;
-		}
+		
 
 		
 		public function movePlayer(xcoord:int, ycoord:int){
@@ -442,7 +571,7 @@
 			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
 				if(HealthBar.hp>99){
 					trace("=================GAME OVER YOU WIN=====================");
-					Navigator.instance.loadScreen( "scoreScreen" );
+					Navigator.instance.loadScreen( "scoreScreen" ,0);
 				}
 			}
 			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
@@ -562,7 +691,7 @@
 		public function onToScoreScreenButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){ 
-				Navigator.instance.loadScreen( "scoreScreen" );
+				Navigator.instance.loadScreen( "scoreScreen" ,0);
 			}
 		}
 		

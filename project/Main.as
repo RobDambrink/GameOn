@@ -28,7 +28,7 @@
 	import org.gestouch.extensions.starling.StarlingTouchHitTester;
 	import starling.display.DisplayObject;
 
-    //import utils.ProgressBar;
+    import utils.ProgressBar;
 
     // This project requires the sources of the "demo" project. Add them either by
     // referencing the "demo/src" directory as a "source path", or by copying the files.
@@ -39,10 +39,10 @@
     {
         private const StageWidth:int  = 426;
         private const StageHeight:int = 240;
-        public static var scaleFactor:int = 3; 
+        public static var scaleFactor:int = 1; 
         private var mStarling:Starling;
         private var mBackground:Loader;
-        //private var mProgressBar:ProgressBar;
+        private var mProgressBar:ProgressBar;
 		public static var assets:AssetManager;
 		
 		
@@ -122,7 +122,7 @@
 
             assets.loadQueue(function(ratio:Number):void
             {
-                //mProgressBar.ratio = ratio;
+                mProgressBar.ratio = ratio;
                 if (ratio == 1) onComplete(assets);
             });
         }
@@ -139,7 +139,7 @@
             // Add background image. By using "loadBytes", we can avoid any flickering.
 			
 // Insert splash screen here
-            var bgPath:String = formatString("assets/{0}x/Circle.png", scaleFactor); //formatString("assets/{0}x/background.jpg", scaleFactor);
+            var bgPath:String = formatString("assets/{0}x/background-orange.png", scaleFactor); //formatString("assets/{0}x/background.jpg", scaleFactor);
             var bgFile:File = File.applicationDirectory.resolvePath(bgPath);
             var bytes:ByteArray = new ByteArray();
             var stream:FileStream = new FileStream();
@@ -159,12 +159,12 @@
                     (mBackground.content as Bitmap).smoothing = true;
                 });
 
-            // While the assets are loaded, we will display a progress bar.
+// While the assets are loaded, we will display a progress bar.
 
-/*            mProgressBar = new ProgressBar(175, 20);
+			mProgressBar = new ProgressBar(175, 20);
             mProgressBar.x = (StageWidth - mProgressBar.width) / 2;
-            mProgressBar.y =  StageHeight * 0.7;*/
-            //mStarling.nativeOverlay.addChild(mProgressBar);
+            mProgressBar.y =  StageHeight * 0.7;
+            mStarling.nativeOverlay.addChild(mProgressBar);
         }
 
 		public function getAssets(){
@@ -180,11 +180,11 @@
                 mBackground = null;
             }
 
-/*            if (mProgressBar)
+            if (mProgressBar)
             {
                 mStarling.nativeOverlay.removeChild(mProgressBar);
                 mProgressBar = null;
-            }*/
+            }
         }
     }
 }

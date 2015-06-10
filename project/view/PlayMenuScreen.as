@@ -71,7 +71,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "levelSelect" );
+				Navigator.instance.loadScreen( "levelSelect" ,0);
 			}
 		}
 		
@@ -80,7 +80,7 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 // WARNING that New Game deletes all progress! 
-				Navigator.instance.loadScreen( "genderSelect" );
+				Navigator.instance.loadScreen( "genderSelect" ,0);
 			}
 		}
 		//---------------end of button's event handlers---------

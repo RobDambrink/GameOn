@@ -12,7 +12,7 @@
 		
 		
 		var levelSelectButton:Image;
-		//var main:Main;
+		var menuBackground:Image;
 		
 		public function LevelSelectScreen() {
 			// constructor code
@@ -24,13 +24,17 @@
 		private function onAddedToStage(event:Event)
 		{
 			trace("LevelSelectScreen loaded");
+			addMenuBackground();
 			addLevelOneButton();
 			addLevelTwoButton();
 			addLevelThreeButton();
+
 		}
 		
-		
-		
+		function addMenuBackground(){
+			menuBackground = new Image(Main.assets.getTexture("background-orange"));
+			addChild( menuBackground );
+		}
 		
 		private function addLevelOneButton(){
 			levelSelectButton = new Image(Main.assets.getTexture("Level1")); 
@@ -46,7 +50,8 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "game" );
+				Navigator.instance.loadScreen( "story", 1 );
+				
 			}
 		}
 		
@@ -66,7 +71,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "game" );
+				Navigator.instance.loadScreen( "story" ,2);
 			}
 		}
 
@@ -86,7 +91,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "game" );
+				Navigator.instance.loadScreen( "story" ,3);
 			}
 		}
 		

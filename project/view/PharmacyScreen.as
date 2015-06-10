@@ -47,7 +47,7 @@
 			if (touch.phase == TouchPhase.BEGAN) {
 				Navigator.breadcrumbs.pop();
 				Navigator.breadcrumbs[0] = "mainMenu";
-				Navigator.instance.loadScreen(Navigator.breadcrumbs[Navigator.breadcrumbs.length - 1]);
+				Navigator.instance.loadScreen(Navigator.breadcrumbs[Navigator.breadcrumbs.length - 1],0);
 			}
 		}
 	}

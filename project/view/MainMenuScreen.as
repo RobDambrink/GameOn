@@ -118,28 +118,28 @@
 		private function onPlayButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("playMenu");
+				Navigator.instance.loadScreen("playMenu",0);
 			}
 		}
 
 		private function onPharmacyButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("pharmacy");
+				Navigator.instance.loadScreen("pharmacy",0);
 			}
 		}
 
 		private function onTutorialButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("tutorial");
+				Navigator.instance.loadScreen("tutorial",0);
 			}
 		}
 
 		private function onOptionsButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("optionsMenu");
+				Navigator.instance.loadScreen("optionsMenu",0);
 			}
 		}
 		

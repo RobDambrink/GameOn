@@ -42,7 +42,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "game" );
+				Navigator.instance.loadScreen( "game",0 );
 			}
 		}
 		

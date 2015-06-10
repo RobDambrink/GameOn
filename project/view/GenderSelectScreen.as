@@ -35,7 +35,7 @@
 		}
 		
 		function addMenuBackground(){
-			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
+			menuBackground = new Image(Main.assets.getTexture("background-orange"));
 			addChild( menuBackground );
 		}
 		
@@ -91,7 +91,7 @@
 			{ 
 //the variable GENDER gets set to Male
 				model.Player.gender = "male";
-				Navigator.instance.loadScreen( "tutorial" );
+				Navigator.instance.loadScreen( "tutorial" ,0);
 			}
 		}
 		
@@ -101,7 +101,7 @@
 			{ 
 //the variable GENDER gets set to Female
 				model.Player.gender = "female";
-				Navigator.instance.loadScreen( "tutorial" );
+				Navigator.instance.loadScreen( "tutorial" ,0);
 			}
 		}
 		//---------------end of button's event handlers---------

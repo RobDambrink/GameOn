@@ -30,11 +30,11 @@
 		public function start(assets: AssetManager) {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
-			loadScreen("mainMenu");
+			loadScreen("mainMenu",0);
 		}
 
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
-		public function loadScreen(screenName: String) // screenName:String = "mainMenu"
+		public function loadScreen(screenName: String, level:int) // screenName:String = "mainMenu"
 		{
 			if (nextScreen != null && contains(nextScreen)) {
 				removeChild(nextScreen, true);
@@ -59,13 +59,13 @@
 			} else if (screenName == "levelSelect3") {
 				nextScreen = new LevelSelectScreen3();
 			} else if (screenName == "story") {
-				nextScreen = new StoryScreen();
+				nextScreen = new StoryScreen(level);
 			} else if (screenName == "lostGame") {
 				nextScreen = new LostGameScreen();
 			} else if (screenName == "scoreScreen") {
 				nextScreen = new ScoreScreen();
 			} else if (screenName == "game") {
-				nextScreen = new GameScreen();
+				nextScreen = new GameScreen(level);
 			}
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
@@ -89,7 +89,7 @@
 
 				breadcrumbs[0] = "mainMenu";
 
-				loadScreen(breadcrumbs[breadcrumbs.length - 1]);
+				loadScreen(breadcrumbs[breadcrumbs.length - 1],0);
 			} else if (e.keyCode == Keyboard.HOME) {
 				//handle the button press here.
 				trace("Devices HOME button pressed");

@@ -54,7 +54,7 @@
 		private function onToLevelSelectButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("levelSelect");
+				Navigator.instance.loadScreen("levelSelect",0);
 			}
 		}
 		
@@ -73,7 +73,7 @@
 			if (touch.phase == TouchPhase.BEGAN) {
 				Navigator.breadcrumbs.pop();
 				Navigator.breadcrumbs[0] = "mainMenu";
-				Navigator.instance.loadScreen(Navigator.breadcrumbs[Navigator.breadcrumbs.length - 1]);
+				Navigator.instance.loadScreen(Navigator.breadcrumbs[Navigator.breadcrumbs.length - 1],0);
 			}
 		}
 
