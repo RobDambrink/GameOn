@@ -63,7 +63,7 @@
 			} else if (screenName == "lostGame") {
 				nextScreen = new LostGameScreen();
 			} else if (screenName == "scoreScreen") {
-				nextScreen = new ScoreScreen();
+				nextScreen = new ScoreScreen(level);
 			} else if (screenName == "game") {
 				nextScreen = new GameScreen(level);
 			}

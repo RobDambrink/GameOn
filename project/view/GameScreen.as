@@ -26,6 +26,7 @@
 		var wall:Wall;
 		var walls:Vector.<Wall> = new Vector.<Wall>();
 		var bounces:Vector.<Wall> = new Vector.<Wall>();
+		var backButton:Image;
 		var playerX:int;
 		var playerY:int;
 		var enemy1:Enemy = new Enemy();
@@ -34,6 +35,9 @@
 		var direction:String;
 		var memorySwipe:String;
 		var level:int;
+		var condomCount:int;
+		var items:Items;
+		var timer:int=0;
 		var tween:Tween = new Tween(player, 0.4,"linear");
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 1
@@ -162,6 +166,7 @@
 			//Only when added to the stage, the function onAddedToStage will be executed.
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.level=level;
+			condomCount=1;
 		}
 		
 		//This function tells the console that the gamescreen is loaded. 
@@ -179,20 +184,29 @@
 			loadMap();
 			loadPlayer(movementGrid);
 			findPlayer();
-			
+			addBackButton();
 			placeHealthBar();
+			placeItems(condomCount);
 			HealthBar.hp=20;
 			updateHealthBar();
+			setTimeout(finish, 60000);
 			
 //			this.addEventListener( Event.ENTER_FRAME , pelletCheck );
 
 			//addToScoreScreenButton();
 		}
 		
+		public function finish(){
+			var score:int=14400-timer;
+			trace("=================GAME OVER YOU WIN=====================");
+			Navigator.instance.loadScreen( "scoreScreen" ,score);
+		}
+		
 		var playerXCoord:int;
 		var playerYCoord:int;
 		
 		private function update(e:Event){
+			timer++;
 			Starling.juggler.add(tween);
 			if(tween.isComplete){
 				tween.reset(player,0.4,"linear");
@@ -375,18 +389,12 @@
 			}
 		}*/
 		
-	function checkPath(xcoord:int, ycoord:int, user:Object, dir:String){
-   		 if(map[xcoord][ycoord]===1 || map[xcoord][ycoord]===2 || map[xcoord][ycoord]===3 || map[xcoord][ycoord]===4){
-   			 if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
-   				 if(direction===memorySwipe){
-   					 direction=lastSwipe;
-   				 }
-   				 else{
-   					 direction=memorySwipe;
-   				 }
-   			 }
-				var wallY:int=((ycoord * 24)+12);
-				var wallX:int=((xcoord * 24)+12); 
+function checkPath(ycoord:int, xcoord:int, user:Object, dir:String){
+			var wallX:int;
+			var wallY:int;
+			if(map[ycoord][xcoord]===1 || map[ycoord][xcoord]===2 || map[ycoord][xcoord]===3 || map[ycoord][xcoord]===4 || map[ycoord][xcoord]===9){
+				wallY=((ycoord * 24)+12);
+				wallX=((xcoord * 24)+12); 
 				
 				if(dir==="up"){	
 					if(user.y<=wallY+24){
@@ -421,16 +429,51 @@
 					else{
 						return true;
 					}
+
 				}
+				
+				
+/*				if((memorySwipe!=="up" && lastSwipe==="down") || (memorySwipe!=="down" && lastSwipe==="up") || (memorySwipe!=="left" && lastSwipe==="right") || (memorySwipe!=="right" && lastSwipe==="left")){
+					if(direction===memorySwipe){
+							direction=lastSwipe;
+						}
+						else{
+							direction=memorySwipe;
+						}
+				}*/
 				if(user is Enemy){
 					user.enemyDirection();
 				}
-   		 }    
-   		 else if(map[xcoord][ycoord]===0 || map[ycoord][xcoord]===9 || map[ycoord][xcoord]===6){
+				else if (user is Player){
+					direction=memorySwipe;
+				}
+				return false;
+			}	
+/*			else if(map[xcoord][ycoord]===0 || map[xcoord][ycoord]===8){			
+				if(ycoord===0 && lastSwipe==="left" && playerX===5 && playerY===1){
+					movePlayer(5,15);
+				}
+				else if(lastSwipe==="right" && playerX===5 && playerY===15){
+					movePlayer(5,1);
+				}*/
+//			else if(player.x==wallX && player.y==wallY){
+//				direction = memorySwipe;
+//				return true;
+//			}
+			else if(map[ycoord][xcoord]===0 || map[ycoord][xcoord]===9 || map[ycoord][xcoord]===7){
 				return true;
-   		 }
-   		 return false;
-   	 }
+			}
+			
+			else if(map[ycoord][xcoord]===6){
+				direction=memorySwipe;
+				memorySwipe=lastSwipe;
+				return true;
+			}
+			
+
+			return false;
+		}
+
 
 		
 
@@ -449,7 +492,7 @@
 		function movement(e:Event){	
 //			enemyMovement(enemy1);
 //			enemyMovement(enemy2);
-			//checkWalls(player);
+			checkWalls(player);
 			collision();
 			playerXCoord= (player.x - 9) / 24 ;
 			playerYCoord=player.y /24;
@@ -510,7 +553,7 @@
 		}	
 		
 		function checkWalls(user:Object){
-			var xcoord= (player.x - 9) / 24;
+			var xcoord= (player.x) / 24;
 			var ycoord= player.y / 24;
 			//for(var i:int; i < healthPellets.length; i++){
 				//var usedPellet:HealthPellet;
@@ -570,17 +613,25 @@
 					
 			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
 				if(HealthBar.hp>99){
+					var score:int=14400-timer;
 					trace("=================GAME OVER YOU WIN=====================");
-					Navigator.instance.loadScreen( "scoreScreen" ,0);
+					Navigator.instance.loadScreen( "scoreScreen" ,score);
 				}
 			}
 			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
-				if(!player.hit){				
+				if(!player.hit && condomCount<=0){				
 					HealthBar.hp-=10;
+					condomCount=0;
+					timer+=240;
 					player.hit=true;
 					setTimeout(player.unHit, 2000);
 					trace(HealthBar.hp);
 					updateHealthBar();
+				}
+				else if(!player.hit && condomCount>=1){
+					condomCount--;
+					player.hit=true;
+					setTimeout(player.unHit, 2000);
 				}
 			}
 
@@ -665,14 +716,14 @@
 			for each(var bounce in bounces){
 				if(player.x===bounce.x && player.y===bounce.y){
 					trace("bouncerino");
-					if((memorySwipe!=="up" && direction==="down") || (memorySwipe!=="down" && direction==="up") || (memorySwipe!=="left" && direction==="right") || (memorySwipe!=="right" && direction==="left")){
+/*					if((memorySwipe!=="up" && direction==="down") || (memorySwipe!=="down" && direction==="up") || (memorySwipe!=="left" && direction==="right") || (memorySwipe!=="right" && direction==="left")){
 						if(direction===memorySwipe){
 							direction=lastSwipe;
 						}
 						else{
 							direction=memorySwipe;
-						}
-					}
+						}*/
+					//}
 					break;
 				}
 			}
@@ -702,6 +753,32 @@
 			addChild(healthBar);
 		}
 		
+		public function placeItems(number:int){
+			items = new Items(number);
+			items.y = 2;
+			items.x = (Starling.current.stage.stageWidth - items.width) / 8;
+			addChild(items);
+		}
+		
+		private function addBackButton(){
+			backButton = new Image(Main.assets.getTexture("BackButton")); 
+			
+			backButton.x = (Starling.current.stage.stageWidth - backButton.width)-((Starling.current.stage.stageWidth - backButton.width) / 8);
+			backButton.y = 2;
+			
+			backButton.addEventListener( TouchEvent.TOUCH , onBackButton );
+			addChild( backButton );
+		}
+		
+		private function onBackButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				//go back.
+				trace("Back button is pressed.");
+			}
+		}
+		
 		public function placePlayer(){
 			trace ("placePlayer")
 			player = new Player();
@@ -714,8 +791,7 @@
 			healthBar.updateHealthBar();
 		}
 		
-		public function removeHealthPellet(healthPellet:HealthPellet)
-		{
+		public function removeHealthPellet(healthPellet:HealthPellet){
 			trace("remove healht pellet");
 			healthPellet.hide(healthPellet);
 			removeChild(healthPellet, true);
