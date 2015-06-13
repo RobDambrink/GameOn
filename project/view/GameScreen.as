@@ -174,7 +174,7 @@
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			this.addEventListener(Event.ENTER_FRAME, update);
 
-			//condomCount=1;
+			condomCount=1;
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);
@@ -184,9 +184,7 @@
 			placeItems(condomCount);
 			updateHealthBar();
 			
-			trace(condomCount);
-			
-			condomText = new TextField(72,24,"Condoms: " + condomCount.toString());
+			condomText = new TextField(100,24,condomCount.toString());
 			condomText.x = 48;
 			condomText.y = 2;
 			addChild(condomText);
@@ -431,7 +429,7 @@
 				}
 			}
 			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
-				if(!player.hit && condomCount<=0){				
+				if(!player.hit && condomCount<1){				
 					HealthBar.hp-=10;
 					condomCount=0;
 					timer+=240;
@@ -445,11 +443,12 @@
 					condomCount--;
 					
 					if(condomCount<1){
-						removeChild(items);
+//						removeChild(items,true);
+//						removeChild(condomText,true);
 					}
 					
-					removeChild(condomText);
-					condomText = new TextField(72,24,"Condoms: " + condomCount.toString());
+					removeChild(condomText,true);
+					condomText = new TextField(100,24,condomCount.toString());
 					condomText.x = 48;
 					condomText.y = 2;
 					addChild(condomText);
