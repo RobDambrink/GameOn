@@ -16,7 +16,7 @@
 		var gameScreen:GameScreen;
 		var healthFill:Image;
 		
-		public static var hp:int = 85;
+		public static var hp:int = 20;
 		public static var maxHp:int = 100;
 		var percentHp:Number = hp/maxHp;
 
