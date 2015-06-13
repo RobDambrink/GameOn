@@ -31,10 +31,10 @@
 			condomText.y = 100;
 			addChild(condomText);
 			
-			starsText = new TextField(200,100,"Stars: " + GameScreen.condomCount.toString());
-			starsText.x = 200;
-			starsText.y = 150;
-			addChild(starsText);
+//			starsText = new TextField(200,100,"Stars: " + GameScreen.condomCount.toString());
+//			starsText.x = 200;
+//			starsText.y = 150;
+//			addChild(starsText);
 		}
 		
 		
@@ -53,17 +53,8 @@
 				GameScreen.condomCount++;
 				//ScoreScreen.currency--;
 				
-				removeChild(condomText);
-				condomText = new TextField(200,100,"Condoms: " + GameScreen.condomCount.toString());
-				addChild(condomText);
-				condomText.x = 200;
-				condomText.y = 100;
-				
-//				removeChild(starsText);
-//				starsText = new TextField(200,100,"Stars: " + ScoreScreen.currency.toString());
-//				starsText.x = 200;
-//				starsText.y = 150;
-//				addChild(starsText);
+				condomText.text = "Condoms: " + GameScreen.condomCount.toString();
+//				starsText.text = "Stars: " + ScoreScreen.currency.toString();
 			}
 		}
 		
