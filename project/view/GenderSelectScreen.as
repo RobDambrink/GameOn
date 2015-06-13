@@ -42,7 +42,7 @@
 		//--------------------start of adding buttons----------------
 
 		private function addMale(){
-			maleImage = new Image(Main.assets.getTexture("BoyFront")); 
+			maleImage = new Image(Main.assets.getTexture("BoyFrontImage")); 
 			addChild( maleImage );
 			
 			maleImage.x = (Starling.current.stage.stageWidth - maleImage.width) * (1/4);
@@ -52,7 +52,7 @@
 		}
 		
 		private function addFemale(){
-			femaleImage = new Image(Main.assets.getTexture("GirlFront")); 
+			femaleImage = new Image(Main.assets.getTexture("GirlFrontImage")); 
 			addChild( femaleImage );
 			
 			femaleImage.x = (Starling.current.stage.stageWidth - femaleImage.width) * (3/4);

@@ -10,7 +10,7 @@
 	
 	public class LevelSelectScreen extends Sprite{
 		
-		
+		var nextButton:Image;
 		var levelSelectButton:Image;
 		var menuBackground:Image;
 		
@@ -23,18 +23,39 @@
 		
 		private function onAddedToStage(event:Event)
 		{
-			trace("LevelSelectScreen loaded");
+			trace("LevelSelectScreen 1 loaded");
 			addMenuBackground();
 			addLevelOneButton();
 			addLevelTwoButton();
 			addLevelThreeButton();
-
+			addNextButton();
 		}
 		
 		function addMenuBackground(){
 			menuBackground = new Image(Main.assets.getTexture("background-orange"));
 			addChild( menuBackground );
 		}
+		
+		
+		private function addNextButton(){
+			nextButton = new Image(Main.assets.getTexture("ArrowsRight")); 
+			addChild( nextButton );
+			
+			nextButton.x = (Starling.current.stage.stageWidth - nextButton.width) * (19/20);
+			nextButton.y = (Starling.current.stage.stageHeight - nextButton.height) * (1/2);
+			
+			nextButton.addEventListener( TouchEvent.TOUCH , onNextButton );
+		}
+		
+		private function onNextButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				Navigator.instance.loadScreen( "levelSelect2", 1 );
+				
+			}
+		}
+		
 		
 		private function addLevelOneButton(){
 			levelSelectButton = new Image(Main.assets.getTexture("Level1")); 
@@ -71,7 +92,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "story" ,2);
+				Navigator.instance.loadScreen( "story" , 2);
 			}
 		}
 
@@ -91,7 +112,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "story" ,3);
+				Navigator.instance.loadScreen( "story" , 3);
 			}
 		}
 		

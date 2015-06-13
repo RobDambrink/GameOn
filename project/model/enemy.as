@@ -11,19 +11,17 @@
 	
 	
 	public class Enemy extends Sprite
-	{ 
+	{ 		
 		
-		
-		public var speed:int=3*Main.scaleFactor;
 		public var enemy:Image;
 		public var enDir:String="";
+		public var enemyX:int;
+		public var enemyY:int;
 		
 		public function Enemy(){
 			trace("enemy constructor aangeroepen");
 			enemy = new Image(Main.assets.getTexture("sti"));
 			enemyDirection();
-			
-			enemy.alignPivot();
 			addChild(enemy);
 		}
 		
