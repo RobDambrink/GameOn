@@ -18,7 +18,7 @@
 
 		//Variable needed to load instances of other classes.
 		var nextScreen: Sprite;
-
+		
 		// This is the path the user follows through all the menu screens.
 		public static var breadcrumbs: Vector.<String> = new Vector.<String>();
 
@@ -70,7 +70,12 @@
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
 			if (breadcrumbs.indexOf(screenName) == -1) {
-				breadcrumbs.push(screenName);
+				if(screenName=="scoreScreen" || screenName=="story"){
+					trace("screen", screenName, "is not added to breadcrumbs.");
+				}
+				else{
+					breadcrumbs.push(screenName);
+				}
 			}
 
 			trace(breadcrumbs);
