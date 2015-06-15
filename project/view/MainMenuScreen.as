@@ -31,6 +31,8 @@
 	import flash.system.Capabilities;
 	import flash.utils.ByteArray;
 	import flash.utils.setTimeout;
+	import flash.net.SharedObject;
+	import model.Player;
 
 	public class MainMenuScreen extends Sprite {
 
@@ -39,10 +41,10 @@
 		var pharmacyButton: Image;
 		var tutorialButton: Image;
 		var optionsButton: Image;
-
+		public static var saveDataObject:SharedObject = SharedObject.getLocal("savedata");
 		
 		
-			public function MainMenuScreen() {
+			public function MainMenuScreen(){
 				// constructor code
 
 				//Only when added to the stage, the function onAddedToStage will be executed.
@@ -52,6 +54,9 @@
 
 		private function onAddedToStage(event: Event) {
 			trace("MainMenuScreen loaded");
+			
+			var myDataObject:Object = {gender:"", condomCount:0, currency:0};
+			
 			addMenuBackground();
 			addPlayBtn();
 			addPharmacyButton();

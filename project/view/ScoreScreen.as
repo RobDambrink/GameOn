@@ -10,7 +10,8 @@
 		var star1:Image;
 		var star2:Image;
 		var star3:Image;
-		public var currency:int;
+		public static var currency:int;
+		var starCount:int;
 
 		public function ScoreScreen(score:int) {
 			// constructor code
@@ -27,10 +28,44 @@
 			var winning:Image = new Image(Main.assets.getTexture("winning"));
 			addChild(winning);
 			countStars();
+			saveScore();
+		}
+		
+		function saveScore(){
+			if(GameScreen.thisLevel==1){
+				MainMenuScreen.saveDataObject.data.level1Score = starCount;
+			}
+			if(GameScreen.thisLevel==2){
+				MainMenuScreen.saveDataObject.data.level2Score = starCount;
+			}
+			if(GameScreen.thisLevel==3){
+				MainMenuScreen.saveDataObject.data.level3Score = starCount;
+			}
+			if(GameScreen.thisLevel==4){
+				MainMenuScreen.saveDataObject.data.level4Score = starCount;
+			}
+			if(GameScreen.thisLevel==5){
+				MainMenuScreen.saveDataObject.data.level5Score = starCount;
+			}
+			if(GameScreen.thisLevel==6){
+				MainMenuScreen.saveDataObject.data.level6Score = starCount;
+			}
+			if(GameScreen.thisLevel==7){
+				MainMenuScreen.saveDataObject.data.level7Score = starCount;
+			}
+			if(GameScreen.thisLevel==8){
+				MainMenuScreen.saveDataObject.data.level8Score = starCount;
+			}
+			if(GameScreen.thisLevel==9){
+				MainMenuScreen.saveDataObject.data.level9Score = starCount;
+			}
+			MainMenuScreen.saveDataObject.flush();
+			trace("Stars level 1: ", MainMenuScreen.saveDataObject.data.level1Score);
+			trace("Stars level 2: ", MainMenuScreen.saveDataObject.data.level2Score);
 		}
 		
 		public function countStars(){
-			var starCount:int;
+			
 			if(score<=6000){
 				starCount=1;
 			}
@@ -45,6 +80,7 @@
 			}
 			addStars(starCount);
 			currency+=starCount;
+			MainMenuScreen.saveDataObject.data.currency=currency;
 		}
 		public function addStars(starCount:int){
 			if(starCount==1){

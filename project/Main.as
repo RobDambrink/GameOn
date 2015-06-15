@@ -29,6 +29,7 @@
 	import starling.display.DisplayObject;
 
     import utils.ProgressBar;
+    import flash.net.SharedObject;
 
     // This project requires the sources of the "demo" project. Add them either by
     // referencing the "demo/src" directory as a "source path", or by copying the files.
@@ -44,6 +45,7 @@
         private var mBackground:Loader;
         private var mProgressBar:ProgressBar;
 		public static var assets:AssetManager;
+		
 		
 		
         public function Main()

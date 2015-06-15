@@ -90,7 +90,7 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 //the variable GENDER gets set to Male
-				model.Player.gender = "male";
+				MainMenuScreen.saveDataObject.data.gender = "male";
 				Navigator.instance.loadScreen( "tutorial" ,0);
 			}
 		}
@@ -100,7 +100,7 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 //the variable GENDER gets set to Female
-				model.Player.gender = "female";
+				MainMenuScreen.saveDataObject.data.gender = "female";
 				Navigator.instance.loadScreen( "tutorial" ,0);
 			}
 		}

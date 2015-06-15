@@ -15,7 +15,7 @@
 	public class Player extends Sprite {
 
 		public static var infected: Boolean;
-		public static var gender: String = "male"; // Remove string before live version!!
+		public static var gender: String;
 		public var hit:Boolean=false;
 		var player: Image
 		
@@ -31,7 +31,9 @@
 
 		public function Player(){
 			this.addEventListener(Event.ENTER_FRAME, updateAnimation);
-			
+			gender = MainMenuScreen.saveDataObject.data.gender;
+
+			trace("Gender: ", gender);
 			
 			player = new Image(Main.assets.getTexture("TileBoy"));
 			//player = new Image(Main.assets.getTexture("TileGirl"));

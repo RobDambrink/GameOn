@@ -26,15 +26,15 @@
 			addBackButton();
 			addBuyButton();
 			
-			condomText = new TextField(200,100,"Condoms: " + GameScreen.condomCount.toString());
+			condomText = new TextField(200,100,"Condoms: " + MainMenuScreen.saveDataObject.data.condomCount.toString());
 			condomText.x = 200;
 			condomText.y = 100;
 			addChild(condomText);
 			
-//			starsText = new TextField(200,100,"Stars: " + GameScreen.condomCount.toString());
-//			starsText.x = 200;
-//			starsText.y = 150;
-//			addChild(starsText);
+			starsText = new TextField(200,100,"Stars: " + MainMenuScreen.saveDataObject.data.currency.toString());
+			starsText.x = 200;
+			starsText.y = 150;
+			addChild(starsText);
 		}
 		
 		
@@ -50,11 +50,16 @@
 		private function buyCondom(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				GameScreen.condomCount++;
-				//ScoreScreen.currency--;
+				trace("condomCount: ", MainMenuScreen.saveDataObject.data.condomCount);
+				if(MainMenuScreen.saveDataObject.data.currency>=1){
+					MainMenuScreen.saveDataObject.data.condomCount++;
+					MainMenuScreen.saveDataObject.data.currency--;
 				
-				condomText.text = "Condoms: " + GameScreen.condomCount.toString();
-//				starsText.text = "Stars: " + ScoreScreen.currency.toString();
+					condomText.text = "Condoms: " + MainMenuScreen.saveDataObject.data.condomCount.toString();
+					starsText.text = "Stars: " + MainMenuScreen.saveDataObject.data.currency.toString();
+					MainMenuScreen.saveDataObject.flush();
+				}
+				else{trace("fu");}
 			}
 		}
 		

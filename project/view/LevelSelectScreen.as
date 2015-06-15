@@ -29,6 +29,7 @@
 			addLevelTwoButton();
 			addLevelThreeButton();
 			addNextButton();
+			trace("level 1 score: ",MainMenuScreen.saveDataObject.data.level1Score);
 		}
 		
 		function addMenuBackground(){

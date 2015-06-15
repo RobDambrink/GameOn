@@ -38,6 +38,7 @@
 		public static var condomCount:int;
 		var items:Items;
 		var timer:int=0;
+		public static var thisLevel:int;
 		var tween:Tween = new Tween(player,playerSpeed,"linear");
 		var enemy1Tween:Tween = new Tween(enemy1,enemySpeed,"linear");
 		var enemy2Tween:Tween = new Tween(enemy2,enemySpeed,"linear");
@@ -56,13 +57,13 @@
 		var map2:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 2
 			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-			[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1],
+			[1,1,1,1,1,1,1,1,7,1,1,1,1,1,1,1,1],
 			[4,4,4,4,4,4,4,4,9,4,4,4,4,4,4,4,4]
 		];	
 		var map3:Array = [
@@ -166,6 +167,8 @@
 		public function GameScreen(level:int){
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.level=level;
+			thisLevel=level;
+			trace("thisLevel: ", thisLevel);
 		}
 		
 		//This function tells the console that the gamescreen is loaded. 
@@ -173,18 +176,23 @@
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			this.addEventListener(Event.ENTER_FRAME, update);
-
-			condomCount=1;
+		
+			if(MainMenuScreen.saveDataObject.data.condomCount==null){
+				MainMenuScreen.saveDataObject.data.condomCount = 0;
+			}
+			
+			HealthBar.hp = 98;
+			
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);
 			findEntities();
 			addBackButton();
 			placeHealthBar();
-			placeItems(condomCount);
+			placeItems(MainMenuScreen.saveDataObject.data.condomCount);
 			updateHealthBar();
 			
-			condomText = new TextField(100,24,condomCount.toString());
+			condomText = new TextField(100,24,MainMenuScreen.saveDataObject.data.condomCount.toString());
 			condomText.x = 48;
 			condomText.y = 2;
 			addChild(condomText);
@@ -429,9 +437,9 @@
 				}
 			}
 			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
-				if(!player.hit && condomCount<1){				
+				if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount<1){				
 					HealthBar.hp-=10;
-					condomCount=0;
+					MainMenuScreen.saveDataObject.data.condomCount=0;
 					timer+=240;
 					player.hitEnemy();
 					setTimeout(player.unHit, 2000);
@@ -439,16 +447,11 @@
 					trace(HealthBar.hp);
 					updateHealthBar();
 				}
-				else if(!player.hit && condomCount>=1){
-					condomCount--;
-					
-					if(condomCount<1){
-//						removeChild(items,true);
-//						removeChild(condomText,true);
-					}
+				else if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount>=1){
+					MainMenuScreen.saveDataObject.data.condomCount--;
 					
 					removeChild(condomText,true);
-					condomText = new TextField(100,24,condomCount.toString());
+					condomText = new TextField(100,24,MainMenuScreen.saveDataObject.data.condomCount.toString());
 					condomText.x = 48;
 					condomText.y = 2;
 					addChild(condomText);
