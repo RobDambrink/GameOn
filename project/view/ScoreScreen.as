@@ -25,40 +25,57 @@
 		{
 			trace("ScoreScreen loaded");
 			trace("score achieved: ", score);
-			var winning:Image = new Image(Main.assets.getTexture("winning"));
-			addChild(winning);
 			countStars();
 			saveScore();
 		}
 		
 		function saveScore(){
 			if(GameScreen.thisLevel==1){
-				MainMenuScreen.saveDataObject.data.level1Score = starCount;
+				if(MainMenuScreen.saveDataObject.data.level1Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level1Score);
+					MainMenuScreen.saveDataObject.data.level1Score = starCount;
+				}
 			}
 			if(GameScreen.thisLevel==2){
-				MainMenuScreen.saveDataObject.data.level2Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level2Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level2Score);
+					MainMenuScreen.saveDataObject.data.level2Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==3){
-				MainMenuScreen.saveDataObject.data.level3Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level3Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level3Score);
+					MainMenuScreen.saveDataObject.data.level3Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==4){
-				MainMenuScreen.saveDataObject.data.level4Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level4Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level4Score);
+					MainMenuScreen.saveDataObject.data.level4Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==5){
-				MainMenuScreen.saveDataObject.data.level5Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level5Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level5Score);
+					MainMenuScreen.saveDataObject.data.level5Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==6){
-				MainMenuScreen.saveDataObject.data.level6Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level6Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level6Score);
+					MainMenuScreen.saveDataObject.data.level6Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==7){
-				MainMenuScreen.saveDataObject.data.level7Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level7Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level7Score);
+					MainMenuScreen.saveDataObject.data.level7Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==8){
-				MainMenuScreen.saveDataObject.data.level8Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level8Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level8Score);
+					MainMenuScreen.saveDataObject.data.level8Score = starCount;
+				}			}
 			if(GameScreen.thisLevel==9){
-				MainMenuScreen.saveDataObject.data.level9Score = starCount;
-			}
+				if(MainMenuScreen.saveDataObject.data.level9Score < starCount){
+					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level9Score);
+					MainMenuScreen.saveDataObject.data.level9Score = starCount;
+				}			}
 			MainMenuScreen.saveDataObject.flush();
 			trace("Stars level 1: ", MainMenuScreen.saveDataObject.data.level1Score);
 			trace("Stars level 2: ", MainMenuScreen.saveDataObject.data.level2Score);
@@ -69,40 +86,38 @@
 			if(score<=6000){
 				starCount=1;
 			}
-			else if(score>6000 && score<=12521){
+			else if(score>6000 && score<=13000){
 				starCount=2;
 			}
-			else if(score>12521){
+			else if(score>13000){
 				starCount=3;
 			}
 			else{
 				starCount=0;
 			}
 			addStars(starCount);
-			currency+=starCount;
-			MainMenuScreen.saveDataObject.data.currency=currency;
 		}
 		public function addStars(starCount:int){
 			if(starCount==1){
-				star1 = new Image(Main.assets.getTexture("Circle"));
-				star2 = new Image(Main.assets.getTexture("green"));
-				star3 = new Image(Main.assets.getTexture("green"));
+				star1 = new Image(Main.assets.getTexture("Star"));
+				star2 = new Image(Main.assets.getTexture("StarGrey"));
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
 				addChild( star1 );
 				addChild( star2 );
 				addChild( star3 );
 			}
 			else if(starCount==2){
-				star1 = new Image(Main.assets.getTexture("Circle"));
-				star2 = new Image(Main.assets.getTexture("Circle"));
-				star3 = new Image(Main.assets.getTexture("green"));
+				star1 = new Image(Main.assets.getTexture("Star"));
+				star2 = new Image(Main.assets.getTexture("Star"));
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
 				addChild( star1 );
 				addChild( star2 );
 				addChild( star3 );
 			}
 			else if(starCount==3){
-				star1 = new Image(Main.assets.getTexture("Circle"));
-				star2 = new Image(Main.assets.getTexture("Circle"));
-				star3 = new Image(Main.assets.getTexture("Circle"));
+				star1 = new Image(Main.assets.getTexture("Star"));
+				star2 = new Image(Main.assets.getTexture("Star"));
+				star3 = new Image(Main.assets.getTexture("Star"));
 				addChild( star1 );
 				addChild( star2 );
 				addChild( star3 );

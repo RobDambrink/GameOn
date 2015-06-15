@@ -185,9 +185,7 @@
 			if(MainMenuScreen.saveDataObject.data.condomCount==null){
 				MainMenuScreen.saveDataObject.data.condomCount = 0;
 			}
-			
-			HealthBar.hp = 98;
-			
+						
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);
@@ -439,6 +437,7 @@
 			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
 				if(HealthBar.hp>99){
 					var score:int=14400-timer;
+					//var score:int=timer;
 					trace("=================GAME OVER YOU WIN=====================");
 					Navigator.instance.loadScreen( "scoreScreen" ,score);
 				}

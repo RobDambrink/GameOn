@@ -28,7 +28,7 @@
 		public function hide(pellet:HealthPellet){
 			if(pellet.hidden===false){
 				pellet.hidden=true;
-				setTimeout(respawn, 5000);
+				setTimeout(respawn, 10000);
 			}
 		}
 		
