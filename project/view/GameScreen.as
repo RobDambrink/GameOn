@@ -17,7 +17,8 @@
 	import starling.text.TextField;
 	
 	public class GameScreen extends Sprite{
-
+		
+		var paused:Boolean;
 		var mazeBackground:Image;
 		var condomText:TextField;
 		public static var player:Player = new Player();
@@ -25,6 +26,10 @@
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
 		var backButton:Image;
+		var pauseMenu:Image;
+		var pauseResume:Image;
+		var pauseTutorial:Image;
+		var pauseExit:Image;
 		var xOffset:int = 9;
 		var currentLevel:Array;
 		var playerX:int;
@@ -200,26 +205,28 @@
 		
 		
 		private function update(e:Event){
-			timer++;
-			Starling.juggler.add(tween);
-			Starling.juggler.add(enemy1Tween);
-			Starling.juggler.add(enemy2Tween);
-			if(tween.isComplete){
-				tween.reset(player,playerSpeed,"linear");
-				movementTest();
-				tween.moveTo((playerY * 24)+xOffset , (playerX * 24));
+			if(!paused){
+				timer++;
+				Starling.juggler.add(tween);
+				Starling.juggler.add(enemy1Tween);
+				Starling.juggler.add(enemy2Tween);
+				if(tween.isComplete){
+					tween.reset(player,playerSpeed,"linear");
+					movementTest();
+					tween.moveTo((playerY * 24)+xOffset , (playerX * 24));
+				}
+				if(enemy1Tween.isComplete){
+					enemy1Tween.reset(enemy1,enemySpeed,"linear");
+					enemyMovement(enemy1);
+					enemy1Tween.moveTo((enemy1.enemyY * 24)+xOffset , (enemy1.enemyX * 24));
+				}
+				if(enemy2Tween.isComplete){
+					enemy2Tween.reset(enemy2,enemySpeed,"linear");
+					enemyMovement(enemy2);
+					enemy2Tween.moveTo((enemy2.enemyY * 24)+xOffset , (enemy2.enemyX * 24));
+				}
+				collision();
 			}
-			if(enemy1Tween.isComplete){
-				enemy1Tween.reset(enemy1,enemySpeed,"linear");
-				enemyMovement(enemy1);
-				enemy1Tween.moveTo((enemy1.enemyY * 24)+xOffset , (enemy1.enemyX * 24));
-			}
-			if(enemy2Tween.isComplete){
-				enemy2Tween.reset(enemy2,enemySpeed,"linear");
-				enemyMovement(enemy2);
-				enemy2Tween.moveTo((enemy2.enemyY * 24)+xOffset , (enemy2.enemyX * 24));
-			}
-			collision();
 		}
 		
 		
@@ -493,10 +500,76 @@
 		
 		
 		public function placeItems(number:int){
-			items = new Items(number);
+			items = new Items();
 			items.y = 2;
 			items.x = (Starling.current.stage.stageWidth - items.width) / 8;
 			addChild(items);
+		}
+		
+		
+		function addPauseMenu(){
+			trace("Pause");
+			
+			pauseMenu = new Image(Main.assets.getTexture("PauseBackground")); 
+			pauseMenu.x = (Starling.current.stage.stageWidth - pauseMenu.width)-((Starling.current.stage.stageWidth - pauseMenu.width) / 2);
+			pauseMenu.y = 48;
+			
+			pauseResume = new Image(Main.assets.getTexture("Circle24")); 
+			pauseResume.x = (Starling.current.stage.stageWidth - pauseResume.width)-((Starling.current.stage.stageWidth - pauseResume.width) / 2);
+			pauseResume.y = 72;
+			pauseResume.addEventListener( TouchEvent.TOUCH , onResumeButton );
+			
+			pauseTutorial = new Image(Main.assets.getTexture("Green24")); 
+			pauseTutorial.x = (Starling.current.stage.stageWidth - pauseTutorial.width)-((Starling.current.stage.stageWidth - pauseTutorial.width) / 2);
+			pauseTutorial.y = 96;
+			pauseTutorial.addEventListener( TouchEvent.TOUCH , onTutorialButton );
+			
+			pauseExit = new Image(Main.assets.getTexture("Circle24")); 
+			pauseExit.x = (Starling.current.stage.stageWidth - pauseExit.width)-((Starling.current.stage.stageWidth - pauseExit.width) / 2);
+			pauseExit.y = 120;
+			pauseExit.addEventListener( TouchEvent.TOUCH , onExitButton );
+			
+			addChild( pauseMenu );
+			addChild( pauseResume );
+			addChild( pauseTutorial );
+			addChild( pauseExit );
+		}
+		
+		
+		private function onResumeButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				paused = false;
+				removePauseMenu();
+			}
+		}
+		
+		
+		private function onTutorialButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				trace("Tutorial");
+			}
+		}
+		
+		
+		private function onExitButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				Navigator.instance.loadScreen("mainMenu",0);
+			}
+		}
+		
+		
+		function removePauseMenu(){
+			trace("Unpause");
+			removeChild( pauseMenu , true );
+			removeChild( pauseResume , true );
+			removeChild( pauseTutorial , true );
+			removeChild( pauseExit , true );
 		}
 		
 		
@@ -513,8 +586,14 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				//go back.
-				trace("Back button is pressed.");
+				if(!paused){
+					paused = true;
+					addPauseMenu();
+				}
+				else{ 
+					paused = false;
+					removePauseMenu();
+				}
 			}
 		}
 		

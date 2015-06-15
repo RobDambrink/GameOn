@@ -41,7 +41,7 @@
         private const StageWidth:int  = 426;
         private const StageHeight:int = 240;
         public static var scaleFactor:int; 
-        private var mStarling:Starling;
+        public static var mStarling:Starling;
         private var mBackground:Loader;
         private var mProgressBar:ProgressBar;
 		public static var assets:AssetManager;
