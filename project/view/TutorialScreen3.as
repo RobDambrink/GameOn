@@ -11,14 +11,13 @@
 	import starling.events.TouchPhase;
 	import starling.core.Starling;
 
-	public class TutorialScreen extends Sprite {
+	public class TutorialScreen3 extends Sprite {
 
-		var toLevelSelectButton: Image;
 		var menuBackground:Image;
 		var continueButton:Image;
 		var returnButton:Image;
 
-		public function TutorialScreen() {
+		public function TutorialScreen3() {
 			// constructor code
 
 			//Only when added to the stage, the function onAddedToStage will be executed.
@@ -26,7 +25,7 @@
 		}
 
 		private function onAddedToStage(event: Event) {
-			trace("TutorialScreen1 loaded");
+			trace("TutorialScreen3 loaded");
 			
 			addMenuBackground();
 			addContinueButton();
@@ -39,30 +38,30 @@
 		}
 		
 		
-		function addMenuBackground(){
-			menuBackground = new Image(Main.assets.getTexture("tutorial-screen-1"));
+		private function addMenuBackground(){
+			menuBackground = new Image(Main.assets.getTexture("tutorial-screen-3"));
 			addChild( menuBackground );
-		}		
-	
-		function addContinueButton(){
+		}
+
+		private function addContinueButton(){
 			continueButton = new Image(Main.assets.getTexture("TutorialContinueButton")); 
 			addChild( continueButton );
 			
 			continueButton.x = (Starling.current.stage.stageWidth - continueButton.width) * (19/20);
 			continueButton.y = (Starling.current.stage.stageHeight - continueButton.height) * (1/1);
-			
 			continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
 		}
 			
-		function onContinueButton(event:TouchEvent){
+		private function onContinueButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "tutorial2", 1);
+				Navigator.instance.loadScreen( "mainMenu", 1);
+				
 			}
 		}
 			
-		function addReturnButton(){
+		private function addReturnButton(){
 			returnButton = new Image(Main.assets.getTexture("TutorialReturnButton")); 
 			addChild( returnButton );
 			
@@ -71,19 +70,14 @@
 			
 			returnButton.addEventListener( TouchEvent.TOUCH , onReturnButton );
 		}
-			
-		function onReturnButton(event: TouchEvent) {
-			var touch: Touch = event.touches[0];
-			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.breadcrumbs.pop();
-				Navigator.breadcrumbs[0] = "mainMenu";
-				Navigator.instance.loadScreen(Navigator.breadcrumbs[Navigator.breadcrumbs.length - 1],0);
+		
+		private function onReturnButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN)
+			{ 
+				Navigator.instance.loadScreen( "tutorial2", 1);
+				
 			}
 		}
-
-
-
-
 	}
-
 }

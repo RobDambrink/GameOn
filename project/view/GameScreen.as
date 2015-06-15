@@ -194,13 +194,13 @@
 			placeHealthBar();
 			placeItems(MainMenuScreen.saveDataObject.data.condomCount);
 			updateHealthBar();
+
 			
 			condomText = new TextField(100,24,MainMenuScreen.saveDataObject.data.condomCount.toString());
 			condomText.x = 48;
 			condomText.y = 2;
 			addChild(condomText);
 		}
-		
 		
 		private function update(e:Event){
 			if(!paused){

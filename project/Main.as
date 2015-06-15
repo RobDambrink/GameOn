@@ -63,7 +63,7 @@
             //var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
 			
 			
-			trace (viewPort);
+			//trace (viewPort);
 			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
 			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
 			else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
@@ -114,7 +114,7 @@
 
 			assets.verbose = Capabilities.isDebugger;
 			assets.enqueue(
-					appDir.resolvePath("audio"),
+					appDir.resolvePath("assets/audio"),
 					appDir.resolvePath(formatString("assets/{0}x", scaleFactor))
 			);
 
@@ -126,7 +126,7 @@
             {
                 mProgressBar.ratio = ratio;
                 if (ratio == 1) onComplete(assets);
-            });
+            })
         }
 
         private function startGame(assets:AssetManager):void

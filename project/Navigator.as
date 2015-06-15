@@ -8,6 +8,7 @@
 	import flash.system.Capabilities;
 	import starling.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.media.Sound;
 	import view.*;
 
 
@@ -21,7 +22,7 @@
 		
 		// This is the path the user follows through all the menu screens.
 		public static var breadcrumbs: Vector.<String> = new Vector.<String>();
-
+		
 		//constructor code
 		public function Navigator() {
 
@@ -31,8 +32,14 @@
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
 			loadScreen("mainMenu",0);
+			playSoundMenu(assets);
 		}
-
+		
+		public function playSoundMenu(assets: AssetManager){
+			var soundMenu:Sound = assets.getSound("soundtrack");
+			soundMenu.play(0,99999);
+		}
+		
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
 		public function loadScreen(screenName: String, level:int) // screenName:String = "mainMenu"
 		{
@@ -48,6 +55,10 @@
 				nextScreen = new GenderSelectScreen();
 			} else if (screenName == "tutorial") {
 				nextScreen = new TutorialScreen();
+			} else if (screenName == "tutorial2") {
+				nextScreen = new TutorialScreen2();
+			} else if (screenName == "tutorial3") {
+				nextScreen = new TutorialScreen3();
 			} else if (screenName == "pharmacy") {
 				nextScreen = new PharmacyScreen();
 			} else if (screenName == "optionsMenu") {
