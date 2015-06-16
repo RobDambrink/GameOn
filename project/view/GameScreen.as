@@ -185,7 +185,8 @@
 			if(MainMenuScreen.saveDataObject.data.condomCount==null){
 				MainMenuScreen.saveDataObject.data.condomCount = 0;
 			}
-						
+			
+			HealthBar.hp=20; 
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);
