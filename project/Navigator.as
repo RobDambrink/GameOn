@@ -81,7 +81,7 @@
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
 			if (breadcrumbs.indexOf(screenName) == -1) {
-				if(screenName=="scoreScreen" || screenName=="story"){
+				if(screenName=="scoreScreen" || screenName=="story" || screenName="tutorial2" || screenName="tutorial3"){
 					trace("screen", screenName, "is not added to breadcrumbs.");
 				}
 				else{

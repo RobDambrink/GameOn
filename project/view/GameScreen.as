@@ -310,13 +310,13 @@
 					if(data === 0) continue;
 					var object:Sprite;
 					if(data === 1){
-						object = new Wall("House");
+						object = new Wall("Table");
 					}
 					if(data === 2){
 						object = new Wall("Tree");
 					}
 					if(data === 3){
-						object = new Wall("Table");
+						object = new Wall("House");
 					}
 					if(data === 4){
 						object = new Wall("Transparent");
@@ -575,8 +575,11 @@
 		
 		private function addBackButton(){
 			backButton = new Image(Main.assets.getTexture("BackButton")); 
-			backButton.x = (Starling.current.stage.stageWidth - backButton.width)-((Starling.current.stage.stageWidth - backButton.width) / 8);
+			backButton.x = (Starling.current.stage.stageWidth - backButton.width)-((Starling.current.stage.stageWidth - backButton.width) * (1/32));
 			backButton.y = 2;
+			backButton.width -= 15;
+			backButton.height = backButton.width;
+			
 			backButton.addEventListener( TouchEvent.TOUCH , onBackButton );
 			addChild( backButton );
 		}
