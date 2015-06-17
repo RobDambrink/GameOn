@@ -15,6 +15,7 @@
 	import starling.animation.Tween;
 	import starling.animation.Transitions;
 	import starling.text.TextField;
+	import starling.display.MovieClip;
 	
 	public class GameScreen extends Sprite{
 		
@@ -229,7 +230,7 @@
 		}
 		
 		
-		function findEntities(){
+		private function findEntities(){
 			for (var i:int = 0; i < map.length; i++){
 				for (var j:int; j < map[i].length; j++){				
 					if (movementGrid[i][j] == 5){
@@ -250,7 +251,7 @@
 		}
     	
 		
-		function movementTest(){    
+		private function movementTest(){    
 			if(direction==="down"){
 				 if(checkPath(playerX+1,playerY)){
 					 playerX+=1;
@@ -274,7 +275,7 @@
 		 }
 
 				
-		function loadMap(){
+		public function loadMap(){
 			if(level===1){
 				currentLevel=this.map;
 			}
@@ -345,7 +346,7 @@
 		}
 		
 		
-		function loadPlayer(map:Array){
+		public function loadPlayer(map:Array){
 			for(var row:int = 0; row < map.length; row++){
 				for(var column:int = 0; column < map[row].length; column++){
 					var data:int = map[row][column];
@@ -372,7 +373,7 @@
 		}
 		
 		
-		function checkPath(xcoord:int, ycoord:int){
+		public function checkPath(xcoord:int, ycoord:int){
 			if(currentLevel[xcoord][ycoord]===0 || currentLevel[xcoord][ycoord]===8 || currentLevel[xcoord][ycoord]===7){			
 				if (currentLevel[xcoord][ycoord]===8){ 
 					var usedPellet:HealthPellet;
@@ -395,7 +396,7 @@
 		}
 		
 		
-		function enemyMovement(user:Enemy){	
+		public function enemyMovement(user:Enemy){	
 			if(user.enDir==="down"){
 				 if(checkPath(user.enemyX+1,user.enemyY)){
 					 user.enemyX+=1;
@@ -434,7 +435,7 @@
 		/*
 			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
 		*/
-		function collision(){								
+		public function collision(){								
 			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
 				if(HealthBar.hp>99){
 					var score:int=14400-timer;
@@ -474,7 +475,8 @@
 		/**
 			This method performs various actions based on the direction the user swiped in.
 		*/
-		function onSwipeRec(e:GestureEvent):void {
+		
+		public function onSwipeRec(e:GestureEvent):void {
 			var swipeGesture:SwipeGesture=e.target as SwipeGesture;
 			if (swipeGesture.offsetX>6) {
 				direction="right";
@@ -507,7 +509,7 @@
 		}
 		
 		
-		function addPauseMenu(){
+		public function addPauseMenu(){
 			trace("Pause");
 			
 			pauseMenu = new Image(Main.assets.getTexture("PauseBackground")); 
@@ -564,7 +566,7 @@
 		}
 		
 		
-		function removePauseMenu(){
+		public function removePauseMenu(){
 			trace("Unpause");
 			removeChild( pauseMenu , true );
 			removeChild( pauseResume , true );

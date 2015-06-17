@@ -50,7 +50,7 @@
 			addChild(comic);
 			//10 second timer before the level is started
 			trace("timer started");
-			setTimeout(startLevel, 10000);
+			setTimeout(startLevel, 1000);
 		}
 
 		
