@@ -62,8 +62,13 @@
 			addPharmacyButton();
 			addTutorialButton();
 			addOptionsButton();
+			
+			Starling.juggler.delayCall(menuSoundStart, 0.1);
 		}
-
+		
+		function menuSoundStart(){
+			Navigator.soundManager.playSound("menuSound", 1.0, 999);
+		}
 
 		function addMenuBackground() {
 			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
@@ -144,7 +149,10 @@
 		private function onOptionsButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				Navigator.instance.loadScreen("optionsMenu",0);
+				//Navigator.instance.loadScreen("optionsMenu",0);
+				
+				Navigator.soundManager.stopSound("menuSound");
+				//Navigator.soundManager.playSound("menuSound", 1.0, 999);
 			}
 		}
 		

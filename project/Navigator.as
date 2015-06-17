@@ -10,6 +10,7 @@
 	import flash.ui.Keyboard;
 	import flash.media.Sound;
 	import view.*;
+	import org.SoundManager;
 
 
 	public class Navigator extends Sprite {
@@ -23,6 +24,8 @@
 		// This is the path the user follows through all the menu screens.
 		public static var breadcrumbs: Vector.<String> = new Vector.<String>();
 		
+		public static var soundManager = new SoundManager();
+		
 		//constructor code
 		public function Navigator() {
 
@@ -32,13 +35,14 @@
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
 			loadScreen("mainMenu",0);
-			playSoundMenu(assets);
+			//playSoundMenu(assets);
+			soundManager.addSound("menuSound", assets.getSound("soundtrack"));
 		}
 		
-		public function playSoundMenu(assets: AssetManager){
-			var soundMenu:Sound = assets.getSound("soundtrack");
-			soundMenu.play(0,99999);
-		}
+//		public function playSoundMenu(assets: AssetManager){
+//			var soundMenu:Sound = assets.getSound("soundtrack");
+//			soundMenu.play(0,99999);
+//		}
 		
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
 		public function loadScreen(screenName: String, level:int) // screenName:String = "mainMenu"
