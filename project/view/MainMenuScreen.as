@@ -174,21 +174,18 @@
 		private function onTutorialButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
-				addTutorial(1);
+				addTutorial(tutCount);
 			}
 		}
 		
-		private function addTutorial(tutCount:int){
-			removeChild(tutorial);
-			removeChild(tutContinue);
-			removeChild(tutReturn);
-			if(tutCount==1){
-			tutorial = new Image(Main.assets.getTexture("tutorial-screen-1"));
+		private function addTutorial(count:int){
+			if(count==1){
+				tutorial = new Image(Main.assets.getTexture("tutorial-screen-1"));
 			}
-			if(tutCount==2){
+			if(count==2){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-2"));			
 			}
-			if(tutCount==3){
+			if(count==3){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-3"));			
 			}
 			tutContinue = new Image(Main.assets.getTexture("TutorialContinueButton")); 
@@ -200,7 +197,7 @@
 				
 			tutContinue.x = (Starling.current.stage.stageWidth - tutContinue.width) * (19/20);
 			tutContinue.y = (Starling.current.stage.stageHeight - tutContinue.height) * (1/1);
-			tutContinue.addEventListener( TouchEvent.TOUCH , onTutContinue );				
+			tutContinue.addEventListener( TouchEvent.TOUCH , onTutContinue );			
 				
 			tutReturn.x = (Starling.current.stage.stageWidth - tutReturn.width) * (1/20);
 			tutReturn.y = (Starling.current.stage.stageHeight - tutReturn.height) * (1/1);
@@ -243,19 +240,19 @@
 					tutCount=2;
 					removeTutorial();
 					addTutorial(tutCount);
-
 				}
-				if(tutCount==2){
+				else if(tutCount==2){
 					trace("continue tut 2");
 					tutCount=3;
 					removeTutorial();
-					addTutorial(tutCount);
+					addTutorial(tutCount);				
 				}
-				if(tutCount==3){
-					trace("continue tut ");
-					removeTutorial();	
+				else if(tutCount==3){
+					trace("continue tut 3");
 					tutCount=1;
+					removeTutorial();
 				}
+
 			}
 		}
 

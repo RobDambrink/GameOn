@@ -57,12 +57,6 @@
 				nextScreen = new PlayMenuScreen();
 			} else if (screenName == "genderSelect") {
 				nextScreen = new GenderSelectScreen();
-			} else if (screenName == "tutorial") {
-				nextScreen = new TutorialScreen();
-			} else if (screenName == "tutorial2") {
-				nextScreen = new TutorialScreen2();
-			} else if (screenName == "tutorial3") {
-				nextScreen = new TutorialScreen3();
 			} else if (screenName == "pharmacy") {
 				nextScreen = new PharmacyScreen();
 			} else if (screenName == "optionsMenu") {
@@ -84,7 +78,7 @@
 			}
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
-			if (breadcrumbs.indexOf(screenName) == -1 || screenName=="levelSelect2" || screenName=="levelSelect3" || screenName=="tutorial" || screenName=="tutorial2" || screenName=="tutorial3") {
+			if (breadcrumbs.indexOf(screenName) == -1 || screenName=="levelSelect2" || screenName=="levelSelect3"){
  					//trace("screen", screenName, "is not added to breadcrumbs.");
 				}
 			else{

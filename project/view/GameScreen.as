@@ -22,6 +22,10 @@
 		var paused:Boolean;
 		var mazeBackground:Image;
 		var condomText:TextField;
+		var tutorial: Image;
+		var tutContinue: Image;
+		var tutReturn: Image;
+		var tutCount: int = 1;
 		public static var player:Player = new Player();
 		var exit:Exit = new Exit();
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
@@ -521,7 +525,7 @@
 			pauseResume.y = 72;
 			pauseResume.addEventListener( TouchEvent.TOUCH , onResumeButton );
 			
-			pauseTutorial = new Image(Main.assets.getTexture("Green24")); 
+			pauseTutorial = new Image(Main.assets.getTexture("TutorialButton")); 
 			pauseTutorial.x = (Starling.current.stage.stageWidth - pauseTutorial.width)-((Starling.current.stage.stageWidth - pauseTutorial.width) / 2);
 			pauseTutorial.y = 96;
 			pauseTutorial.addEventListener( TouchEvent.TOUCH , onTutorialButton );
@@ -552,7 +556,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				trace("Tutorial");
+				addTutorial(tutCount);
 			}
 		}
 		
@@ -628,5 +632,83 @@
 			mazeBackground = new Image(Main.assets.getTexture(backGround));
 			addChild(mazeBackground);
 		}	
+		
+		private function addTutorial(count:int){
+			if(count==1){
+				tutorial = new Image(Main.assets.getTexture("tutorial-screen-1"));
+			}
+			if(count==2){
+				tutorial = new Image(Main.assets.getTexture("tutorial-screen-2"));			
+			}
+			if(count==3){
+				tutorial = new Image(Main.assets.getTexture("tutorial-screen-3"));			
+			}
+			tutContinue = new Image(Main.assets.getTexture("TutorialContinueButton")); 
+			tutReturn = new Image(Main.assets.getTexture("TutorialReturnButton")); 
+			
+			addChild(tutorial);
+			addChild(tutContinue);
+			addChild(tutReturn);
+				
+			tutContinue.x = (Starling.current.stage.stageWidth - tutContinue.width) * (19/20);
+			tutContinue.y = (Starling.current.stage.stageHeight - tutContinue.height) * (1/1);
+			tutContinue.addEventListener( TouchEvent.TOUCH , onTutContinue );			
+				
+			tutReturn.x = (Starling.current.stage.stageWidth - tutReturn.width) * (1/20);
+			tutReturn.y = (Starling.current.stage.stageHeight - tutReturn.height) * (1/1);
+			tutReturn.addEventListener( TouchEvent.TOUCH , onTutReturn );
+		}
+		
+		private function removeTutorial(){
+			removeChild(tutorial);
+			removeChild(tutContinue);
+			removeChild(tutReturn);
+		}
+		
+		public function onTutReturn(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN){
+				if(tutCount==1){
+					trace("return tut 1");
+					removeTutorial();
+				}
+				if(tutCount==2){
+					trace("return tut 2");
+					tutCount=1;
+					removeTutorial();
+					addTutorial(tutCount);				
+				}
+				if(tutCount==3){
+					trace("return tut 3");
+					tutCount=2;
+					removeTutorial();
+					addTutorial(tutCount);
+				}
+			}
+		}
+		
+		public function onTutContinue(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN){
+				if(tutCount==1){
+					trace("continue tut 1");
+					tutCount=2;
+					removeTutorial();
+					addTutorial(tutCount);
+				}
+				else if(tutCount==2){
+					trace("continue tut 2");
+					tutCount=3;
+					removeTutorial();
+					addTutorial(tutCount);				
+				}
+				else if(tutCount==3){
+					trace("continue tut 3");
+					tutCount=1;
+					removeTutorial();
+				}
+
+			}
+		}
 	}	
 }
