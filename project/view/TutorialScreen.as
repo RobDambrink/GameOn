@@ -20,7 +20,6 @@
 
 		public function TutorialScreen() {
 			// constructor code
-
 			//Only when added to the stage, the function onAddedToStage will be executed.
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -58,7 +57,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "tutorial2", 1);
+				Navigator.instance.loadScreen( "tutorial2", 0);
 			}
 		}
 			

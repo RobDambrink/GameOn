@@ -17,6 +17,7 @@
 		var continueButton:Image;
 		var returnButton:Image;
 
+
 		public function TutorialScreen2() {
 			// constructor code
 
@@ -56,7 +57,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "tutorial3", 1);
+				Navigator.instance.loadScreen( "tutorial3", 0);
 				
 			}
 		}
@@ -75,7 +76,7 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "tutorial", 1);
+				Navigator.instance.loadScreen( "tutorial", 0);
 				
 			}
 		}

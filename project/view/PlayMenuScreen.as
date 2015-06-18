@@ -41,13 +41,17 @@
 		//--------------------start of adding buttons----------------
 
 		private function addContinueButton(){
-			continueButton = new Image(Main.assets.getTexture("ContinueButton"));
-			addChild( continueButton );
-			
+			if(MainMenuScreen.saveDataObject.data.gender=="" || MainMenuScreen.saveDataObject.data.gender==null){
+				continueButton = new Image(Main.assets.getTexture("GreyContinueButton"));	
+			}
+			else{
+				trace("else", MainMenuScreen.saveDataObject.data.gender);
+				continueButton = new Image(Main.assets.getTexture("ContinueButton"));				
+				continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
+			}
+			addChild( continueButton );				
 			continueButton.y = 15;
 			continueButton.x = (Starling.current.stage.stageWidth - continueButton.width) / 2;
-			
-			continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
 		}
 		
 		private function addNewGameButton(){
@@ -78,23 +82,28 @@
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
 // WARNING that New Game deletes all progress! 
-				warningBackground = new Image(Main.assets.getTexture("PauseBackground")); 
-				warningBackground.x = (Starling.current.stage.stageWidth - warningBackground.width)-((Starling.current.stage.stageWidth - warningBackground.width) / 2);
-				warningBackground.y = 48;
+				if(MainMenuScreen.saveDataObject.data.gender=="" || MainMenuScreen.saveDataObject.data.gender==null){
+					Navigator.instance.loadScreen( "genderSelect" ,0);					
+				}
+				else{
+					warningBackground = new Image(Main.assets.getTexture("PauseBackground")); 
+					warningBackground.x = (Starling.current.stage.stageWidth - warningBackground.width)-((Starling.current.stage.stageWidth - warningBackground.width) / 2);
+					warningBackground.y = 48;
+					
+					warningOK = new Image(Main.assets.getTexture("green")); 
+					warningOK.x = (Starling.current.stage.stageWidth - warningOK.width)-((Starling.current.stage.stageWidth - warningOK.width) / 4);
+					warningOK.y = 72;
+					warningOK.addEventListener( TouchEvent.TOUCH , onOKButton );
 				
-				warningOK = new Image(Main.assets.getTexture("green")); 
-				warningOK.x = (Starling.current.stage.stageWidth - warningOK.width)-((Starling.current.stage.stageWidth - warningOK.width) / 4);
-				warningOK.y = 72;
-				warningOK.addEventListener( TouchEvent.TOUCH , onOKButton );
-			
-				warningCancel = new Image(Main.assets.getTexture("Circle")); 
-				warningCancel.x = (Starling.current.stage.stageWidth - warningCancel.width)-((Starling.current.stage.stageWidth - warningCancel.width) / 2);
-				warningCancel.y = 72;
-				warningCancel.addEventListener( TouchEvent.TOUCH , onCancelButton );
-				
-				addChild(warningBackground);
-				addChild(warningOK);
-				addChild(warningCancel);
+					warningCancel = new Image(Main.assets.getTexture("Circle")); 
+					warningCancel.x = (Starling.current.stage.stageWidth - warningCancel.width)-((Starling.current.stage.stageWidth - warningCancel.width) / 2);
+					warningCancel.y = 72;
+					warningCancel.addEventListener( TouchEvent.TOUCH , onCancelButton );
+					
+					addChild(warningBackground);
+					addChild(warningOK);
+					addChild(warningCancel);
+				}
 			}
 		}
 		

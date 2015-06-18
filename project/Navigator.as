@@ -84,7 +84,7 @@
 			}
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
-			if (breadcrumbs.indexOf(screenName) == -1) {
+			if (breadcrumbs.indexOf(screenName) == -1 || screenName=="levelSelect2" || screenName=="levelSelect3" || screenName=="tutorial" || screenName=="tutorial2" || screenName=="tutorial3") {
  					//trace("screen", screenName, "is not added to breadcrumbs.");
 				}
 			else{
@@ -97,18 +97,20 @@
 
 			addChild(nextScreen);
 		}
+		
+		public function pop(){
+				breadcrumbs.pop();
+				breadcrumbs[0] = "mainMenu";
+				loadScreen(breadcrumbs[breadcrumbs.length - 1],0);
+		}
 
 		protected function onKeyDown(e: KeyboardEvent): void {
 			if (e.keyCode == Keyboard.BACK) {
 				//handle the button press here.
 				trace("Devices BACK button pressed");
 				e.preventDefault();
-				
-				breadcrumbs.pop();
+				pop();
 
-				breadcrumbs[0] = "mainMenu";
-
-				loadScreen(breadcrumbs[breadcrumbs.length - 1],0);
 			} else if (e.keyCode == Keyboard.HOME) {
 				//handle the button press here.
 				trace("Devices HOME button pressed");

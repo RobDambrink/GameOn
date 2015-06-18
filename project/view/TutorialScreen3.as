@@ -56,8 +56,8 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-				Navigator.instance.loadScreen( "mainMenu", 1);
-				
+				//Navigator.instance.loadScreen( "mainMenu", 1);
+				Navigator.instance.pop();		
 			}
 		}
 			

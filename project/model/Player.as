@@ -14,7 +14,7 @@
 	public class Player extends Sprite {
 
 		public static var infected: Boolean;
-		public static var gender: String;
+		public static var gender:String;
 		public var hit:Boolean=false;
 		public var playerAnimation:MovieClip;
 
