@@ -173,15 +173,20 @@
 			[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 		];
 		
-		// constructor code
+		/**
+		*	Constructor.
+		*	@param level - The level that needs to be loaded.
+		**/
 		public function GameScreen(level:int){
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.level=level;
 			thisLevel=level;
-			trace("thisLevel: ", thisLevel);
 		}
 		
-		//This function tells the console that the gamescreen is loaded. 
+		/**
+		*	Adds eventlistener for the swipe controls and sets up gameticks, loads all buttons, the map, condomcounter and entities.
+		*	@param event - the onAddedToStage event.
+		**/ 
 		private function onAddedToStage(event:Event){
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
@@ -208,6 +213,10 @@
 			addChild(condomText);
 		}
 		
+		/**
+		*	The main game loop which moves the player and enemies, and checks for collision between the player and the exit or enemies.
+		*	@param event - The enter frame event.
+		**/
 		private function update(e:Event){
 			if(!paused){
 				timer++;
@@ -233,7 +242,9 @@
 			}
 		}
 		
-		
+		/**
+		*	Sets the coordinates for the player and enemies based on their position in the movementGrid.
+		**/
 		private function findEntities(){
 			for (var i:int = 0; i < map.length; i++){
 				for (var j:int; j < map[i].length; j++){				
@@ -254,7 +265,9 @@
 			}			
 		}
     	
-		
+		/**
+		*	Calls checkPath to see if movement is possible and moves the player when checkPath returns true. Does nothing when checkPath returns false.
+		**/
 		private function movementTest(){    
 			if(direction==="down"){
 				 if(checkPath(playerX+1,playerY)){
@@ -278,7 +291,9 @@
 			 }
 		 }
 
-				
+		/**
+		*	Places the exit, walls and healthPellets based on the level that is selected.
+		**/		
 		public function loadMap(){
 			if(level===1){
 				currentLevel=this.map;
@@ -349,7 +364,9 @@
 			}
 		}
 		
-		
+		/**
+		*	Places the player and enemies based on the movementGrid.
+		**/
 		public function loadPlayer(map:Array){
 			for(var row:int = 0; row < map.length; row++){
 				for(var column:int = 0; column < map[row].length; column++){
@@ -376,7 +393,12 @@
 			}
 		}
 		
-		
+		/**
+		*	Checks if a player or enemy can move to specified coordinates.
+		*	@param xcoord - the x-Coordinate to check.
+		*	@param ycoord - the Y-Coordinate to check.
+		*	@returns true if movement is possible, false if movement is not possible.
+		**/
 		public function checkPath(xcoord:int, ycoord:int){
 			if(currentLevel[xcoord][ycoord]===0 || currentLevel[xcoord][ycoord]===8 || currentLevel[xcoord][ycoord]===7){			
 				if (currentLevel[xcoord][ycoord]===8){ 
@@ -399,7 +421,10 @@
 			return false;
 		}
 		
-		
+		/**
+		*	Calls checkPath to see if movement is possible. If it is, moves the enemy. If it is not, calls enemyDirection to get a new direction to move in.
+		*	@param user - The enemy which wants to move.
+		**/
 		public function enemyMovement(user:Enemy){	
 			if(user.enDir==="down"){
 				 if(checkPath(user.enemyX+1,user.enemyY)){
@@ -436,15 +461,14 @@
 		}	
 		
 		
-		/*
-			This function checks if the player is colliding with a wall. If that is the case it will stop the player from moving and reposition the player.
-		*/
+		/**
+		*	Checks if a player collides with either one of the enemies and the exit. Loads the scorescreen when the play has enough health. 
+		*	Infects the player and removes points/health when an enemy is hit.
+		**/
 		public function collision(){								
 			if(player.getBounds(player.parent).intersects(exit.getBounds(exit.parent))){
 				if(HealthBar.hp>99){
 					var score:int=14400-timer;
-					//var score:int=timer;
-					trace("=================GAME OVER YOU WIN=====================");
 					Navigator.instance.loadScreen( "scoreScreen" ,score);
 				}
 			}
@@ -456,7 +480,6 @@
 					player.hitEnemy();
 					setTimeout(player.unHit, 2000);
 					setTimeout(player.unInfect, 7000);
-					trace(HealthBar.hp);
 					updateHealthBar();
 				}
 				else if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount>=1){
@@ -477,7 +500,7 @@
 		
 		
 		/**
-			This method performs various actions based on the direction the user swiped in.
+			Sets the direction variable based on the direction the user swiped in.
 		*/
 		
 		public function onSwipeRec(e:GestureEvent):void {
@@ -496,7 +519,9 @@
 			}
 		}
 		
-		
+		/**
+		*	Places the healthbar at the top of the level.
+		**/
 		public function placeHealthBar(){
 			healthBar = new HealthBar(this)
 			healthBar.y = 2;
@@ -504,7 +529,10 @@
 			addChild(healthBar);
 		}
 		
-		
+		/**
+		*	Places the condoms at the top of the level.
+		*	@param number - The number of condoms the player has.
+		**/
 		public function placeItems(number:int){
 			items = new Items();
 			items.y = 2;
@@ -512,10 +540,10 @@
 			addChild(items);
 		}
 		
-		
-		public function addPauseMenu(){
-			trace("Pause");
-			
+		/**
+		*	Adds the menu overlay background, resume-, tutorial- and exitbuttons once the pause button has been touched.
+		**/
+		public function addPauseMenu(){		
 			pauseMenu = new Image(Main.assets.getTexture("PauseBackground")); 
 			pauseMenu.x = (Starling.current.stage.stageWidth - pauseMenu.width)-((Starling.current.stage.stageWidth - pauseMenu.width) / 2);
 			pauseMenu.y = 48;
@@ -541,7 +569,9 @@
 			addChild( pauseExit );
 		}
 		
-		
+		/**
+		*	Calls removePauseMenu which removes the entire pause overlay and sets the paused variable to false.
+		**/
 		private function onResumeButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
@@ -551,7 +581,9 @@
 			}
 		}
 		
-		
+		/**
+		*	Starts the addTutorial method which shows the tutorial.
+		**/
 		private function onTutorialButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
@@ -560,7 +592,9 @@
 			}
 		}
 		
-		
+		/**
+		*	Loads the main menu.
+		**/
 		private function onExitButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
@@ -569,16 +603,19 @@
 			}
 		}
 		
-		
+		/**
+		*	Removes the pause menu overlay.
+		**/
 		public function removePauseMenu(){
-			trace("Unpause");
 			removeChild( pauseMenu , true );
 			removeChild( pauseResume , true );
 			removeChild( pauseTutorial , true );
 			removeChild( pauseExit , true );
 		}
 		
-		
+		/**
+		*	Adds the pause button to the top right corner of the level.
+		**/
 		private function addBackButton(){
 			backButton = new Image(Main.assets.getTexture("BackButton")); 
 			backButton.x = (Starling.current.stage.stageWidth - backButton.width)-((Starling.current.stage.stageWidth - backButton.width) * (1/32));
@@ -590,7 +627,9 @@
 			addChild( backButton );
 		}
 		
-		
+		/**
+		*	Pauses the game when it is unpaused. Unpauses the game when it is paused.
+		**/
 		private function onBackButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
@@ -606,18 +645,24 @@
 			}
 		}
 		
-		
+		/**
+		*	Calls the updateHealthBar function in HealthBar to visually show changes to the players health.
+		**/
 		public function updateHealthBar(){
 			healthBar.updateHealthBar();
 		}
 		
-		
+		/**
+		*	Hides and disables a healthpellet.
+		**/
 		public function removeHealthPellet(healthPellet:HealthPellet){
 			healthPellet.hide(healthPellet);
 			removeChild(healthPellet, true);
 		}
 		
-
+		/**
+		*	Loads the background for the level based on the level that is received in the constructor.
+		**/
 		private function addMazeBackground(){
 			var backGround:String;
 			if(level==1 || level==2 || level==3){
@@ -633,6 +678,10 @@
 			addChild(mazeBackground);
 		}	
 		
+		/**
+		*	Loads the tutorial, next button and previous button images;
+		*	@param count - Count tells addTutorial which tutorial screen it should load.
+		**/		
 		private function addTutorial(count:int){
 			if(count==1){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-1"));
@@ -659,27 +708,31 @@
 			tutReturn.addEventListener( TouchEvent.TOUCH , onTutReturn );
 		}
 		
+		/**
+		*	Removes the tutorial, next button and previous button images.
+		**/
 		private function removeTutorial(){
 			removeChild(tutorial);
 			removeChild(tutContinue);
 			removeChild(tutReturn);
 		}
 		
+		/**
+		*	Removes the current tutorial, next button and previous button images and replaces them with those images for the previous tutorial.
+		*	Just removes all tutorial images if the first tutorial page is showing.
+		**/
 		public function onTutReturn(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){
 				if(tutCount==1){
-					trace("return tut 1");
 					removeTutorial();
 				}
 				if(tutCount==2){
-					trace("return tut 2");
 					tutCount=1;
 					removeTutorial();
 					addTutorial(tutCount);				
 				}
 				if(tutCount==3){
-					trace("return tut 3");
 					tutCount=2;
 					removeTutorial();
 					addTutorial(tutCount);
@@ -687,23 +740,24 @@
 			}
 		}
 		
+		/**
+		*	Removes the current tutorial, next button and previous button images and replaces them with those images for the next tutorial.
+		*	Just removes all tutorial images if the third tutorial page is showing.
+		**/
 		public function onTutContinue(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){
 				if(tutCount==1){
-					trace("continue tut 1");
 					tutCount=2;
 					removeTutorial();
 					addTutorial(tutCount);
 				}
 				else if(tutCount==2){
-					trace("continue tut 2");
 					tutCount=3;
 					removeTutorial();
 					addTutorial(tutCount);				
 				}
 				else if(tutCount==3){
-					trace("continue tut 3");
 					tutCount=1;
 					removeTutorial();
 				}

@@ -48,18 +48,19 @@
 		var muted:Boolean=false;
 		public static var saveDataObject:SharedObject = SharedObject.getLocal("savedata");
 		
-		
-			public function MainMenuScreen(){
-				// constructor code
+		/**
+		*	Constructor
+		**/
+		public function MainMenuScreen(){
+			//Only when added to the stage, the function onAddedToStage will be executed.
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
 
-				//Only when added to the stage, the function onAddedToStage will be executed.
-				addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			}
-
-
-		private function onAddedToStage(event: Event) {
-			trace("MainMenuScreen loaded");
-			
+		/**
+		*	Calls all functions that add buttons to the screen, sets standard values for the savedata and delaycalls menuSoundstart which starts the music.
+		*	@param event - The onAddedToStage event.
+		**/
+		private function onAddedToStage(event: Event) {			
 			var myDataObject:Object = {gender:"", condomCount:0, currency:0};
 			
 			addMenuBackground();
@@ -71,12 +72,18 @@
 			Starling.juggler.delayCall(menuSoundStart, 0.1);
 		}
 		
+		/**
+		*	Starts playing the background music if it is not already playing.
+		**/
 		function menuSoundStart(){
 			if(!Navigator.soundManager.soundIsPlaying("menuSound")){
 				Navigator.soundManager.playSound("menuSound", 1.0, 999);
 			}
 		}
 
+		/**
+		*	Adds the background image.
+		**/
 		function addMenuBackground() {
 			menuBackground = new Image(Main.assets.getTexture("MainMenuBackground"));
 			addChild(menuBackground);
@@ -85,6 +92,9 @@
 
 
 		//--------------------start of adding buttons----------------
+		/**
+		*	All functions below add the different buttons to the stage.
+		**/
 
 		private function addPlayBtn() {
 			playBtn = new Image(Main.assets.getTexture("PlayButton"));
@@ -134,10 +144,12 @@
 
 		//---------------end of adding buttons------------------
 
-
-
 		//---------------start of button's event handlers-------
-
+		//All event parameters are touch events that trigger when the button is pressed.
+		
+		/**
+		*	If sound is not muted, all sound is muted. If sound is already muted, all sound is unmuted.
+		**/
 		private function onMuteButton(event: TouchEvent){
 			var touch:Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN){
@@ -148,7 +160,6 @@
 					muted=true;
 				}
 				else{
-					trace("unmute");
 					removeChild(muteButton);
 					addMuteButton();
 					Navigator.soundManager.muteAll(false);
@@ -157,6 +168,9 @@
 			}
 		}
 		
+		/**
+		*	Loads the playMenu page.
+		**/
 		private function onPlayButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
@@ -164,6 +178,9 @@
 			}
 		}
 
+		/**
+		*	Loads the pharmacy page.
+		**/		
 		private function onPharmacyButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
@@ -171,6 +188,9 @@
 			}
 		}
 
+		/**
+		*	Starts the addTutorial method which shows the tutorial.
+		**/
 		private function onTutorialButton(event: TouchEvent) {
 			var touch: Touch = event.touches[0];
 			if (touch.phase == TouchPhase.BEGAN) {
@@ -178,6 +198,10 @@
 			}
 		}
 		
+		/**
+		*	Loads the tutorial, next button and previous button images;
+		*	@param count - Count tells addTutorial which tutorial screen it should load.
+		**/
 		private function addTutorial(count:int){
 			if(count==1){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-1"));
@@ -204,27 +228,31 @@
 			tutReturn.addEventListener( TouchEvent.TOUCH , onTutReturn );
 		}
 		
+		/**
+		*	Removes the tutorial, next button and previous button images.
+		**/
 		private function removeTutorial(){
 			removeChild(tutorial);
 			removeChild(tutContinue);
 			removeChild(tutReturn);
 		}
 		
+		/**
+		*	Removes the current tutorial, next button and previous button images and replaces them with those images for the previous tutorial.
+		*	Just removes all tutorial images if the first tutorial page is showing.
+		**/
 		public function onTutReturn(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){
 				if(tutCount==1){
-					trace("return tut 1");
 					removeTutorial();
 				}
 				if(tutCount==2){
-					trace("return tut 2");
 					tutCount=1;
 					removeTutorial();
 					addTutorial(tutCount);				
 				}
 				if(tutCount==3){
-					trace("return tut 3");
 					tutCount=2;
 					removeTutorial();
 					addTutorial(tutCount);
@@ -232,23 +260,24 @@
 			}
 		}
 		
+		/**
+		*	Removes the current tutorial, next button and previous button images and replaces them with those images for the next tutorial.
+		*	Just removes all tutorial images if the third tutorial page is showing.
+		**/
 		public function onTutContinue(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){
 				if(tutCount==1){
-					trace("continue tut 1");
 					tutCount=2;
 					removeTutorial();
 					addTutorial(tutCount);
 				}
 				else if(tutCount==2){
-					trace("continue tut 2");
 					tutCount=3;
 					removeTutorial();
 					addTutorial(tutCount);				
 				}
 				else if(tutCount==3){
-					trace("continue tut 3");
 					tutCount=1;
 					removeTutorial();
 				}
