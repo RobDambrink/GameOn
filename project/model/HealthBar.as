@@ -37,7 +37,7 @@
 			}			
 			if (hp < 1){
 				hp = 0;
-				Navigator.instance.loadScreen( "levelSelect" ,0);
+				Navigator.instance.loadScreen( "scoreScreen" ,0);
 			}
 			percentHp = hp / maxHp;
 			healthFill.scaleX = percentHp;

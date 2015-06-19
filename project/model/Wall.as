@@ -17,7 +17,7 @@
 				wall = new Image(Main.assets.getTexture("TileHouse"));
 			}
 			if (type === "Tree"){
-				wall = new Image(Main.assets.getTexture("Circle24"));
+				wall = new Image(Main.assets.getTexture("TileTree"));
 			}
 			if (type === "Table"){
 				wall = new Image(Main.assets.getTexture("TileTable"));

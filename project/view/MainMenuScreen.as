@@ -45,7 +45,7 @@
 		var tutReturn: Image;
 		var tutCount: int = 1;
 		var muteButton: Image;
-		var muted:Boolean=false;
+		public static var muted:Boolean=false;
 		public static var saveDataObject:SharedObject = SharedObject.getLocal("savedata");
 		
 		/**
@@ -67,7 +67,12 @@
 			addPlayBtn();
 			addPharmacyButton();
 			addTutorialButton();
-			addMuteButton();
+			if(muted){
+				addUnMuteButton()
+			}
+			else if(!muted){
+				addMuteButton();
+			}
 			
 			Starling.juggler.delayCall(menuSoundStart, 0.1);
 		}

@@ -12,6 +12,7 @@
 		var star3:Image;
 		public static var currency:int;
 		var starCount:int;
+		var background:Image;
 
 		public function ScoreScreen(score:int) {
 			// constructor code
@@ -25,8 +26,14 @@
 		{
 			trace("ScoreScreen loaded");
 			trace("score achieved: ", score);
+			addBackground();
 			countStars();
 			saveScore();
+		}
+		
+		function addBackground(){
+			background = new Image(Main.assets.getTexture("background-orange"));
+			addChild(background);
 		}
 		
 		function saveScore(){
@@ -81,12 +88,15 @@
 			trace("Stars level 2: ", MainMenuScreen.saveDataObject.data.level2Score);
 		}
 		
+
 		public function countStars(){
-			
-			if(score<=6000){
+			if(score<4000){
+				starCount=0;
+			}
+			else if(score>=4000 && score<=8000){
 				starCount=1;
 			}
-			else if(score>6000 && score<=13000){
+			else if(score>8000 && score<=13000){
 				starCount=2;
 			}
 			else if(score>13000){
@@ -98,7 +108,15 @@
 			addStars(starCount);
 		}
 		public function addStars(starCount:int){
-			if(starCount==1){
+			if(starCount==0){
+				star1 = new Image(Main.assets.getTexture("StarGrey"));
+				star2 = new Image(Main.assets.getTexture("StarGrey"));
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
+				addChild( star1 );
+				addChild( star2 );
+				addChild( star3 );
+			}
+			else if(starCount==1){
 				star1 = new Image(Main.assets.getTexture("Star"));
 				star2 = new Image(Main.assets.getTexture("StarGrey"));
 				star3 = new Image(Main.assets.getTexture("StarGrey"));
