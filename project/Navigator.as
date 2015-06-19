@@ -28,21 +28,16 @@
 		
 		//constructor code
 		public function Navigator() {
-
 		}
+
 
 		public function start(assets: AssetManager) {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
 			loadScreen("mainMenu",0);
-			//playSoundMenu(assets);
 			soundManager.addSound("menuSound", assets.getSound("soundtrack"));
 		}
 		
-//		public function playSoundMenu(assets: AssetManager){
-//			var soundMenu:Sound = assets.getSound("soundtrack");
-//			soundMenu.play(0,99999);
-//		}
 		
 		//Switch screen function. Code to load a new screen and remove the previous screen from the stage. Loads mainMenu by default.
 		public function loadScreen(screenName: String, level:int) // screenName:String = "mainMenu"
@@ -79,16 +74,11 @@
 
 			// Makes sure there are no duplicate values in the breadcrumbs Vector
 			if (breadcrumbs.indexOf(screenName) == -1 || screenName=="levelSelect2" || screenName=="levelSelect3"){
- 					//trace("screen", screenName, "is not added to breadcrumbs.");
 				}
 			else{
 				breadcrumbs.push(screenName);
 			}
-			
-
 			trace(breadcrumbs);
-
-
 			addChild(nextScreen);
 		}
 		

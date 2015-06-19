@@ -89,9 +89,8 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-//the variable GENDER gets set to Male
 				MainMenuScreen.saveDataObject.data.gender = "male";
-				Navigator.instance.loadScreen( "tutorial" ,0);
+				Navigator.instance.loadScreen( "levelSelect" ,0);
 			}
 		}
 		
@@ -99,9 +98,8 @@
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
-//the variable GENDER gets set to Female
 				MainMenuScreen.saveDataObject.data.gender = "female";
-				Navigator.instance.loadScreen( "tutorial" ,0);
+				Navigator.instance.loadScreen( "levelSelect" ,0);
 			}
 		}
 		//---------------end of button's event handlers---------

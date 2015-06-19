@@ -40,7 +40,7 @@
 				Navigator.instance.loadScreen( "levelSelect" ,0);
 			}
 			percentHp = hp / maxHp;
-			healthFill.scaleX = (percentHp - 0.01);
+			healthFill.scaleX = percentHp;
 		}
 	}
 }

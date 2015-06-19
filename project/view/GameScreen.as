@@ -564,9 +564,13 @@
 			pauseExit.addEventListener( TouchEvent.TOUCH , onExitButton );
 			
 			addChild( pauseMenu );
+			setChildIndex ( pauseMenu, ( numChildren - 1 ));
 			addChild( pauseResume );
+			setChildIndex ( pauseResume, ( numChildren - 1 ));
 			addChild( pauseTutorial );
+			setChildIndex ( pauseTutorial, ( numChildren - 1 ));
 			addChild( pauseExit );
+			setChildIndex ( pauseExit, ( numChildren - 1 ));
 		}
 		
 		/**

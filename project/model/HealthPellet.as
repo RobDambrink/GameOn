@@ -26,7 +26,7 @@
 		}
 		
 		public function hide(pellet:HealthPellet){
-			if(pellet.hidden===false){
+			if(pellet.hidden==false){
 				pellet.hidden=true;
 				setTimeout(respawn, 10000);
 			}
@@ -35,7 +35,7 @@
 		
 		public function respawn(){
 			this.hidden=false;	
-			gameScreen.addChild(this);
+			gameScreen.addChildAt(this,1);
 		}
 
 

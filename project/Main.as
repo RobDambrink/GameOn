@@ -47,23 +47,18 @@
 		public static var assets:AssetManager;
 		
 		
-		
-        public function Main()
-        {
+        public function Main() {
             // We develop the game in a *fixed* coordinate system of 320x480. The game might
             // then run on a device with a different resolution; for that case, we zoom the
             // viewPort to the optimal size for any display and load the optimal textures.
 			
 			
 			
-            //var iOS:Boolean = SystemUtil.platform == "IOS";
             var stageSize:Rectangle  = new Rectangle(0, 0, StageWidth, StageHeight);
             var screenSize:Rectangle = new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight);
             var viewPort:Rectangle = RectangleUtil.fit(stageSize, screenSize, ScaleMode.SHOW_ALL);
-            //var scaleFactor:int = viewPort.width < 480 ? 1 : 2; // midway between 320 and 640
 			
 			
-			//trace (viewPort);
 			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
 			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
 			else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
@@ -72,7 +67,6 @@
 			trace ("scaleFactor", scaleFactor);
             Starling.multitouchEnabled = true; // useful on mobile devices
             Starling.handleLostContext = true; // recommended everywhere when using AssetManager
-            //RenderTexture.optimizePersistentBuffers = iOS; // safe on iOS, dangerous on Android
 
             mStarling = new Starling(Navigator, stage, viewPort, null, "auto", "auto");
             mStarling.stage.stageWidth    = StageWidth;  // <- same size on all devices!
@@ -104,8 +98,8 @@
             }
         }
 
-		private function loadAssets(scaleFactor:int, onComplete:Function):void
-		{
+
+		private function loadAssets(scaleFactor:int, onComplete:Function):void{
 			// Our assets are loaded and managed by the 'AssetManager'. To use that class,
 			// we first have to enqueue pointers to all assets we want it to load.
 
@@ -122,22 +116,21 @@
             // has not loaded them yet. This happens in the "loadQueue" method; and since this
             // will take a while, we'll update the progress bar accordingly.
 
-            assets.loadQueue(function(ratio:Number):void
-            {
+            assets.loadQueue(function(ratio:Number):void{
                 mProgressBar.ratio = ratio;
                 if (ratio == 1) onComplete(assets);
             })
         }
 
-        private function startGame(assets:AssetManager):void
-        {
+
+        private function startGame(assets:AssetManager):void{
             var navigator:Navigator = mStarling.root as Navigator;
             navigator.start(assets);
             setTimeout(removeElements, 150); // delay to make 100% sure there's no flickering.
         }
 
-        private function initElements(scaleFactor:int):void
-        {
+
+        private function initElements(scaleFactor:int):void{
             // Add background image. By using "loadBytes", we can avoid any flickering.
 			
 // Insert splash screen here
@@ -169,19 +162,18 @@
             mStarling.nativeOverlay.addChild(mProgressBar);
         }
 
+
 		public function getAssets(){
 			return assets;
 			}
 		
 		
-        private function removeElements():void
-        {
+        private function removeElements():void{
             if (mBackground)
             {
                 mStarling.nativeOverlay.removeChild(mBackground);
                 mBackground = null;
             }
-
             if (mProgressBar)
             {
                 mStarling.nativeOverlay.removeChild(mProgressBar);
