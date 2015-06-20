@@ -13,10 +13,11 @@
 		
 		var previousButton:Image;
 		var nextButton:Image;
-		var level1SelectButton:Image;
-		var level2SelectButton:Image;
-		var level3SelectButton:Image;
+		var level4SelectButton:Image;
+		var level5SelectButton:Image;
+		var level6SelectButton:Image;
 		var menuBackground:Image;
+		var lock:Image;
 		
 		public function LevelSelectScreen2() {
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -26,16 +27,26 @@
 		{
 			trace("LevelSelectScreen 2 loaded");
 			addMenuBackground();
-			addLevelOneButton();
-			addLevelTwoButton();
-			addLevelThreeButton();
+			addLevelFourButton();
+			addLevelFiveButton();
+			addLevelSixButton();
+			if(MainMenuScreen.saveDataObject.data.level3Score==0 || MainMenuScreen.saveDataObject.data.level3Score==null){
+				addLock();
+			}
 			addPreviousButton();
 			addNextButton();
+
+			
 		}
 
 		function addMenuBackground(){
 			menuBackground = new Image(Main.assets.getTexture("background-orange"));
 			addChild( menuBackground );
+		}
+		
+		function addLock(){
+			lock = new Image(Main.assets.getTexture("lock"));
+			addChild(lock);
 		}
 		
 		
@@ -79,15 +90,22 @@
 		}
 		
 		
-		private function addLevelOneButton(){
-			level1SelectButton = new Image(Main.assets.getTexture("Level1")); 
-			addChild( level1SelectButton );
-			
-			level1SelectButton.x = (Starling.current.stage.stageWidth - level1SelectButton.width) * (1/4);
-			level1SelectButton.y = (Starling.current.stage.stageHeight - level1SelectButton.height) * (1/3);
-			
-			level1SelectButton.addEventListener( TouchEvent.TOUCH , onLevelOneButton );
-			
+		private function addLevelFourButton(){
+			if(MainMenuScreen.saveDataObject.data.level4Score>0){
+				level4SelectButton = new Image(Main.assets.getTexture("Level4")); 
+				addChild( level4SelectButton );
+				
+				level4SelectButton.x = (Starling.current.stage.stageWidth - level4SelectButton.width) * (1/4);
+				level4SelectButton.y = (Starling.current.stage.stageHeight - level4SelectButton.height) * (1/3);
+				
+				level4SelectButton.addEventListener( TouchEvent.TOUCH , onLevelFourButton );
+			}
+			else{
+				level4SelectButton = new Image(Main.assets.getTexture("Level4Grey")); 
+				addChild( level4SelectButton );				
+				level4SelectButton.x = (Starling.current.stage.stageWidth - level4SelectButton.width) * (1/4);
+				level4SelectButton.y = (Starling.current.stage.stageHeight - level4SelectButton.height) * (1/3);
+			}
 			var star1:Image;
 			var star2:Image;
 			var star3:Image;
@@ -124,22 +142,22 @@
 				addChild( star2 );
 				addChild( star3 );			
 			}
-			star1.width=level1SelectButton.width-8;
+			star1.width=level4SelectButton.width-8;
 			star1.height=star1.width;
 			star2.width=star1.width;
 			star2.height=star1.width;
 			star3.width=star1.width;
 			star3.height=star1.width;
 			
-			star1.x=level1SelectButton.x-star1.width+3;
-			star1.y=level1SelectButton.y+level1SelectButton.height+5;
-			star2.x=level1SelectButton.x+3;
-			star2.y=level1SelectButton.y+level1SelectButton.height+5;
-			star3.x=level1SelectButton.x+star1.width+3;
-			star3.y=level1SelectButton.y+level1SelectButton.height+5;
+			star1.x=level4SelectButton.x-star1.width+3;
+			star1.y=level4SelectButton.y+level4SelectButton.height+5;
+			star2.x=level4SelectButton.x+3;
+			star2.y=level4SelectButton.y+level4SelectButton.height+5;
+			star3.x=level4SelectButton.x+star1.width+3;
+			star3.y=level4SelectButton.y+level4SelectButton.height+5;
 		}
 		
-		private function onLevelOneButton(event:TouchEvent){
+		private function onLevelFourButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
@@ -150,15 +168,22 @@
 		
 		
 		
-		private function addLevelTwoButton(){
-			level2SelectButton = new Image(Main.assets.getTexture("Level2")); 
-			addChild( level2SelectButton );
-			
-			level2SelectButton.x = (Starling.current.stage.stageWidth - level2SelectButton.width) * (1/2);
-			level2SelectButton.y = (Starling.current.stage.stageHeight - level2SelectButton.height) * (1/3);
-			
-			level2SelectButton.addEventListener( TouchEvent.TOUCH , onLevelTwoButton );
-			
+		private function addLevelFiveButton(){			
+			if(MainMenuScreen.saveDataObject.data.level4Score>0){
+				level5SelectButton = new Image(Main.assets.getTexture("Level5")); 
+				addChild( level5SelectButton );
+				
+				level5SelectButton.x = (Starling.current.stage.stageWidth - level5SelectButton.width) * (1/2);
+				level5SelectButton.y = (Starling.current.stage.stageHeight - level5SelectButton.height) * (1/3);
+				
+				level5SelectButton.addEventListener( TouchEvent.TOUCH , onLevelFiveButton );
+			}
+			else{
+				level5SelectButton = new Image(Main.assets.getTexture("Level5Grey")); 
+				addChild( level5SelectButton );				
+				level5SelectButton.x = (Starling.current.stage.stageWidth - level5SelectButton.width) * (1/2);
+				level5SelectButton.y = (Starling.current.stage.stageHeight - level5SelectButton.height) * (1/3);
+			}
 			var star1:Image;
 			var star2:Image;
 			var star3:Image;
@@ -195,22 +220,22 @@
 				addChild( star2 );
 				addChild( star3 );
 			}
-			star1.width=level1SelectButton.width-8;
+			star1.width=level5SelectButton.width-8;
 			star1.height=star1.width;
 			star2.width=star1.width;
 			star2.height=star1.width;
 			star3.width=star1.width;
 			star3.height=star1.width;
 			
-			star1.x=level2SelectButton.x-star1.width+3;
-			star1.y=level2SelectButton.y+level2SelectButton.height+5;
-			star2.x=level2SelectButton.x+3;
-			star2.y=level2SelectButton.y+level2SelectButton.height+5;
-			star3.x=level2SelectButton.x+star1.width+3;
-			star3.y=level2SelectButton.y+level2SelectButton.height+5;
+			star1.x=level5SelectButton.x-star1.width+3;
+			star1.y=level5SelectButton.y+level5SelectButton.height+5;
+			star2.x=level5SelectButton.x+3;
+			star2.y=level5SelectButton.y+level5SelectButton.height+5;
+			star3.x=level5SelectButton.x+star1.width+3;
+			star3.y=level5SelectButton.y+level5SelectButton.height+5;
 		}
 		
-		private function onLevelTwoButton(event:TouchEvent){
+		private function onLevelFiveButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 
@@ -219,15 +244,22 @@
 		}
 
 
-		private function addLevelThreeButton(){
-			level3SelectButton = new Image(Main.assets.getTexture("Level3")); 
-			addChild( level3SelectButton );
-			
-			level3SelectButton.x = (Starling.current.stage.stageWidth - level3SelectButton.width) * (3/4);
-			level3SelectButton.y = (Starling.current.stage.stageHeight - level3SelectButton.height) * (1/3);
-			
-			level3SelectButton.addEventListener( TouchEvent.TOUCH , onLevelThreeButton );
-			
+		private function addLevelSixButton(){
+			if(MainMenuScreen.saveDataObject.data.level5Score>0){
+				level6SelectButton = new Image(Main.assets.getTexture("Level6")); 
+				addChild( level6SelectButton );
+				
+				level6SelectButton.x = (Starling.current.stage.stageWidth - level6SelectButton.width) * (3/4);
+				level6SelectButton.y = (Starling.current.stage.stageHeight - level6SelectButton.height) * (1/3);
+				
+				level6SelectButton.addEventListener( TouchEvent.TOUCH , onLevelSixButton );
+			}
+			else{
+				level6SelectButton = new Image(Main.assets.getTexture("Level6Grey")); 
+				addChild( level6SelectButton );				
+				level6SelectButton.x = (Starling.current.stage.stageWidth - level6SelectButton.width) * (3/4);
+				level6SelectButton.y = (Starling.current.stage.stageHeight - level6SelectButton.height) * (1/3);
+			}
 			var star1:Image;
 			var star2:Image;
 			var star3:Image;
@@ -264,22 +296,22 @@
 				addChild( star2 );
 				addChild( star3 );
 			}
-			star1.width=level1SelectButton.width-8;
+			star1.width=level6SelectButton.width-8;
 			star1.height=star1.width;
 			star2.width=star1.width;
 			star2.height=star1.width;
 			star3.width=star1.width;
 			star3.height=star1.width;
 			
-			star1.x=level3SelectButton.x-star1.width+3;
-			star1.y=level3SelectButton.y+level3SelectButton.height+5;
-			star2.x=level3SelectButton.x+3;
-			star2.y=level3SelectButton.y+level3SelectButton.height+5;
-			star3.x=level3SelectButton.x+star1.width+3;
-			star3.y=level3SelectButton.y+level3SelectButton.height+5;
+			star1.x=level6SelectButton.x-star1.width+3;
+			star1.y=level6SelectButton.y+level6SelectButton.height+5;
+			star2.x=level6SelectButton.x+3;
+			star2.y=level6SelectButton.y+level6SelectButton.height+5;
+			star3.x=level6SelectButton.x+star1.width+3;
+			star3.y=level6SelectButton.y+level6SelectButton.height+5;
 		}
 		
-		private function onLevelThreeButton(event:TouchEvent){
+		private function onLevelSixButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN)
 			{ 

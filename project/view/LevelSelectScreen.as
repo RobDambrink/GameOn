@@ -136,14 +136,22 @@
 		
 		
 		private function addLevelTwoButton(){
-			level2SelectButton = new Image(Main.assets.getTexture("Level2")); 
-			addChild( level2SelectButton );
-			
-			level2SelectButton.x = (Starling.current.stage.stageWidth - level2SelectButton.width) * (1/2);
-			level2SelectButton.y = (Starling.current.stage.stageHeight - level2SelectButton.height) * (1/3);
-			
-			level2SelectButton.addEventListener( TouchEvent.TOUCH , onLevelTwoButton );
-			
+			if(MainMenuScreen.saveDataObject.data.level1Score>0){	
+				level2SelectButton = new Image(Main.assets.getTexture("Level2")); 
+				addChild( level2SelectButton );
+				
+				level2SelectButton.x = (Starling.current.stage.stageWidth - level2SelectButton.width) * (1/2);
+				level2SelectButton.y = (Starling.current.stage.stageHeight - level2SelectButton.height) * (1/3);
+				
+				level2SelectButton.addEventListener( TouchEvent.TOUCH , onLevelTwoButton );
+			}
+			else{
+				level2SelectButton = new Image(Main.assets.getTexture("Level2Grey")); 
+				addChild( level2SelectButton );
+				
+				level2SelectButton.x = (Starling.current.stage.stageWidth - level2SelectButton.width) * (1/2);
+				level2SelectButton.y = (Starling.current.stage.stageHeight - level2SelectButton.height) * (1/3);
+			}
 			var star1:Image;
 			var star2:Image;
 			var star3:Image;
@@ -204,7 +212,8 @@
 		}
 
 
-		private function addLevelThreeButton(){
+		private function addLevelThreeButton(){			
+			if(MainMenuScreen.saveDataObject.data.level2Score>0){				
 			level3SelectButton = new Image(Main.assets.getTexture("Level3")); 
 			addChild( level3SelectButton );
 			
@@ -212,6 +221,14 @@
 			level3SelectButton.y = (Starling.current.stage.stageHeight - level3SelectButton.height) * (1/3);
 			
 			level3SelectButton.addEventListener( TouchEvent.TOUCH , onLevelThreeButton );
+			}
+			else{
+			level3SelectButton = new Image(Main.assets.getTexture("Level3Grey")); 
+			addChild( level3SelectButton );
+			
+			level3SelectButton.x = (Starling.current.stage.stageWidth - level3SelectButton.width) * (3/4);
+			level3SelectButton.y = (Starling.current.stage.stageHeight - level3SelectButton.height) * (1/3);
+			}
 			
 			var star1:Image;
 			var star2:Image;
