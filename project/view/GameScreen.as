@@ -16,6 +16,8 @@
 	import starling.animation.Transitions;
 	import starling.text.TextField;
 	import starling.display.MovieClip;
+	import starling.utils.AssetManager;
+	import org.SoundManager;
 	
 	public class GameScreen extends Sprite{
 		
@@ -54,6 +56,8 @@
 		var tween:Tween = new Tween(player,playerSpeed,"linear");
 		var enemy1Tween:Tween = new Tween(enemy1,enemySpeed,"linear");
 		var enemy2Tween:Tween = new Tween(enemy2,enemySpeed,"linear");
+		
+
 		var map:Array = [
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // level 1
 			[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
@@ -474,7 +478,8 @@
 				}
 			}
 			if(player.getBounds(player.parent).intersects(enemy1.getBounds(enemy1.parent)) || player.getBounds(player.parent).intersects(enemy2.getBounds(enemy2.parent))){
-				if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount<1){				
+				if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount<1){
+					Navigator.soundManager.playSound("hitEnemy", 1.0, 1);
 					HealthBar.hp-=10;
 					MainMenuScreen.saveDataObject.data.condomCount=0;
 					timer+=240;
@@ -485,6 +490,7 @@
 				}
 				else if(!player.hit && MainMenuScreen.saveDataObject.data.condomCount>=1){
 					MainMenuScreen.saveDataObject.data.condomCount--;
+					Navigator.soundManager.playSound("plop", 1.0, 1);
 					
 					removeChild(condomText,true);
 					condomText = new TextField(100,24,MainMenuScreen.saveDataObject.data.condomCount.toString());

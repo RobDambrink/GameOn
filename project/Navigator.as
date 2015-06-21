@@ -34,8 +34,12 @@
 		public function start(assets: AssetManager) {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			Navigator.instance = this;
-			loadScreen("mainMenu",0);
 			soundManager.addSound("menuSound", assets.getSound("soundtrack"));
+			soundManager.addSound("hitEnemy", assets.getSound("enemyHit"));
+			soundManager.addSound("plop", assets.getSound("plop"));
+			soundManager.addSound("gameOver", assets.getSound("gameover"));
+			soundManager.addSound("bell", assets.getSound("bell"));
+			loadScreen("mainMenu",0);
 		}
 		
 		

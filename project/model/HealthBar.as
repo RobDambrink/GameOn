@@ -7,7 +7,8 @@
 	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.events.Touch;
-	import starling.events.TouchPhase;	
+	import starling.events.TouchPhase;
+	import org.SoundManager;
 	import view.*;
 
 
@@ -33,10 +34,12 @@
 		
 		public function updateHealthBar(){			
 			if (hp > (maxHp - 1)){
+				Navigator.soundManager.playSound("bell", 1.0, 1);
 				hp = maxHp;
 			}			
 			if (hp < 1){
 				hp = 0;
+				Navigator.soundManager.playSound("gameOver", 1.0, 1);
 				Navigator.instance.loadScreen( "scoreScreen" ,0);
 			}
 			percentHp = hp / maxHp;
