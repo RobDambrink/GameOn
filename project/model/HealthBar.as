@@ -34,7 +34,7 @@
 		
 		public function updateHealthBar(){			
 			if (hp > (maxHp - 1)){
-				Navigator.soundManager.playSound("bell", 1.0, 1);
+//				Navigator.soundManager.playSound("bell", 1.0, 1); 	Moet in Exit animatie komen te staan om te fixen!
 				hp = maxHp;
 			}			
 			if (hp < 1){

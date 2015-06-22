@@ -202,7 +202,7 @@
 				MainMenuScreen.saveDataObject.data.condomCount = 0;
 			}
 			
-			HealthBar.hp=20; 
+			HealthBar.hp=90; 
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);
