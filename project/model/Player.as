@@ -17,8 +17,8 @@
 		public static var gender:String;
 		public var hit:Boolean=false;
 		public var playerAnimation:MovieClip;
-		var animHeight:int = 24*Main.scaleFactor;
-		
+		public var animHeight:int = 24*Main.scaleFactor;
+		public var animWidth:int = 24*Main.scaleFactor;
 
 		public function Player(){
 			gender = MainMenuScreen.saveDataObject.data.gender;
@@ -27,6 +27,7 @@
 				addChild(playerAnimation);
 				Starling.juggler.add(playerAnimation);
 				playerAnimation.height=animHeight;
+				playerAnimation.width=animWidth;
 				playerAnimation.loop=false;
 				playerAnimation.play();				
 			}
@@ -35,6 +36,7 @@
 				addChild(playerAnimation);
 				Starling.juggler.add(playerAnimation);
 				playerAnimation.height=animHeight;
+				playerAnimation.width=animWidth;
 				playerAnimation.loop=false;
 				playerAnimation.play();
 			}
@@ -49,20 +51,44 @@
 					removeChild(playerAnimation);
 					Starling.juggler.remove(playerAnimation);
 					if(gender=="male"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("boy-left"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-left"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 					if(gender=="female"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("girl-left"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-left"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 				}
 				if(GameScreen.direction=="right"){
@@ -70,20 +96,44 @@
 					removeChild(playerAnimation);
 					Starling.juggler.remove(playerAnimation);
 					if(gender=="male"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("boy-right"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-right"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 					if(gender=="female"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("girl-right"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-right"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 				}
 				if(GameScreen.direction=="up"){
@@ -91,20 +141,44 @@
 					removeChild(playerAnimation);
 					Starling.juggler.remove(playerAnimation);
 					if(gender=="male"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("boy-back"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-back"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 					if(gender=="female"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("girl-back"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-back"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 				}
 				if(GameScreen.direction=="down"){
@@ -112,20 +186,44 @@
 					removeChild(playerAnimation);
 					Starling.juggler.remove(playerAnimation);
 					if(gender=="male"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("boy-front"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-front"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 					if(gender=="female"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("girl-front"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-front"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 				}
 				else if(GameScreen.direction==""){
@@ -133,20 +231,44 @@
 					removeChild(playerAnimation);
 					Starling.juggler.remove(playerAnimation);
 					if(gender=="male"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 					if(gender=="female"){
-						playerAnimation = new MovieClip(Main.assets.getTextures("girl-front0000"),24);
-						addChild(playerAnimation);
-						Starling.juggler.add(playerAnimation);
-						playerAnimation.height=animHeight;
-						playerAnimation.loop=false;
-						playerAnimation.play();
+						if(infected){
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-infected"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();							
+						}
+						else{
+							playerAnimation = new MovieClip(Main.assets.getTextures("girl-front0000"),24);
+							addChild(playerAnimation);
+							Starling.juggler.add(playerAnimation);
+							playerAnimation.height=animHeight;
+							playerAnimation.width=animWidth;
+							playerAnimation.loop=false;
+							playerAnimation.play();
+						}
 					}
 				}
 			}
