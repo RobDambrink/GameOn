@@ -7,6 +7,7 @@
 	import starling.events.EnterFrameEvent;
 	import starling.display.MovieClip;
 	import flash.utils.setTimeout;
+	import view.*;
 	
 
 /**
@@ -21,8 +22,6 @@
 	var wallType:String;
 		
 		public function Wall(type:String) {
-			
-			
 			if (type === "House"){
 				wall = new Image(Main.assets.getTexture("TileHouse"));
 			}
@@ -36,9 +35,7 @@
 				wall = new Image(Main.assets.getTexture("TileTransparent"));
 			}
 			if (type === "Exit"){
-				//wall = new Image(Main.assets.getTexture("TileExit"));
 				wallType=type;
-				
 				exitAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24); // first frame from spritesheet
 				addChild(exitAnimation);
 				Starling.juggler.add(exitAnimation);
@@ -46,33 +43,35 @@
 				exitAnimation.width=animWidth;
 				exitAnimation.loop=false;
 				exitAnimation.play();
+				addEventListener(Event.ENTER_FRAME, updateAnimation);
 			}
 			if(wall){
 				addChild( wall );
 			}
-			addEventListener(Event.ENTER_FRAME, updateAnimation);
+			MainMenuScreen.saveDataObject.data.fullHealthSound = false;
 		}
 		
+		
 		function updateAnimation(event:Event){
-			//var maxHealthReached:Boolean;
 			if(wallType=="Exit"){
 				if(HealthBar.hp>(HealthBar.maxHp-1)){
-					//maxHealthReached = true;
-					Navigator.soundManager.playSound("bell", 1.0, 1);
-					exitAnimation = new MovieClip(Main.assets.getTextures("boy-infected0000"),24); // spritesheet of exit opening
-					addChild(exitAnimation);
-					Starling.juggler.add(exitAnimation);
-					exitAnimation.height=animHeight;
-					exitAnimation.width=animWidth;
-					exitAnimation.loop=false;
-					exitAnimation.play();	
-					setTimeout(function(){Navigator.soundManager.stopSound("bell");},2000);
-				}
-				if(HealthBar.hp<=(HealthBar.maxHp-1)){
-					maxHealthReached = false;
+					if(MainMenuScreen.saveDataObject.data.fullHealthSound == false){
+						Navigator.soundManager.playSound("bell", 1.0, 1);
+						if(exitAnimation.isComplete){
+							exitAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24); // spritesheet of exit opening
+							addChild(exitAnimation);
+							Starling.juggler.add(exitAnimation);
+							exitAnimation.height=animHeight;
+							exitAnimation.width=animWidth;
+							exitAnimation.loop=false;
+							exitAnimation.play();
+						}	
+						MainMenuScreen.saveDataObject.data.fullHealthSound = true;
+					}
 				}
 			}
 		}
+		
 		
 	}
 }

@@ -61,7 +61,7 @@
 		*	@param event - The onAddedToStage event.
 		**/
 		private function onAddedToStage(event: Event) {			
-			var myDataObject:Object = {gender:"", condomCount:0, currency:0};
+			var myDataObject:Object = {gender:"", condomCount:0, currency:0, fullHealthSound:false};
 			
 			addMenuBackground();
 			addPlayBtn();
