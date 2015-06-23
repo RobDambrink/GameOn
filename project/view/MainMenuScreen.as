@@ -102,7 +102,7 @@
 		**/
 
 		private function addPlayBtn() {
-			playBtn = new Image(Main.assets.getTexture("PlayButton"));
+			playBtn = new Image(Main.assets.getTexture("ButtonPlay"));
 			addChild(playBtn);
 
 			playBtn.y = 15;
@@ -112,7 +112,7 @@
 		}
 
 		private function addPharmacyButton() {
-			pharmacyButton = new Image(Main.assets.getTexture("PharmacyButton"));
+			pharmacyButton = new Image(Main.assets.getTexture("ButtonPharmacy"));
 			addChild(pharmacyButton);
 
 			pharmacyButton.y = playBtn.y + playBtn.height + 10;
@@ -122,7 +122,7 @@
 		}
 
 		private function addTutorialButton() {
-			tutorialButton = new Image(Main.assets.getTexture("TutorialButton"));
+			tutorialButton = new Image(Main.assets.getTexture("ButtonTutorial"));
 			addChild(tutorialButton);
 
 			tutorialButton.y = pharmacyButton.y + pharmacyButton.height + 10;
@@ -132,7 +132,7 @@
 		}
 		
 		private function addMuteButton(){
-			muteButton = new Image(Main.assets.getTexture("unMuted"));
+			muteButton = new Image(Main.assets.getTexture("ButtonMute"));
 			addChild(muteButton);
 			muteButton.y=(Starling.current.stage.stageHeight-muteButton.height)*(31/32);
 			muteButton.x=(Starling.current.stage.stageWidth-muteButton.width)*(31/32);
@@ -140,7 +140,7 @@
 		}
 		
 		private function addUnMuteButton(){
-			muteButton = new Image(Main.assets.getTexture("muted"));
+			muteButton = new Image(Main.assets.getTexture("ButtonUnmute"));
 			addChild(muteButton);
 			muteButton.y=(Starling.current.stage.stageHeight-muteButton.height)*(31/32);
 			muteButton.x=(Starling.current.stage.stageWidth-muteButton.width)*(31/32);
@@ -217,8 +217,8 @@
 			if(count==3){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-3"));			
 			}
-			tutContinue = new Image(Main.assets.getTexture("TutorialContinueButton")); 
-			tutReturn = new Image(Main.assets.getTexture("TutorialReturnButton")); 
+			tutContinue = new Image(Main.assets.getTexture("ButtonTutorialContinue")); 
+			tutReturn = new Image(Main.assets.getTexture("ButtonTutorialReturn")); 
 			
 			addChild(tutorial);
 			addChild(tutContinue);

@@ -551,23 +551,23 @@
 		*	Adds the menu overlay background, resume-, tutorial- and exitbuttons once the pause button has been touched.
 		**/
 		public function addPauseMenu(){		
-			pauseMenu = new Image(Main.assets.getTexture("PauseBackground")); 
+			pauseMenu = new Image(Main.assets.getTexture("Menubox")); 
 			pauseMenu.x = (Starling.current.stage.stageWidth - pauseMenu.width)-((Starling.current.stage.stageWidth - pauseMenu.width) / 2);
 			pauseMenu.y = 48;
 			
-			pauseResume = new Image(Main.assets.getTexture("Circle24")); 
+			pauseResume = new Image(Main.assets.getTexture("ButtonResume")); 
 			pauseResume.x = (Starling.current.stage.stageWidth - pauseResume.width)-((Starling.current.stage.stageWidth - pauseResume.width) / 2);
 			pauseResume.y = 72;
 			pauseResume.addEventListener( TouchEvent.TOUCH , onResumeButton );
 			
-			pauseTutorial = new Image(Main.assets.getTexture("TutorialButton")); 
+			pauseTutorial = new Image(Main.assets.getTexture("ButtonTutorial")); 
 			pauseTutorial.x = (Starling.current.stage.stageWidth - pauseTutorial.width)-((Starling.current.stage.stageWidth - pauseTutorial.width) / 2);
-			pauseTutorial.y = 96;
+			pauseTutorial.y = 107;
 			pauseTutorial.addEventListener( TouchEvent.TOUCH , onTutorialButton );
 			
-			pauseExit = new Image(Main.assets.getTexture("Circle24")); 
+			pauseExit = new Image(Main.assets.getTexture("ButtonExit")); 
 			pauseExit.x = (Starling.current.stage.stageWidth - pauseExit.width)-((Starling.current.stage.stageWidth - pauseExit.width) / 2);
-			pauseExit.y = 120;
+			pauseExit.y = 142;
 			pauseExit.addEventListener( TouchEvent.TOUCH , onExitButton );
 		
 			addChild( pauseMenu );
@@ -636,7 +636,7 @@
 		*	Adds the pause button to the top right corner of the level.
 		**/
 		private function addBackButton(){
-			backButton = new Image(Main.assets.getTexture("BackButton")); 
+			backButton = new Image(Main.assets.getTexture("ButtonPause")); 
 			backButton.x = (Starling.current.stage.stageWidth - backButton.width)-((Starling.current.stage.stageWidth - backButton.width) * (1/32));
 			backButton.y = 2;
 			backButton.width -= 15;
@@ -650,7 +650,7 @@
 		*	Adds the mute button to the top right corner of the game.
 		**/
 		private function addMuteButton(){
-			muteButton = new Image(Main.assets.getTexture("unMuted"));
+			muteButton = new Image(Main.assets.getTexture("ButtonMute"));
 			addChild(muteButton);
 			setChildIndex ( muteButton, ( numChildren - 1 ));
 			muteButton.y=Starling.current.stage.stageHeight*(3/4);
@@ -662,7 +662,7 @@
 		*	Adds the unmute button to the top right corner of the game.
 		**/
 		private function addUnMuteButton(){
-			muteButton = new Image(Main.assets.getTexture("muted"));
+			muteButton = new Image(Main.assets.getTexture("ButtonUnmute"));
 			addChild(muteButton);
 			setChildIndex ( muteButton, ( numChildren - 1 ));
 			muteButton.y=Starling.current.stage.stageHeight*(3/4);
@@ -730,13 +730,13 @@
 		private function addMazeBackground(){
 			var backGround:String;
 			if(level==1 || level==2 || level==3){
-				backGround="background-orange";
+				backGround="preschool";
 			}
 			if(level==4 || level==5 || level==6){
 				backGround="school";
 			}			
 			if(level==7 || level==8 || level==9){
-				backGround="background-desert";
+				backGround="afterschool";
 			}
 			mazeBackground = new Image(Main.assets.getTexture(backGround));
 			addChild(mazeBackground);
@@ -756,8 +756,8 @@
 			if(count==3){
 				tutorial = new Image(Main.assets.getTexture("tutorial-screen-3"));			
 			}
-			tutContinue = new Image(Main.assets.getTexture("TutorialContinueButton")); 
-			tutReturn = new Image(Main.assets.getTexture("TutorialReturnButton")); 
+			tutContinue = new Image(Main.assets.getTexture("ButtonTutorialContinue")); 
+			tutReturn = new Image(Main.assets.getTexture("ButtonTutorialReturn")); 
 			
 			addChild(tutorial);
 			addChild(tutContinue);

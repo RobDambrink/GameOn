@@ -21,7 +21,6 @@
 		
 		
 		private function onAddedToStage(event:Event){
-			trace("PharmacyScreen loaded");
 			addMenuBackground();
 			addBackButton();
 			addBuyButton();
@@ -39,7 +38,7 @@
 		
 		
 		private function addBuyButton(){
-			buyButton = new Image(Main.assets.getTexture("Circle"));
+			buyButton = new Image(Main.assets.getTexture("Star"));
 			addChild(buyButton);
 			buyButton.y = 100;
 			buyButton.x = 100;
@@ -59,7 +58,6 @@
 					starsText.text = "Stars: " + MainMenuScreen.saveDataObject.data.currency.toString();
 					MainMenuScreen.saveDataObject.flush();
 				}
-				else{trace("fu");}
 			}
 		}
 		
@@ -71,7 +69,7 @@
 		
 		
 		private function addBackButton(){
-			backButton = new Image(Main.assets.getTexture("BackButton"));
+			backButton = new Image(Main.assets.getTexture("ButtonBack"));
 			addChild(backButton);
 			backButton.y = 15;
 			backButton.x = 15;

@@ -1,8 +1,13 @@
 ﻿package view{
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.textures.Texture;
 	import starling.display.Image;
+	import starling.events.TouchEvent;
+	import starling.events.Touch;
+	import starling.events.TouchPhase;
 	import starling.core.Starling;
+	import model.*;
 	
 	public class ScoreScreen extends Sprite{
 		
@@ -13,7 +18,8 @@
 		public static var currency:int;
 		var starCount:int;
 		var background:Image;
-
+		var exitButton:Image;
+		
 		public function ScoreScreen(score:int) {
 			// constructor code
 			this.score=score;
@@ -29,6 +35,7 @@
 			addBackground();
 			countStars();
 			saveScore();
+			addExitButton();
 		}
 		
 		function addBackground(){
@@ -141,11 +148,26 @@
 				addChild( star3 );
 			}
 			star1.x=(Starling.current.stage.stageWidth - star1.width)*(1/4);
-			star1.y=Starling.current.stage.stageHeight/2;
+			star1.y=Starling.current.stage.stageHeight*(1/3);
 			star2.x=(Starling.current.stage.stageWidth - star2.width)*(1/2);
-			star2.y=Starling.current.stage.stageHeight/2;
+			star2.y=Starling.current.stage.stageHeight*(1/3);
 			star3.x=(Starling.current.stage.stageWidth - star3.width)*(3/4);
-			star3.y=Starling.current.stage.stageHeight/2;
+			star3.y=Starling.current.stage.stageHeight*(1/3);
+		}
+		
+		private function addExitButton(){
+			exitButton = new Image(Main.assets.getTexture("ButtonExit")); 
+			addChild( exitButton );			
+			exitButton.x = (Starling.current.stage.stageWidth - exitButton.width)/2;
+			exitButton.y = (Starling.current.stage.stageHeight - exitButton.height)/2;			
+			exitButton.addEventListener( TouchEvent.TOUCH , onExitButton );
+		}
+			
+		private function onExitButton(event:TouchEvent){
+			var touch:Touch = event.touches[0];
+			if(touch.phase == TouchPhase.BEGAN){ 
+				Navigator.instance.loadScreen( "MainMenuScreen" ,0);
+			}
 		}
 
 	}

@@ -62,7 +62,7 @@
 		}
 		
 		private function addMaleButton(){
-			maleButton = new Image(Main.assets.getTexture("MaleButton")); 
+			maleButton = new Image(Main.assets.getTexture("ButtonMale")); 
 			addChild( maleButton );
 			
 			maleButton.x = (Starling.current.stage.stageWidth - maleButton.width) * (1/6);
@@ -72,7 +72,7 @@
 		}
 		
 		private function addFemaleButton(){
-			femaleButton = new Image(Main.assets.getTexture("FemaleButton"));
+			femaleButton = new Image(Main.assets.getTexture("ButtonFemale"));
 			addChild( femaleButton );
 			
 			femaleButton.x = (Starling.current.stage.stageWidth - femaleButton.width) * (5/6);

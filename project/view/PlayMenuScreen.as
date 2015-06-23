@@ -42,11 +42,11 @@
 
 		private function addContinueButton(){
 			if(MainMenuScreen.saveDataObject.data.gender=="" || MainMenuScreen.saveDataObject.data.gender==null){
-				continueButton = new Image(Main.assets.getTexture("GreyContinueButton"));	
+				continueButton = new Image(Main.assets.getTexture("ButtonContinueGrey"));	
 			}
 			else{
 				trace("else", MainMenuScreen.saveDataObject.data.gender);
-				continueButton = new Image(Main.assets.getTexture("ContinueButton"));				
+				continueButton = new Image(Main.assets.getTexture("ButtonContinue"));				
 				continueButton.addEventListener( TouchEvent.TOUCH , onContinueButton );
 			}
 			addChild( continueButton );				
@@ -55,7 +55,7 @@
 		}
 		
 		private function addNewGameButton(){
-			newGameButton = new Image(Main.assets.getTexture("NewGameButton"));
+			newGameButton = new Image(Main.assets.getTexture("ButtonNewGame"));
 			addChild( newGameButton );
 			
 			newGameButton.y = continueButton.y + continueButton.height + 10;
@@ -86,18 +86,18 @@
 					Navigator.instance.loadScreen( "genderSelect" ,0);					
 				}
 				else{
-					warningBackground = new Image(Main.assets.getTexture("PauseBackground")); 
+					warningBackground = new Image(Main.assets.getTexture("MenuBox")); 
 					warningBackground.x = (Starling.current.stage.stageWidth - warningBackground.width)-((Starling.current.stage.stageWidth - warningBackground.width) / 2);
 					warningBackground.y = 48;
 					
-					warningOK = new Image(Main.assets.getTexture("green")); 
-					warningOK.x = (Starling.current.stage.stageWidth - warningOK.width)-((Starling.current.stage.stageWidth - warningOK.width) / 4);
-					warningOK.y = 72;
+					warningOK = new Image(Main.assets.getTexture("ButtonYes")); 
+					warningOK.x = (Starling.current.stage.stageWidth - warningOK.width)-((Starling.current.stage.stageWidth - warningOK.width) / 2);
+					warningOK.y = 92;
 					warningOK.addEventListener( TouchEvent.TOUCH , onOKButton );
 				
-					warningCancel = new Image(Main.assets.getTexture("Circle")); 
+					warningCancel = new Image(Main.assets.getTexture("ButtonNo")); 
 					warningCancel.x = (Starling.current.stage.stageWidth - warningCancel.width)-((Starling.current.stage.stageWidth - warningCancel.width) / 2);
-					warningCancel.y = 72;
+					warningCancel.y = 127;
 					warningCancel.addEventListener( TouchEvent.TOUCH , onCancelButton );
 					
 					addChild(warningBackground);
