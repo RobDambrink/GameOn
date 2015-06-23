@@ -551,7 +551,7 @@
 		*	Adds the menu overlay background, resume-, tutorial- and exitbuttons once the pause button has been touched.
 		**/
 		public function addPauseMenu(){		
-			pauseMenu = new Image(Main.assets.getTexture("Menubox")); 
+			pauseMenu = new Image(Main.assets.getTexture("MenuBox")); 
 			pauseMenu.x = (Starling.current.stage.stageWidth - pauseMenu.width)-((Starling.current.stage.stageWidth - pauseMenu.width) / 2);
 			pauseMenu.y = 48;
 			

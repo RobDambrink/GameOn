@@ -15,11 +15,11 @@
 */
 	public class Wall extends Sprite{
 	
-	var wall:Image;
-	var exitAnimation:MovieClip;
+	public var wall:Image;
+	public var exitAnimation:MovieClip;
 	public var animHeight:int = 24*Main.scaleFactor;
 	public var animWidth:int = 24*Main.scaleFactor;
-	var wallType:String;
+	public var wallType:String;
 		
 		public function Wall(type:String) {
 			if (type === "House"){
@@ -36,7 +36,7 @@
 			}
 			if (type === "Exit"){
 				wallType=type;
-				exitAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24); // first frame from spritesheet
+				exitAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24); // first frame from Exit spritesheet
 				addChild(exitAnimation);
 				Starling.juggler.add(exitAnimation);
 				exitAnimation.height=animHeight;
