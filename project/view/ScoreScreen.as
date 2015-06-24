@@ -16,8 +16,8 @@
 		var star1animation:MovieClip;
 		var star2animation:MovieClip;
 		var star3animation:MovieClip;
-		public var animHeight:int = 67*Main.scaleFactor;
-		public var animWidth:int = 67*Main.scaleFactor;
+		public var animHeight:int = 67;
+		public var animWidth:int = 67;
 		var star1:Image;
 		var star2:Image;
 		var star3:Image;

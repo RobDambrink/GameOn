@@ -17,8 +17,8 @@
 		public static var gender:String;
 		public var hit:Boolean=false;
 		public var playerAnimation:MovieClip;
-		public var animHeight:int = 24*Main.scaleFactor;
-		public var animWidth:int = 24*Main.scaleFactor;
+		public var animHeight:int = 24;
+		public var animWidth:int = 24;
 
 		public function Player(){
 			gender = MainMenuScreen.saveDataObject.data.gender;

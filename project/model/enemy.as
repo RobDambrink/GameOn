@@ -19,8 +19,8 @@
 		public var enemyY:int;
 		public var enemyType:String;
 		public var enemyAnimation:MovieClip;
-		public var animHeight:int = 24*Main.scaleFactor;
-		public var animWidth:int = 24*Main.scaleFactor;
+		public var animHeight:int = 24;
+		public var animWidth:int = 24;
 		
 		public function Enemy(type:String){
 			if(type=="SPERM"){ 

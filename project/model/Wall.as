@@ -17,8 +17,8 @@
 	
 	public var wall:Image;
 	public var exitAnimation:MovieClip;
-	public var animHeight:int = 24*Main.scaleFactor;
-	public var animWidth:int = 24*Main.scaleFactor;
+	public var animHeight:int = 24;
+	public var animWidth:int = 24;
 	public var wallType:String;
 		
 		public function Wall(type:String) {
