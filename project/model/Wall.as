@@ -55,7 +55,7 @@
 		function updateAnimation(event:Event){
 			if(wallType=="Exit"){
 				if(HealthBar.hp>(HealthBar.maxHp-1)){
-					if(MainMenuScreen.saveDataObject.data.fullHealthSound == false){
+					if(MainMenuScreen.saveDataObject.data.fullHealthSound==false){
 						Navigator.soundManager.playSound("bell", 1.0, 1);
 						if(exitAnimation.isComplete){
 							exitAnimation.stop();
@@ -70,8 +70,24 @@
 							exitAnimation.loop=false;
 							exitAnimation.play();
 						}	
-						MainMenuScreen.saveDataObject.data.fullHealthSound = true;
+						MainMenuScreen.saveDataObject.data.fullHealthSound=true;
 					}
+				}
+				if(MainMenuScreen.saveDataObject.data.fullHealthSound==true && HealthBar.hp<(HealthBar.maxHp-1)){
+					exitAnimation.stop();
+					removeChild(exitAnimation);
+					Starling.juggler.remove(exitAnimation);
+					
+					// implement new reverse exit movieclip spritesheet here instead of this code
+					exitAnimation = new MovieClip(Main.assets.getTextures("open-door0000"),24); // first frame from Exit spritesheet
+					addChild(exitAnimation);
+					Starling.juggler.add(exitAnimation);
+					exitAnimation.height=animHeight;
+					exitAnimation.width=animWidth;
+					exitAnimation.loop=false;
+					exitAnimation.play();
+					
+					MainMenuScreen.saveDataObject.data.fullHealthSound=false;
 				}
 			}
 		}
