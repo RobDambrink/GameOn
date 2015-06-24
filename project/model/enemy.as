@@ -22,16 +22,17 @@
 		public var animWidth:int = 24*Main.scaleFactor;
 		
 		public function Enemy(){
-			if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+			if(GameScreen.thisLevel==1){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
 				enemyAnimation.height=animHeight;
 				enemyAnimation.width=animWidth;
 				enemyAnimation.loop=false;
-				enemyAnimation.play();				
+				enemyAnimation.play();
+				trace("hoi een");
 			}
-			if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
+			if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){ 
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
@@ -51,7 +52,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-left"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -60,7 +61,7 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
+					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-left"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -74,8 +75,8 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
-						enemyAnimation = new MovieClip(Main.assets.getTextures("boy-right"),24);
+					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-right"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -83,8 +84,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
-						enemyAnimation = new MovieClip(Main.assets.getTextures("girl-right"),24);
+					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-right"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -97,7 +98,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-up"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -106,7 +107,7 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
+					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-up"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -120,7 +121,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -129,7 +130,7 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
+					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -143,7 +144,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(Player.gender=="male"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -152,7 +153,7 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(Player.gender=="female"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR STI
+					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);

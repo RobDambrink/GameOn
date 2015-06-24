@@ -36,7 +36,7 @@
 			}
 			if (type === "Exit"){
 				wallType=type;
-				exitAnimation = new MovieClip(Main.assets.getTextures("boy-front0000"),24); // first frame from Exit spritesheet
+				exitAnimation = new MovieClip(Main.assets.getTextures("open-door0000"),24); // first frame from Exit spritesheet
 				addChild(exitAnimation);
 				Starling.juggler.add(exitAnimation);
 				exitAnimation.height=animHeight;
@@ -58,7 +58,11 @@
 					if(MainMenuScreen.saveDataObject.data.fullHealthSound == false){
 						Navigator.soundManager.playSound("bell", 1.0, 1);
 						if(exitAnimation.isComplete){
-							exitAnimation = new MovieClip(Main.assets.getTextures("boy-infected"),24); // spritesheet of exit opening
+							exitAnimation.stop();
+							removeChild(exitAnimation);
+							Starling.juggler.remove(exitAnimation);
+					
+							exitAnimation = new MovieClip(Main.assets.getTextures("open-door"),24); // spritesheet of exit opening
 							addChild(exitAnimation);
 							Starling.juggler.add(exitAnimation);
 							exitAnimation.height=animHeight;

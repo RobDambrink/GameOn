@@ -184,9 +184,9 @@
 		*	@param level - The level that needs to be loaded.
 		**/
 		public function GameScreen(level:int){
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.level=level;
 			thisLevel=level;
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
 		/**
@@ -201,6 +201,8 @@
 			if(MainMenuScreen.saveDataObject.data.condomCount==null){
 				MainMenuScreen.saveDataObject.data.condomCount = 0;
 			}
+			
+			trace(thisLevel);
 			
 			HealthBar.hp=90; 
 			addMazeBackground();
