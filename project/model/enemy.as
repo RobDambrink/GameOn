@@ -21,8 +21,8 @@
 		public var animHeight:int = 24*Main.scaleFactor;
 		public var animWidth:int = 24*Main.scaleFactor;
 		
-		public function Enemy(){
-			if(GameScreen.thisLevel==1){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+		public function Enemy(type:String){
+			if(type=="STI"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
@@ -30,9 +30,10 @@
 				enemyAnimation.width=animWidth;
 				enemyAnimation.loop=false;
 				enemyAnimation.play();
-				trace("hoi een");
+				trace("hoi STI");
 			}
-			if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){ 
+			if(type=="SPERM"){ 
+				trace("hey sperm");
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
