@@ -17,12 +17,14 @@
 		public var enDir:String="";
 		public var enemyX:int;
 		public var enemyY:int;
+		public var enemyType:String;
 		public var enemyAnimation:MovieClip;
 		public var animHeight:int = 24*Main.scaleFactor;
 		public var animWidth:int = 24*Main.scaleFactor;
 		
 		public function Enemy(type:String){
-			if(type=="STI"){ // CHANGE THIS IF CONDITION TO THE RIGHT LEVELS FOR SPERMS
+			if(type=="SPERM"){ 
+				enemyType=type;
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
@@ -30,10 +32,9 @@
 				enemyAnimation.width=animWidth;
 				enemyAnimation.loop=false;
 				enemyAnimation.play();
-				trace("hoi STI");
 			}
-			if(type=="SPERM"){ 
-				trace("hey sperm");
+			if(type=="STI"){ 
+				enemyType=type;
 				enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 				addChild(enemyAnimation);
 				Starling.juggler.add(enemyAnimation);
@@ -53,7 +54,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+					if(enemyType=="SPERM"){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-left"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -62,8 +63,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
-						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-left"),24);
+					if(enemyType=="STI"){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-left"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -76,7 +77,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+					if(enemyType=="SPERM"){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-right"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -85,8 +86,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
-						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-right"),24);
+					if(enemyType=="STI"){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-right"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -99,7 +100,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+					if(enemyType=="SPERM"){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-up"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -108,8 +109,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
-						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-up"),24);
+					if(enemyType=="STI"){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-up"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -122,7 +123,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+					if(enemyType=="SPERM"){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -131,8 +132,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
-						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down"),24);
+					if(enemyType=="STI"){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 
@@ -145,7 +146,7 @@
 					enemyAnimation.stop();
 					removeChild(enemyAnimation);
 					Starling.juggler.remove(enemyAnimation);
-					if(GameScreen.thisLevel==1 || GameScreen.thisLevel==2 || GameScreen.thisLevel==3 || GameScreen.thisLevel==4 || GameScreen.thisLevel==5 || GameScreen.thisLevel==6){
+					if(enemyType=="SPERM"){
 						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
@@ -154,8 +155,8 @@
 						enemyAnimation.loop=false;
 						enemyAnimation.play();
 					}
-					if(GameScreen.thisLevel==7 || GameScreen.thisLevel==8 || GameScreen.thisLevel==9){
-						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24);
+					if(enemyType=="STI"){
+						enemyAnimation = new MovieClip(Main.assets.getTextures("sperm-down0000"),24); // CHANGE THIS SPRITESHEET FOR THE STI ONE
 						addChild(enemyAnimation);
 						Starling.juggler.add(enemyAnimation);
 						enemyAnimation.height=animHeight; 

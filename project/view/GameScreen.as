@@ -197,23 +197,21 @@
 			var swipe:SwipeGesture = new SwipeGesture(stage);
 			swipe.addEventListener(GestureEvent.GESTURE_RECOGNIZED, onSwipeRec);
 			this.addEventListener(Event.ENTER_FRAME, update);
-		
+			
 			if(MainMenuScreen.saveDataObject.data.condomCount==null){
 				MainMenuScreen.saveDataObject.data.condomCount = 0;
 			}
-			if(level==1 || level==2 || level==3){
-				trace("STI ENEMIES AANGEMAAKT");
-				enemy1 = new Enemy("STI");
-				enemy2 = new Enemy("STI");
-			}
-			else{
-				trace("SPERM ENEMIES AANGEMAAKT");
+			
+			if(level==1 || level==2 || level==3 || level==4 || level==5 || level==6){
 				enemy1 = new Enemy("SPERM");
 				enemy2 = new Enemy("SPERM");
 			}
-			trace(thisLevel);
+			else{
+				enemy1 = new Enemy("STI");
+				enemy2 = new Enemy("STI");
+			}
 			
-			HealthBar.hp=90; 
+			HealthBar.hp=20; 
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);

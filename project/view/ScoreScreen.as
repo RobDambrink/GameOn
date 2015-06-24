@@ -8,10 +8,16 @@
 	import starling.events.TouchPhase;
 	import starling.core.Starling;
 	import model.*;
+	import starling.display.MovieClip;
 	
 	public class ScoreScreen extends Sprite{
 		
 		public var score:int;
+		var star1animation:MovieClip;
+		var star2animation:MovieClip;
+		var star3animation:MovieClip;
+		public var animHeight:int = 67*Main.scaleFactor;
+		public var animWidth:int = 67*Main.scaleFactor;
 		var star1:Image;
 		var star2:Image;
 		var star3:Image;
@@ -20,14 +26,13 @@
 		var background:Image;
 		var exitButton:Image;
 		
+		
 		public function ScoreScreen(score:int) {
-			// constructor code
 			this.score=score;
-			//Only when added to the stage, the function onAddedToStage will be executed.
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
-		//This function tells the console that the gamescreen is loaded. Also adds the background to the stage. The function addConditionMet is delayed for 2 seconds, then executes.
+
 		private function onAddedToStage(event:Event)
 		{
 			trace("ScoreScreen loaded");
@@ -38,10 +43,12 @@
 			addExitButton();
 		}
 		
+		
 		function addBackground(){
 			background = new Image(Main.assets.getTexture("background-orange"));
 			addChild(background);
 		}
+		
 		
 		function saveScore(){
 			if(GameScreen.thisLevel==1){
@@ -91,8 +98,6 @@
 					MainMenuScreen.saveDataObject.data.level9Score = starCount;
 				}			}
 			MainMenuScreen.saveDataObject.flush();
-			trace("Stars level 1: ", MainMenuScreen.saveDataObject.data.level1Score);
-			trace("Stars level 2: ", MainMenuScreen.saveDataObject.data.level2Score);
 		}
 		
 
@@ -114,7 +119,7 @@
 			}
 			addStars(starCount);
 		}
-		public function addStars(starCount:int){
+		/*public function addStars(starCount:int){
 			if(starCount==0){
 				star1 = new Image(Main.assets.getTexture("StarGrey"));
 				star2 = new Image(Main.assets.getTexture("StarGrey"));
@@ -153,23 +158,115 @@
 			star2.y=Starling.current.stage.stageHeight*(1/3);
 			star3.x=(Starling.current.stage.stageWidth - star3.width)*(3/4);
 			star3.y=Starling.current.stage.stageHeight*(1/3);
+		}*/
+		
+		
+		public function addStars(starCount:int){
+			if(starCount==0){
+				star1 = new Image(Main.assets.getTexture("StarGrey"));
+				star2 = new Image(Main.assets.getTexture("StarGrey"));
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
+				addChild( star1 );
+				addChild( star2 );
+				addChild( star3 );
+			}
+			else if(starCount==1){
+				
+				star1animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star1animation);
+				Starling.juggler.add(star1animation);
+				star1animation.height=animHeight;
+				star1animation.width=animWidth;
+				star1animation.loop=false;
+				star1animation.play();
+				star2 = new Image(Main.assets.getTexture("StarGrey"));
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
+				addChild( star2 );
+				addChild( star3 );
+			}
+			else if(starCount==2){
+				star1animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star1animation);
+				Starling.juggler.add(star1animation);
+				star1animation.height=animHeight;
+				star1animation.width=animWidth;
+				star1animation.loop=false;
+				star1animation.play();
+				star2animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star2animation);
+				Starling.juggler.add(star2animation);
+				star2animation.height=animHeight;
+				star2animation.width=animWidth;
+				star2animation.loop=false;
+				star2animation.play();
+				star3 = new Image(Main.assets.getTexture("StarGrey"));
+				addChild( star3 );
+			}
+			else if(starCount==3){
+				star1animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star1animation);
+				Starling.juggler.add(star1animation);
+				star1animation.height=animHeight;
+				star1animation.width=animWidth;
+				star1animation.loop=false;
+				star1animation.play();
+				star2animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star2animation);
+				Starling.juggler.add(star2animation);
+				star2animation.height=animHeight;
+				star2animation.width=animWidth;
+				star2animation.loop=false;
+				star2animation.play();
+				star3animation = new MovieClip(Main.assets.getTextures("star00"),24); // star spritesheet
+				addChild(star3animation);
+				Starling.juggler.add(star3animation);
+				star3animation.height=animHeight;
+				star3animation.width=animWidth;
+				star3animation.loop=false;
+				star3animation.play();
+			}
+			if(star1){
+				star1.x=(Starling.current.stage.stageWidth - star1.width)*(1/4);
+				star1.y=Starling.current.stage.stageHeight*(1/3);
+			}
+			if(star2){
+				star2.x=(Starling.current.stage.stageWidth - star2.width)*(1/2);
+				star2.y=Starling.current.stage.stageHeight*(1/3);
+			}
+			if(star3){
+				star3.x=(Starling.current.stage.stageWidth - star3.width)*(3/4);
+				star3.y=Starling.current.stage.stageHeight*(1/3);
+			}
+			if(star1animation){
+				star1animation.x=(Starling.current.stage.stageWidth - star1animation.width)*(1/4);
+				star1animation.y=Starling.current.stage.stageHeight*(1/3);
+			}
+			if(star2animation){
+				star2animation.x=(Starling.current.stage.stageWidth - star2animation.width)*(1/2);
+				star2animation.y=Starling.current.stage.stageHeight*(1/3);
+			}
+			if(star3animation){
+				star3animation.x=(Starling.current.stage.stageWidth - star3animation.width)*(3/4);
+				star3animation.y=Starling.current.stage.stageHeight*(1/3);
+			}
 		}
+		
 		
 		private function addExitButton(){
 			exitButton = new Image(Main.assets.getTexture("ButtonExit")); 
 			addChild( exitButton );			
 			exitButton.x = (Starling.current.stage.stageWidth - exitButton.width)/2;
-			exitButton.y = (Starling.current.stage.stageHeight - exitButton.height)/2;			
+			exitButton.y = (Starling.current.stage.stageHeight - exitButton.height)*(3/4);			
 			exitButton.addEventListener( TouchEvent.TOUCH , onExitButton );
 		}
+			
 			
 		private function onExitButton(event:TouchEvent){
 			var touch:Touch = event.touches[0];
 			if(touch.phase == TouchPhase.BEGAN){ 
-				Navigator.instance.loadScreen( "MainMenuScreen" ,0);
+				trace("klik");
+				Navigator.instance.loadScreen( "levelSelect" ,0);
 			}
 		}
-
 	}
-	
 }
