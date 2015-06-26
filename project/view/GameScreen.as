@@ -211,7 +211,7 @@
 				enemy2 = new Enemy("STI");
 			}
 			
-			HealthBar.hp=20; 
+			HealthBar.hp=99; 
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);

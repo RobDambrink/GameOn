@@ -91,7 +91,7 @@
 		
 		
 		private function addLevelFourButton(){
-			if(MainMenuScreen.saveDataObject.data.level4Score>0){
+			if(MainMenuScreen.saveDataObject.data.level3Score>0){
 				level4SelectButton = new Image(Main.assets.getTexture("Level4")); 
 				addChild( level4SelectButton );
 				

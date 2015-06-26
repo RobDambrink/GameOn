@@ -62,6 +62,7 @@
 			if (viewPort.height <= 240) { scaleFactor = 1 } // 426 x 240
 			else if (viewPort.height >= 240 && viewPort.width < 480) { scaleFactor = 2 } // 852 x 480
 			else if (viewPort.height >= 480) { scaleFactor = 3 } // 1278 x 720
+			else{ scaleFactor = 1 }
 
 			
 			trace ("scaleFactor", scaleFactor);

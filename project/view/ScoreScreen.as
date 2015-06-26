@@ -51,6 +51,7 @@
 		
 		
 		function saveScore(){
+			trace("Starcount: ", starCount);
 			if(GameScreen.thisLevel==1){
 				if(MainMenuScreen.saveDataObject.data.level1Score < starCount){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level1Score);
