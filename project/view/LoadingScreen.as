@@ -13,6 +13,7 @@
 
 		var loadingBar:Image;
 		var menuBackground:Image;
+		var logo:Image;
 		
 		public function LoadingScreen() {
 			// constructor code
@@ -33,6 +34,7 @@
 //			Starling.juggler.delayCall(conditionMet, 2.0);
 			addLoadingBar();
 			addMenuBackground();
+			addLogo();
 		}
 		
 		
@@ -41,6 +43,12 @@
 			addChild( menuBackground );
 		}
 		
+		function addLogo(){
+			logo = new Image(Navigator.assets.getTexture("logo"));
+			addChild(logo);
+			logo.x=Starling.current.stage.stageWidth/2;
+			logo.y=(Starling.current.stage.stageHeight)*(1/3)
+		}
 		
 //		private function conditionMet() {
 //			trace("Loading complete, loading Main Menu");

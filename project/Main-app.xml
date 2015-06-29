@@ -15,12 +15,12 @@
 	</name>
 -->
 <application xmlns="http://ns.adobe.com/air/application/18.0">
-  <id>TripleSafeBeta2</id>
-  <versionNumber>1.0.0</versionNumber>
-  <versionLabel></versionLabel>
-  <filename>TripleSafeBeta2</filename>
+  <id>DundaBeta</id>
+  <versionNumber>0.9.0</versionNumber>
+  <versionLabel>Beta</versionLabel>
+  <filename>Dunda Beta</filename>
   <description/>
-  <name>TripleSafeBeta2</name>
+  <name>Dunda Beta</name>
   <copyright/>
   <initialWindow>
     <content>Main.swf</content>
@@ -31,25 +31,21 @@
     <aspectRatio>landscape</aspectRatio>
     <renderMode>direct</renderMode>
     <autoOrients>false</autoOrients></initialWindow>
-  <icon/>
+  <icon>
+    <image96x96>AppIconsForPublish/Icon96.png</image96x96>
+    <image72x72>AppIconsForPublish/Icon72.png</image72x72>
+    <image48x48>AppIconsForPublish/Icon48.png</image48x48>
+    <image36x36>AppIconsForPublish/Icon36.png</image36x36>
+  </icon>
   <customUpdateUI>false</customUpdateUI>
   <allowBrowserInvocation>false</allowBrowserInvocation>
   <android>
-    <manifestAdditions>
-      <![CDATA[<manifest>
-<uses-permission android:name="android.permission.INTERNET"/>
+    <manifestAdditions><![CDATA[<manifest>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-permission android:name="android.permission.RECORD_AUDIO"/>
 <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-</manifest>]]>
-    </manifestAdditions>
+</manifest>]]></manifestAdditions>
   </android>
-  <supportedLanguages>en</supportedLanguages>
+  <supportedLanguages>fr</supportedLanguages>
 </application>
