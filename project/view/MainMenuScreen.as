@@ -42,6 +42,7 @@
 		var tutorialButton: Image;
 		var tutorial: Image;
 		var tutContinue: Image;
+		var logo:Image;
 		var tutReturn: Image;
 		var tutCount: int = 1;
 		var muteButton: Image;
@@ -64,6 +65,7 @@
 			var myDataObject:Object = {gender:"", condomCount:0, currency:0, fullHealthSound:false};
 			
 			addMenuBackground();
+			addLogo();
 			addPlayBtn();
 			addPharmacyButton();
 			addTutorialButton();
@@ -84,6 +86,16 @@
 			if(!Navigator.soundManager.soundIsPlaying("menuSound")){
 				Navigator.soundManager.playSound("menuSound", 1.0, 999);
 			}
+		}
+		
+		/**
+		*	Adds the logo to the top left corner of the screen.
+		**/
+		function addLogo(){
+			logo = new Image(Main.assets.getTexture("logo"));
+			addChild(logo);
+			logo.x=(Starling.current.stage.stageWidth)*(1/32);
+			logo.y=(Starling.current.stage.stageHeight)*(1/32)
 		}
 
 		/**
