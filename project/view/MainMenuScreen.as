@@ -47,7 +47,7 @@
 		var tutCount: int = 1;
 		var muteButton: Image;
 		public static var muted:Boolean=false;
-		public static var saveDataObject:SharedObject = SharedObject.getLocal("savedata");
+		public static var saveDataObject:SharedObject = SharedObject.getLocal("DundaSaveData");
 		
 		/**
 		*	Constructor
