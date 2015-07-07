@@ -91,6 +91,7 @@
 			{ 
 				MainMenuScreen.saveDataObject.data.gender = "male";
 				Navigator.instance.loadScreen( "levelSelect" ,0);
+				MainMenuScreen.saveDataObject.flush();
 			}
 		}
 		
@@ -100,6 +101,7 @@
 			{ 
 				MainMenuScreen.saveDataObject.data.gender = "female";
 				Navigator.instance.loadScreen( "levelSelect" ,0);
+				MainMenuScreen.saveDataObject.flush();
 			}
 		}
 		//---------------end of button's event handlers---------

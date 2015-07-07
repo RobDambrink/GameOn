@@ -49,6 +49,7 @@
 		public static var muted:Boolean=false;
 		public static var saveDataObject:SharedObject = SharedObject.getLocal("DundaSaveData");
 		
+		
 		/**
 		*	Constructor
 		**/
@@ -62,7 +63,7 @@
 		*	@param event - The onAddedToStage event.
 		**/
 		private function onAddedToStage(event: Event) {			
-			var myDataObject:Object = {gender:"", condomCount:0, currency:0, fullHealthSound:false};
+			//var myDataObject:Object = {gender:"", condomCount:0, currency:0, fullHealthSound:false, level1Score:0, level2Score:0, level3Score:0, level4Score:0, level5Score:0, level6Score:0, level7Score:0, level8Score:0, level9Score:0};
 			
 			addMenuBackground();
 			addLogo();

@@ -53,51 +53,55 @@
 		function saveScore(){
 			trace("Starcount: ", starCount);
 			if(GameScreen.thisLevel==1){
-				if(MainMenuScreen.saveDataObject.data.level1Score < starCount){
+				trace("===level1===");
+				if(MainMenuScreen.saveDataObject.data.level1Score < starCount ||MainMenuScreen.saveDataObject.data.level1Score==null){
+					trace("setting level 1 score: ", starCount)
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level1Score);
 					MainMenuScreen.saveDataObject.data.level1Score = starCount;
+					trace("test", MainMenuScreen.saveDataObject.data.level1Score);
 				}
 			}
 			if(GameScreen.thisLevel==2){
-				if(MainMenuScreen.saveDataObject.data.level2Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level2Score < starCount ||MainMenuScreen.saveDataObject.data.level2Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level2Score);
 					MainMenuScreen.saveDataObject.data.level2Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==3){
-				if(MainMenuScreen.saveDataObject.data.level3Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level3Score < starCount ||MainMenuScreen.saveDataObject.data.level3Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level3Score);
 					MainMenuScreen.saveDataObject.data.level3Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==4){
-				if(MainMenuScreen.saveDataObject.data.level4Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level4Score < starCount ||MainMenuScreen.saveDataObject.data.level4Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level4Score);
 					MainMenuScreen.saveDataObject.data.level4Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==5){
-				if(MainMenuScreen.saveDataObject.data.level5Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level5Score < starCount ||MainMenuScreen.saveDataObject.data.level5Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level5Score);
 					MainMenuScreen.saveDataObject.data.level5Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==6){
-				if(MainMenuScreen.saveDataObject.data.level6Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level6Score < starCount ||MainMenuScreen.saveDataObject.data.level6Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level6Score);
 					MainMenuScreen.saveDataObject.data.level6Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==7){
-				if(MainMenuScreen.saveDataObject.data.level7Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level7Score < starCount ||MainMenuScreen.saveDataObject.data.level7Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level7Score);
 					MainMenuScreen.saveDataObject.data.level7Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==8){
-				if(MainMenuScreen.saveDataObject.data.level8Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level8Score < starCount ||MainMenuScreen.saveDataObject.data.level8Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level8Score);
 					MainMenuScreen.saveDataObject.data.level8Score = starCount;
 				}			}
 			if(GameScreen.thisLevel==9){
-				if(MainMenuScreen.saveDataObject.data.level9Score < starCount){
+				if(MainMenuScreen.saveDataObject.data.level9Score < starCount ||MainMenuScreen.saveDataObject.data.level9Score==null){
 					MainMenuScreen.saveDataObject.data.currency+=(starCount-MainMenuScreen.saveDataObject.data.level9Score);
 					MainMenuScreen.saveDataObject.data.level9Score = starCount;
-				}			}
+				}			
+			}
 			MainMenuScreen.saveDataObject.flush();
 		}
 		

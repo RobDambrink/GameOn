@@ -18,6 +18,8 @@
 		private var thirdFrame:Image;
 		private var fourthFrame:Image;
 		private var fifthFrame:Image;
+		private var sixthFrame:Image;
+		private var seventhFrame:Image;
 
 		public function StoryScreen(level:int) {
 			// constructor code
@@ -37,49 +39,53 @@
 			}
 			if(level===2){
 				firstFrame = new Image(Main.assets.getTexture("Comic1.4"));
-				secondFrame = new Image(Main.assets.getTexture("Comic1.5"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic1.6"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.1"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.2"));
 			}
 			if(level===3){
-				firstFrame = new Image(Main.assets.getTexture("Comic2.1"));
-				secondFrame = new Image(Main.assets.getTexture("Comic2.2"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic2.3"));
-				fourthFrame = new Image(Main.assets.getTexture("Comic2.4"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.1"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				fifthFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				sixthFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				seventhFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 			if(level===4){
-				firstFrame = new Image(Main.assets.getTexture("Comic2.8"));
-				secondFrame = new Image(Main.assets.getTexture("Comic2.9"));
-				thirdFrame = new Image(Main.assets.getTexture("ComicPharmacy"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 			if(level===5){
-				firstFrame = new Image(Main.assets.getTexture("Comic1.1"));
-				secondFrame = new Image(Main.assets.getTexture("Comic1.2"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic1.3"));
-				fourthFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 			if(level===6){
-				firstFrame = new Image(Main.assets.getTexture("Comic2.8"));
-				secondFrame = new Image(Main.assets.getTexture("Comic2.9"));
-				thirdFrame = new Image(Main.assets.getTexture("ComicPharmacy"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.4"));
 			}
 			if(level===7){
-				firstFrame = new Image(Main.assets.getTexture("Comic2.7"));
-				secondFrame = new Image(Main.assets.getTexture("Comic3.1"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic3.2"));
-				fourthFrame = new Image(Main.assets.getTexture("Comic3.3"));
-				fifthFrame = new Image(Main.assets.getTexture("Comic3.4"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.1"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				fifthFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 			if(level===8){
-				firstFrame = new Image(Main.assets.getTexture("Comic1.1"));
-				secondFrame = new Image(Main.assets.getTexture("Comic1.2"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic1.3"));
-				fourthFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 			if(level===9){
-				firstFrame = new Image(Main.assets.getTexture("Comic1.1"));
-				secondFrame = new Image(Main.assets.getTexture("Comic1.2"));
-				thirdFrame = new Image(Main.assets.getTexture("Comic1.3"));
-				fourthFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				firstFrame = new Image(Main.assets.getTexture("Comic1.2"));
+				secondFrame = new Image(Main.assets.getTexture("Comic1.3"));
+				thirdFrame = new Image(Main.assets.getTexture("Comic1.4"));
+				fourthFrame = new Image(Main.assets.getTexture("Comic1.1"));
 			}
 		}
 
@@ -112,6 +118,16 @@
 						addChild(fifthFrame);
 						fifthFrame.addEventListener( TouchEvent.TOUCH , onTap );
 						comicCount=5;						
+					}
+					else if(comicCount==5 && sixthFrame!=null){
+						addChild(sixthFrame);
+						sixthFrame.addEventListener(TouchEvent.TOUCH, onTap);
+						comicCount=6;
+					}
+					else if(comicCount==6 && seventhFrame!=null){
+						addChild(seventhFrame);
+						seventhFrame.addEventListener(TouchEvent.TOUCH, onTap);
+						comicCount=7;
 					}
 					else{
 						startLevel();
