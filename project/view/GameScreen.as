@@ -30,7 +30,6 @@
 		var tutContinue: Image;
 		var tutReturn: Image;
 		var tutCount: int = 1;
-		public static var player:Player = new Player();
 		var exit:Exit = new Exit();
 		var healthPellets:Vector.<HealthPellet> = new Vector.<HealthPellet>();
 		var healthBar:HealthBar;
@@ -53,6 +52,7 @@
 		var items:Items;
 		var timer:int=0;
 		public static var thisLevel:int;
+		var player:Player;
 		var tween:Tween = new Tween(player,playerSpeed,"linear");
 		var enemy1Tween:Tween = new Tween(enemy1,enemySpeed,"linear");
 		var enemy2Tween:Tween = new Tween(enemy2,enemySpeed,"linear");
@@ -210,8 +210,11 @@
 				enemy1 = new Enemy("STI");
 				enemy2 = new Enemy("STI");
 			}
-			
+			direction = "";
+			player = new Player();
 			HealthBar.hp=20; 
+
+			
 			addMazeBackground();
 			loadMap();
 			loadPlayer(movementGrid);

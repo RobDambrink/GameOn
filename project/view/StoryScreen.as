@@ -139,6 +139,7 @@
 				
 		public function startLevel(){
 			trace("loading level", level);
+			trace("LEEEEEEEEEEEEEVEEEEEEEEEEEEEEEEEEEEEEEEL");
 			Navigator.instance.loadScreen("game",level);
 		}
 	}	

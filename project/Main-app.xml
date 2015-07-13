@@ -15,12 +15,12 @@
 	</name>
 -->
 <application xmlns="http://ns.adobe.com/air/application/18.0">
-  <id>DundaBeta8</id>
-  <versionNumber>0.9.25</versionNumber>
-  <versionLabel>Beta</versionLabel>
-  <filename>Dunda Beta8</filename>
+  <id>Dunda</id>
+  <versionNumber>1.0.0</versionNumber>
+  <versionLabel>For testing in Senegal</versionLabel>
+  <filename>Dunda</filename>
   <description/>
-  <name>Dunda Beta8</name>
+  <name>Dunda</name>
   <copyright/>
   <initialWindow>
     <content>Main.swf</content>
